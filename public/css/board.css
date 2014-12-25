@@ -1,0 +1,30 @@
+html{
+	overflow: hidden;
+}
+#board{
+	background: url(../img/purty_wood.png);
+	/*subtlepatterns.com*/
+	width: 100%;
+	height: 100vh;
+}
+
+#staging{
+	position: absolute;
+	bottom: 0;
+	height: 210px;
+	border-top: 5px solid black;
+	width: 100%;
+	padding: 1em 0;
+}
+.done{
+	float: right;
+}
+.done button{
+	height: 4em;
+	width: 4em;
+	margin: 7% 0;
+	font-size: 1.2em;
+}
+#board .tileContainer{
+	float: left;
+}

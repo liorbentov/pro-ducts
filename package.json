@@ -1,0 +1,20 @@
+{
+  "name": "pro-ducts",
+  "version": "0.0.1",
+  "description": "The best final project",
+  "main": "server/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liorbentov/pro-ducts.git"
+  },
+  "author": "Lior Bentov & Yotam Roth &, Itay Evron & Tomer Gravski",
+  "bugs": {
+    "url": "https://github.com/liorbentov/pro-ducts/issues"
+  },
+  "homepage": "https://github.com/liorbentov/pro-ducts",
+  "dependencies": {
+    "express": "4.7.2",
+    "body-parser": "1.5.2",
+    "socket.io": "1.0.6"
+  }
+}

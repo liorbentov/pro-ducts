@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-xs-2 pull-right">
+	</div>
+	<div class="col-xs-3 pull-right">
+		<h3>מה קונים היום?</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">
+	</div>
+	<div class="col-xs-2" ng-repeat="ptype in productTypes">
+		<button type="button" id="{{ptype.Name}}" ng-click="chooseProductType($event)" class="btn btn-default btn-lg btn-block" ng-class="{'btn-primary':typeChosen=='{{ptype.Name}}'}">{{ptype.HebName}}</button> 
+	</div>
+</div>
+<br/>
+<div class="row" ng-show="typeChosen">
+	<div class="col-xs-1 pull-right">
+	</div>
+	<div class="col-xs-5 pull-right offset-col-xs-1 text-center">
+		<h4>לפי דגם ספצפיפי</h4>
+		<h5 class="text-muted">אני יודע שאני רוצה את הדגם הזה...</h5>
+		<button ng-click="chooseByModule()" class="btn btn-default">המשך</button>
+	</div>
+	<div class="col-xs-5 pull-right text-center">
+		<h4>מה הכי טוב ב...</h4>
+		<h5 class="text-muted">לאיזה מכשיר המצלמה הכי טובה</h5>
+		<button ng-click="chooseByCriteria()" class="btn btn-default">המשך</button>
+	</div>
+</div>

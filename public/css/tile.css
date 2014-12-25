@@ -1,0 +1,86 @@
+@font-face {
+    font-family: numbers;
+    src: url(../fonts/Crasns.ttf);
+}
+
+.tileContainer{
+	border-radius: 7px;
+	width: 100px;
+	height: 160px;
+	background-color: #F4EDD0;
+	box-shadow: 4px 0 #E0DAC1,-4px 0 #FFF8DB,0 4px #F0E9CB, 0 -4px #F0E9CB;
+	-webkit-transition: margin-top 1s;
+	cursor: pointer;
+
+	margin: 1em;
+}
+
+.tileBack{
+	border-radius: 7px;
+	width: 100px;
+	height: 160px;
+	background-color: #F4EDD0;
+	box-shadow: 4px 0 #E0DAC1,-4px 0 #FFF8DB,0 4px #F0E9CB, 0 -4px #F0E9CB;
+	-webkit-transition: margin-top 1s;
+	cursor: pointer;
+	
+	margin: 1em;
+}
+.tileBack .brand{
+	color: transparent;
+	text-align: center;
+	padding-top: 45%;
+	text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
+	background-color: rgb(185, 185, 185);
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+
+	font-size: 1.6em;
+}
+.numberContainer{
+	font-family: numbers;
+	border-radius: 50%;
+	box-shadow: 1px 1px 2px rgb(150, 146, 146) inset;
+	height: 50%;
+	text-align: center;
+	margin: 5px;
+	padding-top: 10%;
+	font-size: 3em;
+	font-weight: bold;
+	text-shadow:2px 0 1px #AFADA4, -2px 0 1px #FDF8E2, 0 2px 1px #BEBCB1, 0 -2px 1px #F0E9CB;
+}
+.numberContainer .fa{
+	font-size: 1.5em;
+}
+.tileContainer .brand{
+	color: transparent;
+	text-align: center;
+	margin-top: 50%;
+	font-size: 1.2em;
+	text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
+	background-color: rgb(185, 185, 185);
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+}
+
+.red{
+	color: red;
+}
+.blue{
+	color: blue;
+}
+.yellow{
+	color: yellow;
+}
+.black{
+	color: black;
+}
+
+.tileSpot{
+	border: 5px dashed white;
+	width: 110px;
+	height: 170px;
+	border-radius: 15px;
+}

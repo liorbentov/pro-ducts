@@ -1,0 +1,35 @@
+#playerBoard{
+	background:url(../img/dark_wood.png);
+	/*background:url(http://subtlepatterns.com/patterns/wood_pattern.png);*/
+}
+#playerBoard button{
+	height: 4em;
+	width: 4em;
+	margin: 0 1em;
+}
+#playerScroll{
+	width: 92.4vw;
+	height: 100vh;
+	overflow: hidden;
+	overflow-x:scroll;
+	display: inline-block;
+	margin-left: 7em;
+}
+
+#stageButton {
+	position: absolute;
+	top: 10em;
+}
+
+#playerBoard .tileContainer {
+	margin-top: 100px;
+	float: left;
+	-webkit-transition: margin-top 1s;
+}
+#playerBoard .tileContainer.active {
+	margin-top: 0;
+}
+
+#infinitePlace{
+	width: 90000px;
+}
