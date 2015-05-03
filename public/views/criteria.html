@@ -2,27 +2,27 @@
 	<div class="col-sm-3 col-md-3 col-md-push-7">
 		<h4>בחר מתוך רשימת הקריטריונים</h4>
 		<div ng-repeat="person in people" ng-animate="'person'">
-			<input type="radio" name="attributes" ng-model="$parent.right" value="{{$index}}">
+			<input type="radio" name="attributes" ng-model="$parent.outSelected" value="{{$index}}">
     			{{person.first}}&nbsp;
 		</div>
 	</div>
 	<div class="col-sm-1 col-md-1 col-md-push-3">
 		<br><br>
-		<button ng-click="choose(right)" class="btn btn-default left-button"></button>
+		<button ng-click="choose(outSelected)" class="btn btn-default left-button"></button>
 		<br><br>
-		<button ng-click="unChoose(my)" class="btn btn-default right-button"></button>
+		<button ng-click="unChoose(inSelected)" class="btn btn-default right-button"></button>
 	</div>
 	<div class="col-sm-3 col-md-3 col-md-pull-1 row">
 		<div class="col-sm-2">
 			<br><br>
-    		<button ng-click="personUp(my)" class="btn btn-default up-button"></button>
+    		<button ng-click="personUp(inSelected)" class="btn btn-default up-button"></button>
     		<br>
-    		<button ng-click="personDown(my)" class="btn btn-default down-button"></button>
+    		<button ng-click="personDown(inSelected)" class="btn btn-default down-button"></button>
 		</div>
 		<div class="col-sm-10">
 			<h4>תעדף מתוך הרשימה</h4>
 			<div ng-repeat="person in chosenPeople">
-				<input type="radio" name="chosenAttributes" ng-model="$parent.my" value="{{$index}}">
+				<input type="radio" name="chosenAttributes" ng-model="$parent.inSelected" value="{{$index}}">
 			    {{person.first}} {{person.last}} &nbsp;
 			</div>
 		</div>

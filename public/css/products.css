@@ -3,7 +3,7 @@ body {
 	margin:0;
 	padding:0;
 	height:100%;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	font-family: "Tahoma";
 }
@@ -16,8 +16,20 @@ h3, h4{
 }
 #header {
 	padding:10px;
-	background:#5ee;
+	background:#607D8B;
+	box-shadow: 1px 1px 10px rgba(0,0,0,0.6);
 }
+
+#header a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#header a:hover {
+	color: #DDDDDD;
+	text-decoration: none;
+}
+
 #content {
 	padding:10px;
 	padding-bottom:80px;   /* Height of the footer element */
@@ -27,7 +39,8 @@ h3, h4{
 	position:absolute;
 	bottom:0;
 	left:0;
-	background:#EEE;
+	background: #90A4AE;
+	color: #EEEEEE;
 }
 
 .products-models>div {
@@ -110,4 +123,39 @@ h3, h4{
     border-style: solid;
     border-width: 5px 0 5px 10px;
     border-color: transparent transparent transparent rgba(64, 64, 65, 0.56);
+}
+
+.first-place-bottom {
+	height: 100px;
+}
+
+.podium-div {
+	position: absolute;
+	bottom: 2%;
+	left: 0;
+	width: 100%;
+	padding: 2%;
+}
+
+.podium-top {
+
+}
+.podium-bottom{
+	background-color:blue;
+	width:40px;
+	vertical-align:top;
+	width: 100px;
+}
+
+.podium-rank {
+	color: yellow;
+	margin-top: 1%;
+}
+
+.content-div{
+	padding: 2%;
+}
+
+span.angular-highlight{
+	background-color: yellow;
 }

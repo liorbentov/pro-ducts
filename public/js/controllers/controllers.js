@@ -1,33 +1,9 @@
-var multiRummi = angular.module('multiRummi.controllers', []);
+var proDucts = angular.module('proDucts.controllers', []);
 
 var controllers = {};
+var selectedItem = 0;
 
 var API_PATH = '/api/';
-
-controllers.playerController = function($scope, $location) {
-	$scope.playerDeck = [];
-	$scope.stagingTiles=[];
-
-	$scope.joinGame = function() {
-		if ($scope.username != "") {
-			socket.emit('joinGame', $scope.username);
-			$location.url('/player');
-		}
-	};
-
-	$scope.stageCards = function(){
-		// $(".tileContainer.active"). 
-		socket.emit('stageCards', $scope.stagingTiles);
-		removeTilesFromDeck($scope.stagingTiles, $scope.playerDeck);
-		$scope.stagingCards=[];
-	};
-	
-	socket.on('clientTakeCard', function(tiles) {
-		$scope.$apply(function(){ 
-			$scope.playerDeck = $scope.playerDeck.concat(tiles);
-		});
-	});
-};
 
 controllers.productType = function($scope, $location) {
 	$scope.productTypes = [
@@ -49,7 +25,7 @@ controllers.productType = function($scope, $location) {
 		}
 	];
 
-
+	$scope.selectedItem = 0;
 	$scope.typeChosen = null;
 
 	// Doesnt change
@@ -68,7 +44,47 @@ controllers.productType = function($scope, $location) {
 	}
 }
 
+controllers.sentenceController = function($scope, $location, $http) {
+	$scope.sentence;
+	$scope.resultSentences;
+
+	$scope.checkSentence = function() {
+
+		var req = {
+			method: 'GET',
+			url: '/disassemble/',
+			params: { "fullText":  $scope.sentence}
+		}
+
+		$http(req).	
+			success(function(data, status, headers, config) {
+				console.log(data);
+				$scope.resultSentences = data;
+				$scope.resultSentences.forEach(function(entry){
+					entry.keywords = "";
+					if (entry.features) {
+						entry.features.forEach(function(feature){
+							feature.words.forEach(function(word){
+								if (entry.keywords == ""){
+									entry.keywords = word.word;
+								}
+								else {
+									entry.keywords += ("," + word.word);	
+								}
+							})
+						})
+					}
+				})
+			}).
+			error(function(data, status, headers, config) {
+				console.error(error);
+			});
+	}
+}
+
 controllers.hostController = function($scope, $routeParams, $http, $location, $timeout) {
+
+	$scope.selectedItem = selectedItem;
 
 	// For model.html
 	$scope.products = [
@@ -106,6 +122,28 @@ controllers.hostController = function($scope, $routeParams, $http, $location, $t
 	    }
         return false;
   	};
+
+  	$scope.chooseProduct = function (index) {
+  		selectedItem = index;
+		$location.url('/item');
+  	}
+
+  	$scope.productRight = function () {
+  		console.log(selectedItem);
+  		if (selectedItem > 0) {
+  			selectedItem--;
+  			$scope.selectedItem--;
+  		}
+  	}
+
+  	$scope.productLeft = function () {
+  		console.log(selectedItem);
+  		if (selectedItem < $scope.products.length - 1) {
+  			selectedItem++;
+  			$scope.selectedItem++;
+  		}
+  	}
+
 	// End model.html
 
 	// For criteria.html
@@ -114,84 +152,61 @@ controllers.hostController = function($scope, $routeParams, $http, $location, $t
     {"first":'Cindy'}];    
 
     $scope.personUp = function(index) {		
-        /*if (index <= 0 || index >= $scope.chosenPeople.length)
-            return;*/
-         if (index > 0 && index < $scope.chosenPeople.length)
-         {
-		    var temp = $scope.chosenPeople[index];
-		    $scope.chosenPeople[index] = $scope.chosenPeople[index - 1];
-		    $scope.chosenPeople[index - 1] = temp;
-		    $timeout(function(){
-		 	   $scope.my = index-1;	
-		    });
+    	if ($scope.inSelected) {
+	         if (index > 0 && index < $scope.chosenPeople.length)
+	         {
+			    var temp = $scope.chosenPeople[index];
+			    $scope.chosenPeople[index] = $scope.chosenPeople[index - 1];
+			    $scope.chosenPeople[index - 1] = temp;
+			    $timeout(function(){
+			 	   $scope.inSelected = index-1;	
+			    });
+	        }
         }
     };
 
     $scope.personDown = function(index) {
-        if (index < 0 || index >= ($scope.chosenPeople.length - 1))
-            return;
-        var temp = $scope.chosenPeople[index];
-        $scope.chosenPeople[index] = $scope.chosenPeople[index*1 + 1];
-        $scope.chosenPeople[index*1 + 1] = temp;
+    	if ($scope.inSelected != null) {
+	        if (index >= 0 && index < $scope.chosenPeople.length - 1)
+	        {
+		        var temp = $scope.chosenPeople[index];
+		        $scope.chosenPeople[index] = $scope.chosenPeople[index*1 + 1];
+		        $scope.chosenPeople[index*1 + 1] = temp;
 
-		$timeout(function(){
-        	$scope.my = index*1+1;
-		});
+				$timeout(function(){
+		        	$scope.inSelected = index*1+1;
+				});
+			}
+		}
     };
 
     $scope.personRemove = function(index) {
         $scope.chosenPeople.splice(index, 1);
-        $scope.my = null;
+        $scope.inSelected = null;
     };
 
     $scope.choose = function(index){
-    	if ($scope.right){
+    	if ($scope.outSelected){
 	    	$scope.chosenPeople.push($scope.people[index]);
 	    	$scope.people.splice(index,1);
-	    	$scope.right = null;
-	    	$scope.my = null;
+	    	$scope.outSelected = null;
+	    	$scope.inSelected = null;
     	}
     }
 
     $scope.unChoose = function(index){
-    	if ($scope.my) {
+    	if ($scope.inSelected) {
 	    	$scope.people.push($scope.chosenPeople[index]);
 	    	$scope.chosenPeople.splice(index,1);
-	    	$scope.my = null;
-	    	$scope.right = null;
+	    	$scope.inSelected = null;
+	    	$scope.outSelected = null;
     	}
     }
-	// Lior's addition
-
-
-	// End
-
-	$scope.hostGame = function() {
-		// $http.post(API_PATH + 'games', {name: $scope.username});
-		//$location.url('/host');
-		//socket.emit('hostGame', $scope.username);
-		console.log("Hello");
-	};
 
 
 
-	$scope.startGame = function(){
-		socket.emit('startGame');
-	};
+	// Lior'outSelectedition
 
-	$scope.takeCard = function(){
-		socket.emit('serverTakeCard');
-	};
-
-	socket.on('playerJoined', function(username) {
-		$scope.players.push(username);
-	});
-
-	socket.on('boardStageCards', function(tiles) {
-		$scope.$apply(function(){ 
-			$scope.stagingTiles = $scope.stagingTiles.concat(tiles);
-		});
-	});
 };
 
-multiRummi.controller(controllers);
+proDucts.controller(controllers);
