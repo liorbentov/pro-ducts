@@ -1,4 +1,4 @@
-var multiRummi = angular.module('multiRummi.directives', []);
+var proDucts = angular.module('proDucts.directives', []);
 
 var directives = {};
 
@@ -20,4 +20,4 @@ directives.productType = function() {
     };
 };
 
-multiRummi.directive(directives);
+proDucts.directive(directives);
