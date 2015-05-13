@@ -156,6 +156,23 @@ h3, h4{
 	padding: 2%;
 }
 
+
 span.angular-highlight{
 	background-color: yellow;
+}
+span.angular-highlight-positive{
+	background-color: rgb(76, 254, 76);
+}
+
+span.angular-highlight-negative{
+	background-color: rgb(255, 121, 121);
+}
+
+span.angular-highlight-neutral{
+	background-color: #EEE;
+}
+
+textarea.form-control {
+	width: 500px !important;
+	height: 250px;
 }

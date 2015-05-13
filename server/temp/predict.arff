@@ -1,0 +1,7 @@
+@relation 	Feature1
+
+@attribute 	Text	string
+@attribute 	Class 	{Positive, Negative, Neutral}
+
+@data
+"המצלמה הזאת היא המצלמה הכי גרועה שראיתי אבל הבטריה ממש טובה", Neutral

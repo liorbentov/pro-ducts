@@ -1,6 +1,15 @@
 var express = require('express');
 var app = express();
 
+var weka = require('../node_modules/node-weka/lib/weka-lib');
+var sentimentsClassifier = 
+	new (require('./sentiments-classifier.js').sentimentsClassifier)(
+		"D:\\Weka-3-6\\weka.jar", 
+		"D:\\Pro-Ducts\\server\\training", 
+		"D:\\Pro-Ducts\\server\\models",
+		"D:\\Pro-Ducts\\server\\temp");
+
+
 var mongoose = require('mongoose');
 
 var Q = require('q');
@@ -22,7 +31,6 @@ app.get('/', function(req, res){
 });
 
 app.get('/disassemble', function(req, res){
-	console.log(req.query.fullText);
 	splitToSentences(req.query.fullText, res);
 })
 
@@ -32,7 +40,7 @@ app.get('*', function(req, res){
 
 var splitToSentences = function (fullText, response) {
 	var sentences = [];
-	fullText.match( /([^\r\n.!?]+([.!?]+|$))/gim).forEach(function(entry){sentences.push({"sentence" :entry})});
+	fullText.match( /([^\r\n.!?]+([.!?]+|$))/gim).forEach(function(entry){sentences.push({sentence :entry})});
 	
 	getKeywords().then(function(docs){
 		sentences.forEach(function(sentence){
@@ -42,32 +50,48 @@ var splitToSentences = function (fullText, response) {
 					
 					// Check if it has feature
 					if (!sentence.features) {
-						sentence.features = [];
+						sentence.features = {};
 					}
 
-					// Check if it already has this feature
-					var featurePlace = -1;
-					for (var featureIndex = 0; (featureIndex < sentence.features.length) && featurePlace < 0; featureIndex++) {
-						 if (sentence.features[featureIndex].feature_name == keyword.feature_id) {
-						 	featurePlace = featureIndex;
+					// Add the feature if it not already in the element
+					if (!sentence.features[keyword.feature_id]) {
+						sentence.features[keyword.feature_id] = {words: []};
+					}
+
+					sentence.features[keyword.feature_id].words.push({word : keyword.expression});
+				}
+			})
+		});
+		
+		getClassification(sentences).then(function(toClassify){
+			sentimentsClassifier.classify(toClassify, function(err, results){
+				var toResponse = [];
+				results.forEach(function(entry){
+
+					var sentencePlace = -1;
+					for (var sentenceIndex = 0; (sentenceIndex < sentences.length) && sentencePlace < 0; sentenceIndex++) {
+						 if (sentences[sentenceIndex].sentence == entry.sentence) {
+						 	sentencePlace = sentenceIndex;
 						 }
 					}
 
 					// Add the feature if it not already in the element
-					if (featurePlace >= 0) {
-						sentence.features[featurePlace].words.push({"word" : keyword.expression});
-					}
-					else {	
-						sentence.features.push({"feature_name" : keyword.feature_id});
-						sentence.features[sentence.features.length - 1].words = []
-						sentence.features[sentence.features.length - 1].words.push({"word" : keyword.expression});
-					}
-				}
-			})
-		});
+						sentences[sentencePlace].features[entry.featureId] = {
+							words : sentences[sentencePlace].features[entry.featureId].words,
+							featureId: entry.featureId,
+							predicted: entry.predicted,
+							certainty: entry.certainty,
+						};
+				});
 
-		response.json(sentences);
-	})
+				response.json(sentences);
+			});
+		}, function(error){
+			console.log("this is an error: " + error);
+				response.json(sentences);
+		});
+	});
+
 };
 
 // Load the dictionary
@@ -99,5 +123,22 @@ var getKeywords = function(sentence) {
 	});
 };
 
+var getClassification = function(sentences) {
+	return Q.promise(function(resolve, reject){
+		var toClassify = [];
+		sentences.forEach(function(currSentence){
+			if (currSentence.features){
+				Object.keys(currSentence.features).forEach(function(currFeature){
+					toClassify.push({
+						featureId : currFeature,
+						sentence : currSentence.sentence
+					});
+				})
+			}
+		});
+
+		resolve(toClassify);
+	});
+};
 
 server.listen(4444);

@@ -1,0 +1,410 @@
+@relation 'Feature2-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-T-I-N1-stemmerweka.core.stemmers.NullStemmer-M2-tokenizerweka.core.tokenizers.NGramTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\" -max 3 -min 1'
+
+@attribute Class {Positive,Negative,Neutral}
+@attribute 1 numeric
+@attribute 12 numeric
+@attribute 13 numeric
+@attribute '13 מגה' numeric
+@attribute '13 מגה פיקסל' numeric
+@attribute 2 numeric
+@attribute '20\%' numeric
+@attribute 3 numeric
+@attribute 4 numeric
+@attribute 5 numeric
+@attribute 6 numeric
+@attribute 8 numeric
+@attribute gps numeric
+@attribute אבל numeric
+@attribute 'אבל יש' numeric
+@attribute או numeric
+@attribute אורך numeric
+@attribute אותה numeric
+@attribute אותו numeric
+@attribute אז numeric
+@attribute 'אז היא' numeric
+@attribute אחד numeric
+@attribute אחוז numeric
+@attribute 'אחוז בחצי' numeric
+@attribute 'אחוז בחצי שעה' numeric
+@attribute אחת numeric
+@attribute איכות numeric
+@attribute איכותי numeric
+@attribute איכותית numeric
+@attribute אין numeric
+@attribute אם numeric
+@attribute 'אם רוצים' numeric
+@attribute אני numeric
+@attribute 'אני לא' numeric
+@attribute 'אני מגיע' numeric
+@attribute אפילו numeric
+@attribute אפל numeric
+@attribute אפליקציות numeric
+@attribute אפשר numeric
+@attribute אצלי numeric
+@attribute 'אצלי יומיים' numeric
+@attribute 'אצלי יומיים בשימוש' numeric
+@attribute את numeric
+@attribute 'את המכשיר' numeric
+@attribute 'את זה' numeric
+@attribute באיכות numeric
+@attribute בגלל numeric
+@attribute 'בגלל המסך' numeric
+@attribute בהירות numeric
+@attribute בהרבה numeric
+@attribute בו numeric
+@attribute בזמן numeric
+@attribute בחצי numeric
+@attribute 'בחצי שעה' numeric
+@attribute בטירוף numeric
+@attribute בטריה numeric
+@attribute בטרייה numeric
+@attribute 'בטרייה חזקה' numeric
+@attribute ביום numeric
+@attribute ביותר numeric
+@attribute בכלל numeric
+@attribute בלבד numeric
+@attribute בלי numeric
+@attribute בלילה numeric
+@attribute במהירות numeric
+@attribute במכשיר numeric
+@attribute 'במכשיר הזה' numeric
+@attribute במצב numeric
+@attribute במקרה numeric
+@attribute בניגוד numeric
+@attribute בעיה numeric
+@attribute בעיות numeric
+@attribute בעיקר numeric
+@attribute בערך numeric
+@attribute בצורה numeric
+@attribute בקלות numeric
+@attribute ברשותי numeric
+@attribute בשביל numeric
+@attribute בשוק numeric
+@attribute בשימוש numeric
+@attribute 'בשימוש כבד' numeric
+@attribute 'בשימוש מאסיבי' numeric
+@attribute 'בשימוש מאסיבי יותר' numeric
+@attribute 'בשימוש סביר' numeric
+@attribute 'בשימוש סביר סמסים' numeric
+@attribute גבוהה numeric
+@attribute גדול numeric
+@attribute גלישה numeric
+@attribute גם numeric
+@attribute די numeric
+@attribute דק numeric
+@attribute דקות numeric
+@attribute האייפון numeric
+@attribute הבטריה numeric
+@attribute הדגם numeric
+@attribute 'הדגם הקודם' numeric
+@attribute הוא numeric
+@attribute הודעות numeric
+@attribute הופתעתי numeric
+@attribute הזה numeric
+@attribute הטובות numeric
+@attribute הטלפון numeric
+@attribute הטענה numeric
+@attribute היא numeric
+@attribute 'היא מתרוקנת' numeric
+@attribute היה numeric
+@attribute היום numeric
+@attribute הכי numeric
+@attribute הכל numeric
+@attribute המטען numeric
+@attribute 'המטען המקורי' numeric
+@attribute המכשיר numeric
+@attribute 'המכשיר לא' numeric
+@attribute המסך numeric
+@attribute המצלמה numeric
+@attribute המקורי numeric
+@attribute הסוללה numeric
+@attribute 'הסוללה במכשיר' numeric
+@attribute 'הסוללה מחזיקה' numeric
+@attribute 'הסוללה מחזיקה אצלי' numeric
+@attribute 'הסוללה שלו' numeric
+@attribute הפלאפון numeric
+@attribute הפעלה numeric
+@attribute הקודם numeric
+@attribute הקודמים numeric
+@attribute הרבה numeric
+@attribute 'הרבה זמן' numeric
+@attribute התאכזבתי numeric
+@attribute ואם numeric
+@attribute וגם numeric
+@attribute והוא numeric
+@attribute והסוללה numeric
+@attribute ווייז numeric
+@attribute 'ווייז וכד' numeric
+@attribute וזה numeric
+@attribute וחבל numeric
+@attribute וחצי numeric
+@attribute וכד numeric
+@attribute וכו numeric
+@attribute 'וכו וקצת' numeric
+@attribute 'וכו וקצת פחות' numeric
+@attribute ולא numeric
+@attribute ולאחר numeric
+@attribute ולהחליף numeric
+@attribute ומהיר numeric
+@attribute וסוללה numeric
+@attribute ועוד numeric
+@attribute וקצת numeric
+@attribute 'וקצת פחות' numeric
+@attribute 'וקצת פחות מיום' numeric
+@attribute זה numeric
+@attribute זיכרון numeric
+@attribute זמן numeric
+@attribute 'זמן מסך' numeric
+@attribute 'זמן סוללה' numeric
+@attribute 'זמן רב' numeric
+@attribute חודשים numeric
+@attribute חוץ numeric
+@attribute חזק numeric
+@attribute חזקה numeric
+@attribute 'חזקה מאוד' numeric
+@attribute חזקים numeric
+@attribute חיי numeric
+@attribute 'חיי הסוללה' numeric
+@attribute חלשה numeric
+@attribute חשוך numeric
+@attribute 'חשוך בלי' numeric
+@attribute טוב numeric
+@attribute 'טוב אבל' numeric
+@attribute 'טוב מצלמה' numeric
+@attribute טובה numeric
+@attribute 'טובה סוללה' numeric
+@attribute טיפה numeric
+@attribute 'טיפה יותר' numeric
+@attribute טלפון numeric
+@attribute 'טלפון טוב' numeric
+@attribute 'טלפון מצוין' numeric
+@attribute טעינה numeric
+@attribute 'טעינה מהירה' numeric
+@attribute 'טעינה מהירה מאוד' numeric
+@attribute יום numeric
+@attribute 'יום עבודה' numeric
+@attribute 'יום שלם' numeric
+@attribute יומיים numeric
+@attribute 'יומיים בשימוש' numeric
+@attribute 'יומיים בשימוש סביר' numeric
+@attribute יותר numeric
+@attribute 'יותר חזקה' numeric
+@attribute 'יותר משחקים' numeric
+@attribute 'יותר משחקים ווייז' numeric
+@attribute יחסית numeric
+@attribute יכולה numeric
+@attribute יפה numeric
+@attribute יש numeric
+@attribute 'יש רק' numeric
+@attribute יתרון numeric
+@attribute כבד numeric
+@attribute כבר numeric
+@attribute כזה numeric
+@attribute כי numeric
+@attribute כל numeric
+@attribute כמה numeric
+@attribute כמו numeric
+@attribute 'כמו כל' numeric
+@attribute כמובן numeric
+@attribute כמעט numeric
+@attribute כשלא numeric
+@attribute לא numeric
+@attribute 'לא מחזיקה' numeric
+@attribute 'לא נכון' numeric
+@attribute לאחר numeric
+@attribute לגלקסי numeric
+@attribute להחליף numeric
+@attribute להחלפה numeric
+@attribute להטעין numeric
+@attribute להשתמש numeric
+@attribute לי numeric
+@attribute ליום numeric
+@attribute 'ליום וחצי' numeric
+@attribute 'ליום עבודה' numeric
+@attribute 'ליום עבודה שיפור' numeric
+@attribute 'ליום שלם' numeric
+@attribute ליומיים numeric
+@attribute לכל numeric
+@attribute 'לכל היום' numeric
+@attribute לכם numeric
+@attribute ללא numeric
+@attribute ללכת numeric
+@attribute למי numeric
+@attribute למרות numeric
+@attribute לעבור numeric
+@attribute לעומת numeric
+@attribute 'לעומת הדגם' numeric
+@attribute 'לעומת הדגם הקודם' numeric
+@attribute לפחות numeric
+@attribute לפני numeric
+@attribute מאד numeric
+@attribute מאוד numeric
+@attribute 'מאוד אבל' numeric
+@attribute 'מאוד מהיר' numeric
+@attribute מאסיבי numeric
+@attribute 'מאסיבי יותר' numeric
+@attribute 'מאסיבי יותר משחקים' numeric
+@attribute מגה numeric
+@attribute 'מגה פיקסל' numeric
+@attribute מגיע numeric
+@attribute מדהים numeric
+@attribute מדהימה numeric
+@attribute מה numeric
+@attribute מהיר numeric
+@attribute 'מהיר מאוד' numeric
+@attribute מהירה numeric
+@attribute 'מהירה מאוד' numeric
+@attribute מהר numeric
+@attribute 'מהר מאוד' numeric
+@attribute מומלץ numeric
+@attribute מחזיקה numeric
+@attribute 'מחזיקה אצלי' numeric
+@attribute 'מחזיקה אצלי יומיים' numeric
+@attribute 'מחזיקה הרבה' numeric
+@attribute 'מחזיקה הרבה זמן' numeric
+@attribute 'מחזיקה יום' numeric
+@attribute 'מחזיקה יום עבודה' numeric
+@attribute 'מחזיקה יום שלם' numeric
+@attribute מחיי numeric
+@attribute מטעין numeric
+@attribute מטען numeric
+@attribute מי numeric
+@attribute מיום numeric
+@attribute 'מיום בשימוש' numeric
+@attribute 'מיום בשימוש מאסיבי' numeric
+@attribute מילים numeric
+@attribute מכשיר numeric
+@attribute מלא numeric
+@attribute ממש numeric
+@attribute ממשק numeric
+@attribute מסך numeric
+@attribute 'מסך גדול' numeric
+@attribute מספיק numeric
+@attribute מספיקה numeric
+@attribute 'מספיקה ליום' numeric
+@attribute מעולה numeric
+@attribute מעל numeric
+@attribute מערכת numeric
+@attribute 'מערכת הפעלה' numeric
+@attribute מצב numeric
+@attribute מצויינת numeric
+@attribute מצוין numeric
+@attribute מצוינת numeric
+@attribute מצלמה numeric
+@attribute 'מצלמה איכותית' numeric
+@attribute 'מצלמה באיכות' numeric
+@attribute 'מצלמה טובה' numeric
+@attribute 'מצלמה טובה סוללה' numeric
+@attribute 'מצלמה מעולה' numeric
+@attribute 'מצלמה שיחות' numeric
+@attribute 'מצלמה שיחות וכו' numeric
+@attribute מרשימה numeric
+@attribute משהו numeric
+@attribute משחקים numeric
+@attribute 'משחקים ווייז' numeric
+@attribute 'משחקים ווייז וכד' numeric
+@attribute מתרוקנת numeric
+@attribute נגמרת numeric
+@attribute 'נגמרת מהר' numeric
+@attribute נהרס numeric
+@attribute נוח numeric
+@attribute נזללת numeric
+@attribute נטען numeric
+@attribute ניתן numeric
+@attribute ניתנת numeric
+@attribute 'ניתנת להחלפה' numeric
+@attribute נכון numeric
+@attribute נפתח numeric
+@attribute נתקע numeric
+@attribute סבבה numeric
+@attribute סביר numeric
+@attribute 'סביר סמסים' numeric
+@attribute 'סביר סמסים מצלמה' numeric
+@attribute סבירה numeric
+@attribute סוללה numeric
+@attribute 'סוללה חזקה' numeric
+@attribute 'סוללה חזקה מאוד' numeric
+@attribute 'סוללה חלשה' numeric
+@attribute 'סוללה טובה' numeric
+@attribute 'סוללה לא' numeric
+@attribute 'סוללה מחזיקה' numeric
+@attribute 'סוללה מספיקה' numeric
+@attribute 'סוללה מעולה' numeric
+@attribute 'סוללה שמחזיקה' numeric
+@attribute 'סוללה שמספיקה' numeric
+@attribute 'סוללה שמספיקה ליום' numeric
+@attribute סמסים numeric
+@attribute 'סמסים מצלמה' numeric
+@attribute 'סמסים מצלמה שיחות' numeric
+@attribute עבודה numeric
+@attribute 'עבודה שיפור' numeric
+@attribute 'עבודה שיפור רב' numeric
+@attribute עד numeric
+@attribute עדיין numeric
+@attribute עובד numeric
+@attribute עוד numeric
+@attribute עוצמת numeric
+@attribute עושה numeric
+@attribute 'עושה רושם' numeric
+@attribute על numeric
+@attribute עם numeric
+@attribute ענק numeric
+@attribute פחות numeric
+@attribute 'פחות מיום' numeric
+@attribute 'פחות מיום בשימוש' numeric
+@attribute פיקסל numeric
+@attribute פשוט numeric
+@attribute צריך numeric
+@attribute קיבלתי numeric
+@attribute קל numeric
+@attribute קצת numeric
+@attribute 'קצת יותר' numeric
+@attribute רב numeric
+@attribute 'רב לעומת' numeric
+@attribute 'רב לעומת הדגם' numeric
+@attribute רגיל numeric
+@attribute רוב numeric
+@attribute רוצים numeric
+@attribute רושם numeric
+@attribute רמקול numeric
+@attribute רמקולים numeric
+@attribute 'רמקולים חזקים' numeric
+@attribute רק numeric
+@attribute שבוע numeric
+@attribute שגם numeric
+@attribute שהוא numeric
+@attribute שהסוללה numeric
+@attribute שזה numeric
+@attribute 'שזה יתרון' numeric
+@attribute שיחות numeric
+@attribute 'שיחות וכו' numeric
+@attribute 'שיחות וכו וקצת' numeric
+@attribute שימוש numeric
+@attribute שיפור numeric
+@attribute 'שיפור רב' numeric
+@attribute 'שיפור רב לעומת' numeric
+@attribute שיש numeric
+@attribute של numeric
+@attribute 'של 6' numeric
+@attribute 'של המכשיר' numeric
+@attribute שלא numeric
+@attribute שלו numeric
+@attribute 'שלו הסוללה' numeric
+@attribute שלי numeric
+@attribute שלם numeric
+@attribute שם numeric
+@attribute שמחזיקה numeric
+@attribute שמספיקה numeric
+@attribute 'שמספיקה ליום' numeric
+@attribute 'שמספיקה ליום עבודה' numeric
+@attribute שנה numeric
+@attribute שני numeric
+@attribute שעה numeric
+@attribute שעות numeric
+@attribute 'שעות בערך' numeric
+@attribute תוך numeric
+@attribute תקיעות numeric
+
+@data
+
+{0 Neutral,14 1.854256,94 3.158983,104 2.726323,108 3.158983,115 2.915322,171 2.058516,275 2.726323}

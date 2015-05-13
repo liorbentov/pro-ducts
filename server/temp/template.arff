@@ -1,0 +1,6 @@
+@relation 	Feature1
+
+@attribute 	Text	string
+@attribute 	Class 	{Positive, Negative, Neutral}
+
+@data

@@ -58,26 +58,25 @@ controllers.sentenceController = function($scope, $location, $http) {
 
 		$http(req).	
 			success(function(data, status, headers, config) {
-				console.log(data);
 				$scope.resultSentences = data;
-				$scope.resultSentences.forEach(function(entry){
-					entry.keywords = "";
-					if (entry.features) {
-						entry.features.forEach(function(feature){
-							feature.words.forEach(function(word){
-								if (entry.keywords == ""){
-									entry.keywords = word.word;
+				for (entry in $scope.resultSentences){
+					$scope.resultSentences[entry].keywords = "";
+					if ($scope.resultSentences[entry].features) {
+						for (feature in $scope.resultSentences[entry].features) {
+							$scope.resultSentences[entry].features[feature].words.forEach(function(word) {
+								if ($scope.resultSentences[entry].keywords == ""){
+									$scope.resultSentences[entry].keywords = word.word;
 								}
 								else {
-									entry.keywords += ("," + word.word);	
+									$scope.resultSentences[entry].keywords += ("," + word.word);	
 								}
 							})
-						})
+						}
 					}
-				})
+				}
+
 			}).
 			error(function(data, status, headers, config) {
-				console.error(error);
 			});
 	}
 }
