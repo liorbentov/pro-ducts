@@ -44,9 +44,12 @@ var splitToSentences = function (fullText, response) {
 	
 	getKeywords().then(function(docs){
 		sentences.forEach(function(sentence){
+			sentence.sentence = sentence.sentence.replace("פלפו","פלאפו").replace("פאלפו","פלאפו");
 			docs.forEach(function(keyword){
+				var wordRegex = new RegExp("(^|[^A-zא-ת])"+keyword.expression+"($|[^A-zא-ת])", "gim");
 				// Check if keyword is in the sentence
-				if (sentence.sentence.indexOf(keyword.expression) != -1){
+				if (wordRegex.test(sentence.sentence)) {
+				// if (sentence.sentence.indexOf(keyword.expression) != -1){
 					
 					// Check if it has feature
 					if (!sentence.features) {
@@ -60,7 +63,7 @@ var splitToSentences = function (fullText, response) {
 
 					sentence.features[keyword.feature_id].words.push({word : keyword.expression});
 				}
-			})
+			});
 		});
 		
 		getClassification(sentences).then(function(toClassify){
@@ -96,6 +99,7 @@ var splitToSentences = function (fullText, response) {
 
 // Load the dictionary
 // mongoimport -d mydb -c things --type csv --file locations.csv --headerline
+// mongoimport -d Products -c dictionary --type csv --file "D:\My Documents\Downloads\dictionary2.csv" --headerline
 mongoose.connect('mongodb://localhost/Products');
 
 var Schema = mongoose.Schema

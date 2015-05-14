@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Alef";
+    src: url("../fonts/Alef-Regular.ttf");
+}
+
 html,
 body {
 	margin:0;
@@ -5,10 +10,12 @@ body {
 	height:100%;
 	overflow-y: hidden;
 	overflow-x: hidden;
-	font-family: "Tahoma";
+	font-family: "Roboto", "Tahoma";
 }
 h3, h4{
 	color: #02188B;
+	font-family: "Alef";
+	font-weight: bold;
 }
 #wrapper {
 	min-height:100%;
@@ -18,6 +25,9 @@ h3, h4{
 	padding:10px;
 	background:#607D8B;
 	box-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+	font-family: 'Roboto', 'Syncopate', Tahoma, sans-serif;
+	font-weight: bold;
+	font-size: 1.3em;
 }
 
 #header a {
@@ -158,21 +168,55 @@ h3, h4{
 
 
 span.angular-highlight{
-	background-color: yellow;
+	background-color: rgba(255, 255, 0, 0.5);;
 }
 span.angular-highlight-positive{
-	background-color: rgb(76, 254, 76);
+	background-color: rgba(76, 254, 76, 0.5);
 }
 
 span.angular-highlight-negative{
-	background-color: rgb(255, 121, 121);
+	background-color: rgba(255, 121, 121, 0.5);
 }
 
 span.angular-highlight-neutral{
-	background-color: #EEE;
+	background-color: #DDD;
 }
 
 textarea.form-control {
 	width: 500px !important;
 	height: 250px;
+}
+
+.sentence {
+	border-left: 1px solid #DDD;
+}
+
+.odd-row {
+	background-color: #EEE;
+}
+
+.col-xs-offset-half {
+  margin-left: 4%;
+}
+
+.result-row {
+	line-height: 2em;
+	border-radius: 5px;
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0;
+  top: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.loader > img {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 3%;
 }

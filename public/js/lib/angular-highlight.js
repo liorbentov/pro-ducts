@@ -27,6 +27,10 @@ angular.module('angular-highlight', []).directive('highlight', function() {
 			return '<span class="'+attrs.highlightClassNeutral+'">'+match+'</span>';
 		}
 
+		var replacer = function(match, item) {
+			return '<span class="'+attrs.highlightClass+'">'+match+'</span>';
+		}
+
 		var tokenize = function(keywords) {
 			keywords = keywords.replace(new RegExp(',$','g'), '').split(',');
 			var i;
@@ -44,45 +48,47 @@ angular.module('angular-highlight', []).directive('highlight', function() {
 				return false;
 			}
 			
-			Object.keys(scope.keywords).forEach(function(feature){
+			// Object.keys(scope.keywords).forEach(function(feature){
 
-				var words = "";
+			// 	var words = "";
 
-				scope.keywords[feature].words.forEach(function(word){
-					words += ((words == "" ? "" : ",") + word.word);
-				});
+			// 	scope.keywords[feature].words.forEach(function(word){
+			// 		words += ((words == "" ? "" : ",") + word.word);
+			// 	});
 
-				var tokenized	= tokenize(words);
-				var regex 		= new RegExp(tokenized.join('|'), 'gmi');
-				
-				// Find the words
-				if (!element.html() || element.html().trim() == ""){
-					var html = scope.highlight;
-				}
-				else {
-					var html = element.html();
-				}
-				
-				switch (scope.keywords[feature].predicted) {
-					case "Positive" : {
-						html = html.replace(regex, positiveReplacer);
-						break;
-					}
-					case "Negative" : {
-						html = html.replace(regex, negativeReplacer);
-						break;
-					}
-					case "Neutral" : {
-						html = html.replace(regex, neutralReplacer);
-						break;
-					}
-					default : {
-						break;
-					}
-				}
+			var tokenized	= tokenize(scope.keywords);
+			var regex 		= new RegExp(tokenized.join('|'), 'gmi');
+			
+			var html = scope.highlight.replace(regex, replacer);
 
-				element.html(html);
-			});
+			// Find the words
+			// if (!element.html() || element.html().trim() == ""){
+			// 	var html = scope.highlight;
+			// }
+			// else {
+			// 	var html = element.html();
+			// }
+
+			// switch (scope.keywords[feature].predicted) {
+			// 	case "Positive" : {
+			// 		html = html.replace(regex, positiveReplacer);
+			// 		break;
+			// 	}
+			// 	case "Negative" : {
+			// 		html = html.replace(regex, negativeReplacer);
+			// 		break;
+			// 	}
+			// 	case "Neutral" : {
+			// 		html = html.replace(regex, neutralReplacer);
+			// 		break;
+			// 	}
+			// 	default : {
+			// 		break;
+			// 	}
+			// }
+
+			element.html(html);
+			// });
 		});
 	}
 	return {

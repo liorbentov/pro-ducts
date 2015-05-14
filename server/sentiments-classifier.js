@@ -83,6 +83,15 @@ var sentencesByFeaturesDictionary = function(featureSentenceCouples) {
 	return dictionary;
 };
 
+var getCopyOfSentences = function(arrayOfSentences) {
+	var copyArray = [];
+	arrayOfSentences.forEach(function(sentence){
+		copyArray.push(sentence.replace(/[|&;$%@"<>()+,!.?\-\*'#\^_:]/g, ""));
+	})
+	
+	return copyArray;
+}
+
 sentimentsClassifier.prototype.classify = function (featureSentenceCouples, callback) {
 	var sentencesByFeatures = sentencesByFeaturesDictionary(featureSentenceCouples);
 	var featureKeys = Object.keys(sentencesByFeatures),
@@ -101,10 +110,12 @@ sentimentsClassifier.prototype.classify = function (featureSentenceCouples, call
 		
 		var feature = features[featureId];
 		
+		console.log(getCopyOfSentences(sentencesByFeatures[featureId]));
+
 		weka.classify2(
 			this.modelsDirectory + "\\3_classes_feature_" + featureId + ".model",
 			this.trainDirectory + "\\3_classes_feature_" + featureId + ".arff",
-			sentencesByFeatures[featureId],
+			getCopyOfSentences(sentencesByFeatures[featureId]),
 			{ 
 				classifier: feature.classifier,
 				params: feature.classifierParams,
