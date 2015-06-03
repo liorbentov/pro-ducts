@@ -8,7 +8,7 @@ body {
 	margin:0;
 	padding:0;
 	height:100%;
-	overflow-y: hidden;
+	/*overflow-y: hidden;*/
 	overflow-x: hidden;
 	font-family: "Roboto", "Tahoma";
 }
@@ -58,7 +58,7 @@ h3, h4{
 }
 
 .product-panel {
-	height:200px;
+	/*height:200px;*/
 }
 
 .product-image{
@@ -74,7 +74,7 @@ h3, h4{
 }
 
 .product-panel:hover {
-	border-color: #EA2460;
+	border-color: rgb(0, 255, 0) /*#EA2460*/;
 	outline: 0;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,36,84,.6);
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,36,84,.6);
@@ -91,6 +91,13 @@ h3, h4{
 	width: 100%;
 }
 
+.product-panel-header span:first-child {
+	max-width: 200px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 .up-button:before {
     content:"";
     display:inline-block;
@@ -98,7 +105,7 @@ h3, h4{
     height: 0;
     vertical-align:middle;
     border-style: solid;
-    border-width: 0 5px 10px 5px;
+    border-width: 0 9px 15px 9px;
     border-color: transparent transparent rgba(64, 64, 65, 0.56) transparent;
 }
 
@@ -109,7 +116,7 @@ h3, h4{
     height: 0;
     vertical-align:middle;
     border-style: solid;
-    border-width: 10px 5px 0 5px;
+    border-width: 15px 9px 0 9px;
     border-color: rgba(64, 64, 65, 0.56) transparent transparent transparent;
 }
 
@@ -120,7 +127,7 @@ h3, h4{
     height: 0;
     vertical-align:middle;
     border-style: solid;
-    border-width: 5px 10px 5px 0;
+    border-width: 9px 15px 9px 0;
     border-color: transparent rgba(64, 64, 65, 0.56) transparent transparent;
 }
 
@@ -131,7 +138,7 @@ h3, h4{
     height: 0;
     vertical-align:middle;
     border-style: solid;
-    border-width: 5px 0 5px 10px;
+    border-width: 9px 0 9px 15px;
     border-color: transparent transparent transparent rgba(64, 64, 65, 0.56);
 }
 
@@ -219,4 +226,32 @@ textarea.form-control {
   top: 40%;
   left: 50%;
   width: 3%;
+}
+
+.right-button, .left-button {
+	border: 0;
+	border-radius: 5px;
+	width: 50px;
+	height: 30px;
+}
+
+.up-button, .down-button {
+	border: 0;
+	border-radius: 5px;
+	width: 50px;
+	height: 30px;
+}
+
+input[type=range], ::-moz-range-track, ::-ms-track {
+/*-webkit-appearance: none;*/
+background-color: 3f91e5;
+width: 250px;
+height:20px;
+}
+
+::-webkit-slider-thumb, ::-moz-range-thumb, ::-ms-thumb {{
+/*-webkit-appearance: none;*/
+background-color: #666;
+width: 10px;
+height: 20px;
 }

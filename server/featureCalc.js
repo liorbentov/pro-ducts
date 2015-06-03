@@ -1,0 +1,1 @@
+db.getCollection('stats').aggregate([{$match : {featureId: "1"}},{$project : {productId : 1, featureId: 1, "counters.positives": 1, "counters.negatives": 1 , "counters.neutrals" : 1 , grade: {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives", "$counters.neutrals"]}]}}}, {$match : {grade :{$gt : 0.9}}}]) 

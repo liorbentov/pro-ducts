@@ -1,14 +1,9 @@
 var express = require('express');
+var products = require('./products.js');
+var sentences = require('./sentence.js');
+var features = require('./feature.js');
+var DB = require('./db.js');
 var app = express();
-
-var weka = require('../node_modules/node-weka/lib/weka-lib');
-var sentimentsClassifier = 
-	new (require('./sentiments-classifier.js').sentimentsClassifier)(
-		"D:\\Weka-3-6\\weka.jar", 
-		"D:\\Pro-Ducts\\server\\training", 
-		"D:\\Pro-Ducts\\server\\models",
-		"D:\\Pro-Ducts\\server\\temp");
-
 
 var mongoose = require('mongoose');
 
@@ -23,6 +18,7 @@ var API_PATH = '/api/';
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../public"));
 
@@ -31,118 +27,44 @@ app.get('/', function(req, res){
 });
 
 app.get('/disassemble', function(req, res){
-	splitToSentences(req.query.fullText, res);
+	sentences.splitToSentences(req.query.fullText, res);
+});
+
+app.get('/features', function(req, res){
+	res.json(features.getFeatures());
+});
+
+app.get('/productSentences', function(req, res) {
+	var sentencesToClassify = [];
+	var sendToClassify3 = [];
+	var counter = 1;
+	products.getSentencesByProductId(req.query.productId).then(function(productComments){
+		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
+			sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
+				//sendToClassify3 = endResults;
+				res.json(endResults);
+			});
+		});
+	});
+
+
+});
+
+app.get('/aggregate', function(req, res){
+	DB.getObject("stat").aggregate([{$match : {featureId: "1"}},{$project : {productId : 1, featureId: 1, "counters.positives": 1, "counters.negatives": 1 , "counters.neutrals" : 1 , grade: {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives", "$counters.neutrals"]}]}}}, {$match : {grade :{$gt : 0.9}}}]).exec(function(err, results){res.json(results)});
+})
+
+app.get('/products', function(req, res){
+	products.getProducts(res);
+})
+
+app.get('/picture', function(req, res){
+	products.getProductPicture(req.query.productName, res);
 })
 
 app.get('*', function(req, res){
 	res.redirect('/#' + req.originalUrl);
 });
 
-var splitToSentences = function (fullText, response) {
-	var sentences = [];
-	fullText.match( /([^\r\n.!?]+([.!?]+|$))/gim).forEach(function(entry){sentences.push({sentence :entry})});
-	
-	getKeywords().then(function(docs){
-		sentences.forEach(function(sentence){
-			sentence.sentence = sentence.sentence.replace("פלפו","פלאפו").replace("פאלפו","פלאפו");
-			docs.forEach(function(keyword){
-				var wordRegex = new RegExp("(^|[^A-zא-ת])"+keyword.expression+"($|[^A-zא-ת])", "gim");
-				// Check if keyword is in the sentence
-				if (wordRegex.test(sentence.sentence)) {
-				// if (sentence.sentence.indexOf(keyword.expression) != -1){
-					
-					// Check if it has feature
-					if (!sentence.features) {
-						sentence.features = {};
-					}
-
-					// Add the feature if it not already in the element
-					if (!sentence.features[keyword.feature_id]) {
-						sentence.features[keyword.feature_id] = {words: []};
-					}
-
-					sentence.features[keyword.feature_id].words.push({word : keyword.expression});
-				}
-			});
-		});
-		
-		getClassification(sentences).then(function(toClassify){
-			sentimentsClassifier.classify(toClassify, function(err, results){
-				var toResponse = [];
-				results.forEach(function(entry){
-
-					var sentencePlace = -1;
-					for (var sentenceIndex = 0; (sentenceIndex < sentences.length) && sentencePlace < 0; sentenceIndex++) {
-						 if (sentences[sentenceIndex].sentence == entry.sentence) {
-						 	sentencePlace = sentenceIndex;
-						 }
-					}
-
-					// Add the feature if it not already in the element
-						sentences[sentencePlace].features[entry.featureId] = {
-							words : sentences[sentencePlace].features[entry.featureId].words,
-							featureId: entry.featureId,
-							predicted: entry.predicted,
-							certainty: entry.certainty,
-						};
-				});
-
-				response.json(sentences);
-			});
-		}, function(error){
-			console.log("this is an error: " + error);
-				response.json(sentences);
-		});
-	});
-
-};
-
-// Load the dictionary
-// mongoimport -d mydb -c things --type csv --file locations.csv --headerline
-// mongoimport -d Products -c dictionary --type csv --file "D:\My Documents\Downloads\dictionary2.csv" --headerline
-mongoose.connect('mongodb://localhost/Products');
-
-var Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
-
-var Keyword = new Schema({
-	expression : String
-  , feature_id : String
-  , frequency  : String
-},
-{collection: 'dictionary'});
-
-var myKeyword = mongoose.model('Keyword', Keyword);
-
-var getKeywords = function(sentence) {
-	return Q.promise(function(resolve, reject) { 
-		myKeyword.find({}, function (err, docs) {
-			if (err || docs.lenght == 0) {
-				reject("error");				
-			}
-			else {
-				resolve(docs);	
-			}
-		})
-	});
-};
-
-var getClassification = function(sentences) {
-	return Q.promise(function(resolve, reject){
-		var toClassify = [];
-		sentences.forEach(function(currSentence){
-			if (currSentence.features){
-				Object.keys(currSentence.features).forEach(function(currFeature){
-					toClassify.push({
-						featureId : currFeature,
-						sentence : currSentence.sentence
-					});
-				})
-			}
-		});
-
-		resolve(toClassify);
-	});
-};
 
 server.listen(4444);

@@ -83,71 +83,135 @@ var sentencesByFeaturesDictionary = function(featureSentenceCouples) {
 	return dictionary;
 };
 
-var getCopyOfSentences = function(arrayOfSentences) {
-	var copyArray = [];
-	arrayOfSentences.forEach(function(sentence){
-		copyArray.push(sentence.replace(/[|&;$%@"<>()+,!.?\-\*'#\^_:]/g, ""));
-	})
-	
-	return copyArray;
-}
-
 sentimentsClassifier.prototype.classify = function (featureSentenceCouples, callback) {
-	var sentencesByFeatures = sentencesByFeaturesDictionary(featureSentenceCouples);
-	var featureKeys = Object.keys(sentencesByFeatures),
+    var sentencesByFeatures = sentencesByFeaturesDictionary(featureSentenceCouples);
+    var featureKeys = Object.keys(sentencesByFeatures),
 		numFeatures = featureKeys.length;
 
-	var results = [];
-	var that = this;
-	
-	function handleFeature(currFeature) {
-	
-		if (currFeature >= numFeatures) {
-			callback(undefined, results);
-			return;
-		}
-		var featureId = featureKeys[currFeature];
-		
-		var feature = features[featureId];
-		
-		console.log(getCopyOfSentences(sentencesByFeatures[featureId]));
+    var results = [];
+    var that = this;
 
-		weka.classify2(
+    function handleFeature(currFeature) {
+
+        if (currFeature >= numFeatures) {
+            callback(undefined, results);
+            return;
+        }
+        var featureId = featureKeys[currFeature];
+
+        var feature = features[featureId];
+
+        weka.classify2(
 			this.modelsDirectory + "\\3_classes_feature_" + featureId + ".model",
 			this.trainDirectory + "\\3_classes_feature_" + featureId + ".arff",
-			getCopyOfSentences(sentencesByFeatures[featureId]),
-			{ 
-				classifier: feature.classifier,
-				params: feature.classifierParams,
-				classIndex: 1,
-				jarPath: this.wekaJarPath,
-				workingDirectory: this.tempFilesFolder,
-				filter: "weka.filters.unsupervised.attribute.StringToWordVector",
-				filterParams: '-R first-last -W 1000 -prune-rate -1.0 -T -I -N 1 -stemmer weka.core.stemmers.NullStemmer -M 2 ' +
+			sentencesByFeatures[featureId],
+			{
+			    classifier: feature.classifier,
+			    params: feature.classifierParams,
+			    classIndex: 1,
+			    jarPath: this.wekaJarPath,
+			    workingDirectory: this.tempFilesFolder,
+			    filter: "weka.filters.unsupervised.attribute.StringToWordVector",
+			    filterParams: '-R first-last -W 1000 -prune-rate -1.0 -T -I -N 1 -stemmer weka.core.stemmers.NullStemmer -M 2 ' +
 					'-tokenizer \"weka.core.tokenizers.NGramTokenizer -delimiters \\" \\\\r\\\\n\\\\t.,;:\\\\\\\'\\\\\\\"()?!\\" -max 3 -min 1',
 			},
 			function (errors, currResults) {
-			
-				if (errors) {
-					callback(errors);
-					return;
-				}
-				
-				for (var i = 0, len = currResults.length; i < len; i++) {
-					results.push({
-						predicted: currResults[i].predicted,
-						certainty: currResults[i].certainty,
-						featureId: featureId,
-						sentence: sentencesByFeatures[featureId][i]
-					});
-				}
-					
-				console.log("Finished " + currResults.length + " sentences for feature #" + featureId);
-				handleFeature.call(that, currFeature + 1);
+
+			    if (errors) {
+			        callback(errors);
+			        return;
+			    }
+
+			    for (var i = 0, len = currResults.length; i < len; i++) {
+			        results.push({
+			            predicted: currResults[i].predicted,
+			            certainty: currResults[i].certainty,
+			            featureId: featureId,
+			            sentence: sentencesByFeatures[featureId][i]
+			        });
+			    }
+
+			    console.log("Finished " + currResults.length + " sentences for feature #" + featureId);
+			    handleFeature.call(that, currFeature + 1);
 			});
-	}
-	
-	handleFeature.call(this, 0);
+    }
+
+    handleFeature.call(this, 0);
+};
+
+sentimentsClassifier.prototype.classifyProduct = function (productId, featureSentenceCouples, callback) {
+    var sentencesByFeatures = sentencesByFeaturesDictionary(featureSentenceCouples);
+    var featureKeys = Object.keys(sentencesByFeatures),
+		numFeatures = featureKeys.length;
+
+    var results = [],
+        stats = [];
+    var that = this;
+
+    function handleFeature(currFeature) {
+
+        // If we're finished
+        if (currFeature >= numFeatures) {
+            callback(undefined, results, stats);
+            return;
+        }
+        var featureId = featureKeys[currFeature];
+
+        var feature = features[featureId];
+
+        weka.classify3(
+			this.trainDirectory + "\\3_classes_feature_" + featureId + ".arff",
+			sentencesByFeatures[featureId],
+			{
+			    classifier: feature.classifier,
+			    params: feature.classifierParams,
+			    classIndex: 1,
+			    jarPath: this.wekaJarPath,
+			    workingDirectory: this.tempFilesFolder,
+			    filter: "weka.filters.unsupervised.attribute.StringToWordVector",
+			    filterParams: '-R first-last -W 1000 -prune-rate -1.0 -T -I -N 1 -stemmer weka.core.stemmers.NullStemmer -M 2 ' +
+					'-tokenizer \"weka.core.tokenizers.NGramTokenizer -delimiters \\" \\\\r\\\\n\\\\t.,;:\\\\\\\'\\\\\\\"()?!\\" -max 3 -min 1',
+			},
+			function (errors, currResults) {
+
+			    if (errors) {
+			        callback(errors);
+			        return;
+			    }
+
+			    var counters = {
+			        positives: 0,
+			        negatives: 0,
+			        neutrals: 0
+			    };
+
+			    for (var i = 0, len = currResults.length; i < len; i++) {
+			        var predicted = currResults[i].predicted;
+
+			        results.push({
+			            predicted: predicted,
+			            certainty: currResults[i].certainty,
+			            featureId: featureId,
+			            sentence: sentencesByFeatures[featureId][i]
+			        });
+
+			        if (predicted === "Positive")
+			            counters.positives++;
+			        else if (predicted === "Negative")
+			            counters.negatives++;
+			        else
+			            counters.neutrals++;
+			    }
+
+			    stats.push({ productId: productId, featureId: featureId, counters: counters });
+
+			    console.log("Finished " + currResults.length + " sentences for feature #" + featureId +
+                    " (" + counters.positives + " Positives, " + counters.negatives + " Negatives, " + counters.neutrals + " Neutrals)");
+			    handleFeature.call(that, currFeature + 1);
+			});
+    }
+
+    handleFeature.call(this, 0);
 };
 
 if (typeof module !== "undefined") {

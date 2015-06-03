@@ -7,7 +7,7 @@
 <br>
 <div class="row" class="products-models">
 	<div class="col-sm-6 col-md-3 pull-right" ng-repeat="product in products|filter:filterProduct">
-		<product ng-model="product" ng-click="chooseProduct($index)"></product>
+		<product ng-model="product" ng-click="chooseProduct((product.ID-1))"></product>
 	</div>
 </div>
 
