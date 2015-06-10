@@ -4,32 +4,38 @@ angular.module('proDucts.controllers').controller('productTypeController', ['$sc
 			{
 				name : "טלפונים סלולריים",
 				img : "cellphones.jpg",
-				numberOfProducts : 527
+				numberOfProducts : 527,
+				isClickable: true
 			},
 			{
 				name : "טאבלטים",
 				img : "tablets.jpg",
-				numberOfProducts : 500
+				numberOfProducts : 500,
+				isClickable: false
 			},
 			{
 				name : "טלוויזיות",
 				img : "tvs.jpg",
-				numberOfProducts : 495
+				numberOfProducts : 495,
+				isClickable: false
 			},
 			{
 				name : "מצלמות",
 				img : "cameras.jpg",
-				numberOfProducts : 518
+				numberOfProducts : 518,
+				isClickable: false
 			},
 			{
 				name : "מכונות קפה",
 				img : "coffeeMachines.jpg",
-				numberOfProducts : 430
+				numberOfProducts : 430,
+				isClickable: false
 			},
 			{
 				name : "מזגנים",
 				img : "AirConditioner.jpg",
-				numberOfProducts : 390
+				numberOfProducts : 390,
+				isClickable: false
 			}
 		];
 

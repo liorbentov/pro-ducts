@@ -404,3 +404,36 @@ textarea.form-control {
 .progressGreen {
   background-color: #86e01e;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.notClickable {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.bs-footer-links li:first-child {
+    padding-left: 0;
+}
+
+.bs-footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+
+.bs-footer-links a {
+    color: #E8E8E8;
+}
+
+.bs-footer-links {
+    padding-left: 0;
+    list-style-type: disc;
+    margin-bottom: 0;
+}
+
+.bs-footer {
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
