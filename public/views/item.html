@@ -15,13 +15,30 @@
 	</div>
 </div>
 <div id="left" style="width: 50%; position:absolute; left:0; min-height:85%">
-	<div class="content-div" style="width: 100%; position:absolute; top:0;">
+	<div class="content-div row" style="width: 100%; position:absolute; top:0;">
 		<h4>ציון ע"פ הקריטריונים: {{products[selectedItem].grade.toPrecision(2) * 100}}</h4>
 		<!--<div ng-repeat="feature in products[selectedItem].features">קריטריון: {{feature.featureId}} ציון: {{feature.grade}}</div>-->
 
-		<div class="grade" ng-repeat="feature in products[selectedItem].features">
-			<p class="title" style="float:right; clear:both">{{features[feature.featureId]}}</p>
-			<p class="percentage" style="float:right; margin-left:5px; width: 100px; background-color:blue; border-right:{{100-(feature.grade.toPrecision(2) * 100)}}px solid red" >{{feature.grade.toPrecision(2) * 100}}<span>%</span></p>
+		<div class="grade col-md-6 col-sm-6" ng-repeat="feature in products[selectedItem].features">
+
+				<p class="title">{{features[feature.featureId]}}</p>
+				<div class="progress">
+					<div class="progress-bar" style="width:{{(feature.grade.toPrecision()*100).toFixed()}}%;"
+						ng-class="{progressRed:(feature.grade.toPrecision()*100).toFixed() <= 60,
+							progressYellow:((feature.grade.toPrecision()*100).toFixed() > 60 &&
+								(feature.grade.toPrecision()*100).toFixed() <= 80),
+							progressGreen: (feature.grade.toPrecision()*100).toFixed() > 80}">
+
+					</div>
+					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
+				</div>
+
+
+				<!-- <span style="background:green; width:{{(feature.grade.toFixed() * 100)}}px">&nbsp;</span>
+				<span style="background:red; width:{{100-(feature.grade.toFixed() * 100)}}px">&nbsp;</span> -->
+
+				<!-- <p class="percentage" style="float:left ; margin-left:5px; width: 100px; background-color:blue; border-right:{{100-(feature.grade.toPrecision(2) * 100)}}px solid red" >{{feature.grade.toPrecision(2) * 100}}<span>%</span></p> -->
+
 		</div> <!-- end of grade -->
 	</div>
 	<div id="left-lower" class="content-div podium-div">

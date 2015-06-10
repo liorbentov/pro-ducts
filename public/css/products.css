@@ -403,3 +403,57 @@ height: 20px;
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: right;
 }
+
+.grade .title{
+  float:right;
+  clear:both;
+}
+
+.progress {
+  float: left;
+  width: 100px;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+  height: 16px;
+  border-radius: 4px;
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  -webkit-transition-property: width, background-color;
+  -moz-transition-property: width, background-color;
+  -o-transition-property: width, background-color;
+  transition-property: width, background-color;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.progressGrade {
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  font-size: 1em;
+}
+
+.progressRed {
+  background-color: #f63a0f;
+}
+
+.progressYellow {
+  background-color: #f2b01e;
+}
+
+.progressGreen {
+  background-color: #86e01e;
+}
