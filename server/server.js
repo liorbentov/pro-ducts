@@ -50,14 +50,25 @@ app.get('/productSentences', function(req, res) {
 });
 
 app.get('/aggregate', function(req, res){
-	
+
+	var importantFeatures = [];
+
+	if (req.query.important) {
+		if (typeof(req.query.important) == "string") {
+			importantFeatures.push(req.query.important);
+		}
+		else {
+			importantFeatures = req.query.important;
+		}
+	}
+
 	DB.getObject("stat").aggregate([
-			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade : 
+			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade :
         {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives"]}]}} }}}
        ,{$project : {_id:1, features: "$feats"}}
        ,{$sort : {_id : 1}}
-		]).exec(function(err, results){shtuty(results, 
-			req.query.important.map(function(currentValue, index, array){return currentValue*1}), res)});
+		]).exec(function(err, results){shtuty(results,
+			importantFeatures.map(function(currentValue, index, array){return currentValue*1}), res)});
 })
 
 var shtuty = function(array, importantFeatures, res) {
