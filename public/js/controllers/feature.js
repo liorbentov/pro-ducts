@@ -1,15 +1,15 @@
-angular.module('proDucts.controllers').controller('featureController', ['$scope', '$timeout', 'productsService', 'featuresService',  
-	function($scope, $timeout, productsService, featuresService) {
+angular.module('proDucts.controllers').controller('featureController', ['$scope', '$timeout', '$location','productsService', 'featuresService',
+	function($scope, $timeout, $location, productsService, featuresService) {
 
 	// For criteria.html
     $scope.unChosenFeatures;
-    $scope.chosenFeatures; 
+    $scope.chosenFeatures;
 
     var checkedFeatures = [];
 
-	var promise = productsService.getFeaturesAsArray();
-	
-	var findValueInArray = function(value, array) {
+	var promise = featuresService.getFeaturesAsArray();
+
+	$scope.findValueInArray = function(value, array) {
 		for (var i = 0; i < array.length; i++) {
 			if (array[i].key == value.key) {
 				return i;
@@ -19,7 +19,6 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 		return -1;
 	}
 
-
 	promise.then(function(results) {
 		$scope.unChosenFeatures = results;
 
@@ -28,30 +27,40 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 	    	if (!$scope.chosenFeatures) {
 	    		$scope.chosenFeatures = [];
 	    	}
-	    	else {
-	    		$scope.chosenFeatures.forEach(function(entry){
-	    			var index = findValueInArray(entry, $scope.unChosenFeatures)
-	    			if (index > -1) {
-	    				$scope.unChosenFeatures.splice(index, 1);
-	    			}
-	    		});
-	    	}
+	    	// else {
+	    	// 	$scope.chosenFeatures.forEach(function(entry){
+	    	// 		var index = findValueInArray(entry, $scope.unChosenFeatures)
+	    	// 		if (index > -1) {
+	    	// 			$scope.unChosenFeatures.splice(index, 1);
+	    	// 		}
+	    	// 	});
+	    	// }
 	    }
 	}, function(error) {
 		console.log(error);
 	});
 
-	$scope.checkFeature = function(feature){
-		var index = findValueInArray(feature, checkedFeatures);
-		if (index > -1) {
-			checkedFeatures.splice(index, 1);
-		}
-		else {
-			checkedFeatures.push(feature);
-		}
+
+	$scope.getProducts = function() {
+		productsService.getProductsAfterCalc(
+			$scope.chosenFeatures.map(function(currentValue, index, array){return currentValue.key}),
+			function(results){$timeout(function(){$location.url("/item");}) }
+		);
 	}
 
-    $scope.featureUp = function(index) {		
+	$scope.checkFeature = function(feature){
+		var index = $scope.findValueInArray(feature, $scope.chosenFeatures);
+		if (index > -1) {
+			$scope.chosenFeatures.splice(index, 1);
+		}
+		else {
+			$scope.chosenFeatures.push(feature);
+		}
+
+		featuresService.saveChosenFeatures($scope.chosenFeatures);
+	}
+
+    $scope.featureUp = function(index) {
     	if ($scope.inSelected) {
 	         if (index > 0 && index < $scope.chosenFeatures.length)
 	         {
@@ -59,7 +68,7 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 			    $scope.chosenFeatures[index] = $scope.chosenFeatures[index - 1];
 			    $scope.chosenFeatures[index - 1] = temp;
 			    $timeout(function(){
-			 	   $scope.inSelected = index-1;	
+			 	   $scope.inSelected = index-1;
 			    });
 	        }
 

@@ -1,25 +1,35 @@
 <div class="row">
-	<div class="col-sm-3 col-md-3 col-md-push-7">
-		<h4>בחר מתוך רשימת הקריטריונים</h4>
-		<div ng-repeat="feature in unChosenFeatures track by feature.key" ng-animate="'feature'">
-			<input type="checkbox" id="feature.key" value="feature.name" name="selectedFeatures[]" ng-click="checkFeature(feature)">
-    			{{feature.name}}
+	<div class="col-sm-6 col-md-6 col-md-push-4">
+		<h4>בחר מתוך רשימת הקריטריונים את אלו שיותר חשובים לך</h4>
+		<div class="row">
+			<div ng-repeat="feature in unChosenFeatures track by feature.key" ng-animate="'feature'" class="ondisplay col-sm-6 col-md-6 pull-right">
+				
+					<div class="slideTwo">
+						<input type="checkbox" id="{{feature.key}}" value="feature.name" name="selectedFeatures[]" ng-click="checkFeature(feature)" ng-checked="findValueInArray(feature, chosenFeatures) > -1">
+						<label for="{{feature.key}}"></label>
+
+	    			</div>
+	    			<span style="float: right;margin-top: 10px;margin-right: 5px;">{{feature.name}}</span>
+			</div>
 		</div>
-		{{selectedFeatures}}
+
+		<br>
+		<button class="btn btn-default" ng-click="getProducts()">בדוק אילו מוצרים מתאימים</button>
 	</div>
-	<div class="col-sm-1 col-md-1 col-md-push-3">
+
+	<!--<div class="col-sm-1 col-md-1 col-md-push-3">
 		<br><br>
 		<button ng-click="choose(outSelected)" class="btn btn-default left-button"></button>
 		<br><br>
 		<button ng-click="unChoose(inSelected)" class="btn btn-default right-button"></button>
 	</div>
 	<div class="col-sm-5 col-md-5 col-md-pull-3 row">
-		<!--<div class="col-sm-2">
+		<div class="col-sm-2">
 			<br><br>
     		<button ng-click="featureUp(inSelected)" class="btn btn-default up-button"></button>
     		<br>
     		<button ng-click="featureDown(inSelected)" class="btn btn-default down-button"></button>
-		</div>-->
+		</div>
 		<div class="col-sm-12">
 			<h4>תעדף מתוך הרשימה</h4>
 			<span ng-repeat="feature in chosenFeatures track by feature.key">
@@ -28,5 +38,5 @@
 			    <chosen-feature ng-model="feature"></chosen-feature>
 			</span>
 		</div>
-	</div>
+	</div>-->
 </div>

@@ -2,17 +2,17 @@ var DB = require('./db.js');
 var Q = require('q');
 
 var weka = require('../node_modules/node-weka/lib/weka-lib');
-var sentimentsClassifier = 
+var sentimentsClassifier =
 	new (require('./sentiments-classifier.js').sentimentsClassifier)(
-		"D:\\Weka-3-6\\weka.jar", 
-		"D:\\Pro-Ducts\\server\\training", 
-		"D:\\Pro-Ducts\\server\\models",
-		"D:\\Pro-Ducts\\server\\temp");
+		"D:\\Weka-3-6\\weka.jar",
+		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\training",
+		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\models",
+		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\temp");
 
 var splitToSentences = function (fullText, response) {
 	var sentences = [];
 	fullText.match( /([^\r\n.!?]+([.!?]+|$))/gim).forEach(function(entry){sentences.push({sentence :entry})});
-	
+
 	getKeywords().then(function(docs){
 		sentences.forEach(function(sentence){
 			sentence.sentence = sentence.sentence.replace("פלפו","פלאפו").replace("פאלפו","פלאפו");
@@ -35,7 +35,7 @@ var splitToSentences = function (fullText, response) {
 				}
 			});
 		});
-		
+
 		getClassification(sentences).then(function(toClassify){
 			sentimentsClassifier.classify(toClassify, function(err, results){
 				var toResponse = [];
@@ -73,7 +73,7 @@ var splitAndFindFeatures = function (fullTextArray) {
 		console.log(fullTextArray.length);
 		fullTextArray.forEach(function(fullText){
 			fullText.sentence.match(/([^\r\n.!?]+([.!?]+|$))/gim).forEach(function(entry){sentences.push({sentence :entry})});
-			
+
 		});
 
 		getKeywords().then(function(docs){
@@ -100,7 +100,7 @@ var splitAndFindFeatures = function (fullTextArray) {
 			});
 
 			resolve(sentences);
-		});	
+		});
 	});
 };
 
@@ -119,7 +119,7 @@ var combineFeaturesAndSentences = function(productId, sentencesArray) {
 				}
 				catch (err) {
 					console.log(err + ": " + feature);
-				}	
+				}
 			}
 		});
 		console.log(sentencesToClassify	);
@@ -154,19 +154,19 @@ var combineFeaturesAndSentences = function(productId, sentencesArray) {
 				resolve(stats);
 				//resolve(sentencesToClassify);
 			}
-		});		
+		});
 
 	});
 };
 
 var getKeywords = function(sentence) {
-	return Q.promise(function(resolve, reject) { 
+	return Q.promise(function(resolve, reject) {
 		DB.getObject("keyword").find({}, function (err, docs) {
 			if (err || docs.lenght == 0) {
-				reject("error");				
+				reject("error");
 			}
 			else {
-				resolve(docs);	
+				resolve(docs);
 			}
 		})
 	});

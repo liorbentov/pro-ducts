@@ -1,22 +1,23 @@
-angular.module('proDucts.controllers').controller('sentenceController', ['$scope', '$location', '$http', 'productsService', 
-	function($scope, $location, $http, productsService) {
+angular.module('proDucts.controllers').controller('sentenceController', ['$scope', '$location', '$http', 'productsService','featuresService',
+	function($scope, $location, $http, productsService, featuresService) {
 		$scope.sentence;
 		$scope.resultSentences;
 		$scope.featuresNames;
 		$scope.wait = false;
 
-	    if (!$scope.featuresNames) {
-	        productsService.getFeatures(function(results) {
-	            $scope.featuresNames = results;
-	        })    
-	    }
+		var promise = featuresService.getFeatures();
+		promise.then(function(results) {
+			if (!$scope.featuresNames) {
+				$scope.featuresNames = results;
+			}
+		});
 
 		$scope.getFeaturesAndTheirGrade = function(sentences) {
 			$scope.features = [];
 			sentences.forEach(function(sentence){
 				if (sentence.features){
 					for (feature in sentence.features) {
-						
+
 						// Check if the current feature is in the array
 						var tempFeature = $scope.searchFeature(feature, $scope.features);
 						if (tempFeature == null){
@@ -56,7 +57,7 @@ angular.module('proDucts.controllers').controller('sentenceController', ['$scope
 				params: { "fullText":  $scope.sentence}
 			}
 
-			$http(req).	
+			$http(req).
 				success(function(data, status, headers, config) {
 					 $scope.resultSentences = data;
 
@@ -69,7 +70,7 @@ angular.module('proDucts.controllers').controller('sentenceController', ['$scope
 										$scope.resultSentences[entry].keywords = word.word;
 									}
 									else {
-										$scope.resultSentences[entry].keywords += ("," + word.word);	
+										$scope.resultSentences[entry].keywords += ("," + word.word);
 									}
 								})
 							}

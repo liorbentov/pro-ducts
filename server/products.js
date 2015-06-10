@@ -601,8 +601,20 @@ var getProductPicture = function(productName, res) {
 	})
 };
 
+var getProductNameById = function(productId) {
+	var result = products.filter(function(element){return element.productId == productId});
+	
+	if (result) {
+		return result[0];
+	}
+	else {
+		return null;
+	}
+};
+
 module.exports = {
 	getProducts : getProducts,
 	getSentencesByProductId : getSentencesByProductId,
-	getProductPicture : getProductPicture
+	getProductPicture : getProductPicture,
+	getProductNameById : getProductNameById
 };

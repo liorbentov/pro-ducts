@@ -1,11 +1,20 @@
-angular.module('proDucts.controllers').controller('productController', ['$scope', '$http', '$location', 'productsService', 
-	function($scope, $http, $location, productsService) {
+angular.module('proDucts.controllers').controller('productController', ['$scope', '$http', '$location', 'productsService', 'featuresService',
+	function($scope, $http, $location, productsService, featuresService) {
 
 	$scope.productsFilter = "";
 	$scope.products = null;
-	$scope.selectedItem = productsService.getSelectedIndex();
-
+	var selectedItem = $scope.selectedItem = productsService.getSelectedIndex();
+  //var selectedItem = 0;
 	productsService.getProducts(function(results){$scope.products = results});
+
+  $scope.chosenFeatures = featuresService.getChosenFeatures();
+
+	$scope.features = null;
+
+	var promise = featuresService.getFeatures();
+	promise.then(function(results){
+		$scope.features = results;
+	});
 
 	$scope.filterProduct = function (item){
 	    if (item.Name.toUpperCase().indexOf($scope.productsFilter.toUpperCase())!=-1 /*|| item.Grade.toString().indexOf($scope.productsFilter)!=-1*/) {
@@ -15,13 +24,18 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   	};
 
   	$scope.chooseProduct = function (productIndex) {
-  		selectedItem = productIndex;
-		productsService.setProductImage(productIndex, function(results){
+
+		  productsService.setProductImage(productIndex, function(results){
 			$scope.products = results;
 			$location.url('/item');
 		});
   	};
 
+
+    $scope.displayProduct = function(productIndex) {
+          $scope.selectedItem = productIndex;
+          selectedItem = productIndex;
+    };
 
   	$scope.productRight = function () {
   		if (selectedItem > 0) {

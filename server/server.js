@@ -41,7 +41,6 @@ app.get('/productSentences', function(req, res) {
 	products.getSentencesByProductId(req.query.productId).then(function(productComments){
 		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
 			sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
-				//sendToClassify3 = endResults;
 				res.json(endResults);
 			});
 		});
@@ -51,8 +50,49 @@ app.get('/productSentences', function(req, res) {
 });
 
 app.get('/aggregate', function(req, res){
-	DB.getObject("stat").aggregate([{$match : {featureId: "1"}},{$project : {productId : 1, featureId: 1, "counters.positives": 1, "counters.negatives": 1 , "counters.neutrals" : 1 , grade: {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives", "$counters.neutrals"]}]}}}, {$match : {grade :{$gt : 0.9}}}]).exec(function(err, results){res.json(results)});
+	
+	DB.getObject("stat").aggregate([
+			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade : 
+        {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives"]}]}} }}}
+       ,{$project : {_id:1, features: "$feats"}}
+       ,{$sort : {_id : 1}}
+		]).exec(function(err, results){shtuty(results, 
+			req.query.important.map(function(currentValue, index, array){return currentValue*1}), res)});
 })
+
+var shtuty = function(array, importantFeatures, res) {
+	var results = [];
+	array.forEach(function(product){
+		var featuresSum = 0;
+		var featuresCount = 0;
+		product.features.forEach(function(feature){
+			featuresSum += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.grade : feature.grade*2);
+			featuresCount += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.count : feature.count*2);
+		});
+
+		results.push({
+			product : product._id,
+			grade : (featuresSum/featuresCount),
+			features : product.features
+		});
+	});
+
+	sortByKey(results, "grade").then(function(shtuty){res.json(shtuty.map(function(currentValue, index, array){
+		var productToReturn = products.getProductNameById(currentValue.product);
+		productToReturn.grade = currentValue.grade;
+		productToReturn.features = currentValue.features;
+		return (productToReturn);
+	}));}) ;
+};
+
+var sortByKey = function(array, key) {
+	return Q.promise(function(resolve, reject) {
+	    resolve(array.sort(function(a, b) {
+	        var x = a[key]; var y = b[key];
+	        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+	    })) ;
+	});
+}
 
 app.get('/products', function(req, res){
 	products.getProducts(res);

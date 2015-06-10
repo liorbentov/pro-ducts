@@ -42,7 +42,7 @@ h3, h4{
 
 #content {
 	padding:10px;
-	padding-bottom:80px;   /* Height of the footer element */
+	/*padding-bottom:80px;   /* Height of the footer element */*/
 }
 #footer {
 	width:100%;
@@ -81,13 +81,13 @@ h3, h4{
 }
 
 .product-panel:hover .product-panel-header {
-	
+
 }
 
 .product-panel-header {
-	border-bottom:1px solid #DDD; 
+	border-bottom:1px solid #DDD;
 	background:rgb(250,250,250);
-	overflow: hidden; 
+	overflow: hidden;
 	width: 100%;
 }
 
@@ -242,16 +242,164 @@ textarea.form-control {
 	height: 30px;
 }
 
-input[type=range], ::-moz-range-track, ::-ms-track {
-/*-webkit-appearance: none;*/
+/* .slideTwo */
+.slideTwo {
+  width: 80px;
+  height: 30px;
+  background: #DDD;
+  margin: 5px 5px;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+  clear: both;
+  float: right;
+}
+.slideTwo:after {
+  content: ' ';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  height: 2px;
+  width: 52px;
+  background: #111;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+.slideTwo label {
+  display: block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  z-index: 1;
+  left: 4px;
+  background: #fcfff4;
+  border-radius: 50px;
+  -webkit-transition: all 0.4s ease;
+          transition: all 0.4s ease;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+}
+.slideTwo label:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #888;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px black, 0px 1px 0px rgba(255, 255, 255, 0.9);
+}
+.slideTwo input[type=checkbox] {
+  visibility: hidden;
+}
+.slideTwo input[type=checkbox]:checked + label {
+  left: 54px;
+}
+.slideTwo input[type=checkbox]:checked + label:after {
+  background: #27ae60;
+  /*activeColor*/
+}
+
+/* end .slideTwo */
+
+.ondisplay section:after {
+  /*         visibility: hidden; */
+  content: attr(title);
+  position: relative;
+  width: 100%;
+  /*left: 0;*/
+  bottom: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0px 1px #000;
+}
+
+/* grade circle */
+.grade{
+  /*width: 144px;
+  height: 156px;*/
+  background: #fff;
+  /*background: #f6f6f6;*/
+  float: right;
+
+}
+.title, .grade-percentage p{
+  text-align: center;
+}
+.title{
+  /*padding-top: 22px;*/
+  color: #404040;
+  font-size: 12px;
+}
+.grade-circle{
+  width: 66px;
+  height: 66px;
+  border-radius: 66px;
+  position: relative;
+  margin-left: 10px;
+  /*margin: 0 auto;*/
+  /*margin-top: 20px;*/
+}
+.grade-percentage{
+  width: 50px;
+  height: 50px;
+  background: #f8f8f8;
+  border-radius: 50px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  box-shadow: -1px 1px 2px rgba(0,0,0,0.3);
+}
+.grade-percentage p{
+  /*font-size: 26px;*/
+  font-weight: bold;
+  color: #404040;
+  margin-top: 13px
+}
+.grade-percentage p span{
+  font-size: 10px;
+  vertical-align: top;
+}
+
+/* colors */
+.green{background: #b8c765;}
+.yellow{background: #ede487;}
+.red{background: #dd5c5c;}
+.blue{background: #5c90dd;}
+
+/*input[type=range], ::-moz-range-track, ::-ms-track {
+/*-webkit-appearance: none;
 background-color: 3f91e5;
 width: 250px;
 height:20px;
 }
 
 ::-webkit-slider-thumb, ::-moz-range-thumb, ::-ms-thumb {{
-/*-webkit-appearance: none;*/
+-webkit-appearance: none;
 background-color: #666;
 width: 10px;
 height: 20px;
+}*/
+
+.product-title {
+  position: relative;
+  top: -45px;
+  background: rgba(0, 0, 0, 0.5);
+  height: 45px;
+  color: white;
+  text-indent: 1%;
+}
+
+.product-title div:nth-child(1){
+  font-weight: bold;
+}
+
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+  float: right;
 }
