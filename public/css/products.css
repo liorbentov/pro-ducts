@@ -437,3 +437,15 @@ textarea.form-control {
     text-align: center;
     border-top: 1px solid #e5e5e5;
 }
+
+.first-place{
+  position: absolute;
+  top: -20px;
+  left: 220px;
+  width: 100px;
+  word-break: break-all;
+  border: 1px solid;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  float: right;
+}

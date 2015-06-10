@@ -34,11 +34,6 @@
 					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
 				</div>
 
-
-		<div class="grade" ng-repeat="feature in products[selectedItem].features">
-			<p class="title" style="float:right; clear:both">{{features[feature.featureId]}}</p>
-			<p class="percentage" style="float:right; margin-left:5px; width: 100px; background-color:blue; border-right:{{100-(feature.grade.toPrecision(2) * 100)}}px solid red" >{{feature.grade.toPrecision(2) * 100}}<span>%</span></p>
-
 		</div> <!-- end of grade -->
 	</div>
 	<div id="left-lower" class="content-div podium-div">
