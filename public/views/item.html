@@ -1,11 +1,10 @@
-
-<div id="right" style="width: 50%; position:absolute; left:50%; min-height:85%;">
-	<div style="margin:2%;padding-bottom:130px">
+<div id="right">
+	<div>
 		<h3 class="text-center">{{products[selectedItem].productName}}</h3>
 		<br>
-		<img src="{{products[selectedItem].Img}}" style="height:350px; width:70%;margin-right:13%" class="text-center">
+		<img src="{{products[selectedItem].Img}}" class="text-center">
 	</div>
-	<div style="position:absolute;bottom:2%;left:0;width:96%;margin-left:2%;">
+	<div>
 		<span class="pull-right">
 			<button class="right-button" ng-click="productRight()"></button>
 		</span>
@@ -14,8 +13,8 @@
 		</span>
 	</div>
 </div>
-<div id="left" style="width: 50%; position:absolute; left:0; min-height:85%">
-	<div class="content-div" style="width: 100%; position:absolute; top:0;">
+<div id="left">
+	<div class="content-div">
 		<h4>ציון ע"פ הקריטריונים: {{products[selectedItem].grade.toPrecision(2) * 100}}</h4>
 		<!--<div ng-repeat="feature in products[selectedItem].features">קריטריון: {{feature.featureId}} ציון: {{feature.grade}}</div>-->
 
@@ -33,39 +32,14 @@
 					</div>
 					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
 				</div>
-
-		</div> <!-- end of grade -->
+		</div>
 	</div>
 	<div id="left-lower" class="content-div podium-div">
 		<h4>3 הגדולים ע"פ הקריטריונים</h4>
 		<br>
-		<div style="position:absolute; top:85%">
-			<span style="position: relative; top: -72px; left: -203px;width:50px;word-break:break-all;border:1px solid">{{products[0].productName}}</span>
-			<span style="position: relative; top: -51px; left: -380px;width:100px">number 2</span>
-			<span style="position: relative; top: -27px; left: -221px;width:100px">{{products[2].productName}}</span>
+			<span class="first-place"><a ng-click="displayProduct(0)" class="clickable">{{products[0].productName}}</a></span>
+			<span class="second-place"><a ng-click="displayProduct(1)" class="clickable">{{products[1].productName}}</a></span>
+			<span class="third-place"><a ng-click="displayProduct(2)" class="clickable">{{products[2].productName}}</a></span>
 			<img src="../img/podium.png">
-		</div>
-		<!-- <table class="poduim">
-			<tr>
-				<td rowspan="3" class="text-center"><a ng-click="displayProduct(2)">{{products[2].productName}}</a></td>
-				<td rowspan="1" class="text-center"><a ng-click="displayProduct(0)">{{products[0].productName}}</a></td>
-				<td rowspan="2" class="text-center"><a ng-click="displayProduct(1)">{{products[1].productName}}</a></td>
-			</tr>
-			<tr>
-				<td class="podium-bottom first-place-bottom" rowspan="4">
-					<h2 class="text-center podium-rank">1</h2>
-				</td>
-			</tr>
-			<tr>
-				<td class="podium-bottom" rowspan="3">
-					<h2 class="text-center podium-rank">2</h2>
-				</td>
-			</tr>
-			<tr>
-				<td class="podium-bottom">
-					<h2 class="text-center podium-rank">3</h2>
-				</td>
-			</tr>
-		</table> -->
 	</div>
 </div>

@@ -147,11 +147,17 @@ h3, h4{
 }
 
 .podium-div {
-	position: absolute;
-	bottom: 23%;
-	left: 0;
+	position: fixed;
+	bottom: 10%;
+	left: -50%;
 	width: 100%;
 	padding: 2%;
+}
+
+.podium-div img {
+  position: relative;
+  left: -10%;
+  top: 20%;
 }
 
 .podium-top {
@@ -172,7 +178,6 @@ h3, h4{
 .content-div{
 	padding: 2%;
 }
-
 
 span.angular-highlight{
 	background-color: rgba(255, 255, 0, 0.5);;
@@ -438,14 +443,68 @@ textarea.form-control {
     border-top: 1px solid #e5e5e5;
 }
 
-.first-place{
-  position: absolute;
-  top: -20px;
-  left: 220px;
+.podium-div span{
   width: 100px;
   word-break: break-all;
-  border: 1px solid;
   max-width: 100px;
   text-overflow: ellipsis;
   float: right;
+  position: absolute;
+  text-align: center;
+  z-index: 10;
+}
+
+.first-place{
+  top: 23%;
+  left: 72%;
+}
+
+.second-place {
+  bottom: 53%;
+  left: 64%;
+}
+
+.third-place {
+  top: 48%;
+  left: 80.5%;
+}
+
+/* item.html */
+#right, #left {
+  width: 50%;
+  position:absolute;
+  min-height:85%;
+}
+
+#right {
+  left:50%;
+}
+
+#right div:nth-child(1) {
+  margin:2%;
+  padding-bottom:130px;
+}
+
+#right img {
+  height:350px;
+  width:70%;
+  margin-right:13%;
+}
+
+#right div:nth-child(2) {
+  position:absolute;
+  bottom:2%;
+  left:0;
+  width:96%;
+  margin-left:2%;
+}
+
+#left {
+  left: 0;
+}
+
+#left div:first {
+  width: 100%;
+  position:absolute;
+  top:0;
 }
