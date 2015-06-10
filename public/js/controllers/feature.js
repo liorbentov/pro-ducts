@@ -48,6 +48,11 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 		);
 	}
 
+	$scope.resetFeatures = function() {
+		$scope.chosenFeatures = [];
+		featuresService.saveChosenFeatures($scope.chosenFeatures);
+	}
+
 	$scope.checkFeature = function(feature){
 		var index = $scope.findValueInArray(feature, $scope.chosenFeatures);
 		if (index > -1) {
