@@ -403,3 +403,36 @@ height: 20px;
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: right;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.notClickable {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.bs-footer-links li:first-child {
+    padding-left: 0;
+}
+
+.bs-footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+
+.bs-footer-links a {
+    color: #E8E8E8;
+}
+
+.bs-footer-links {
+    padding-left: 0;
+    list-style-type: disc;
+    margin-bottom: 0;
+}
+
+.bs-footer {
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
