@@ -32,22 +32,15 @@
 					</div>
 					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
 				</div>
-
-
-				<!-- <span style="background:green; width:{{(feature.grade.toFixed() * 100)}}px">&nbsp;</span>
-				<span style="background:red; width:{{100-(feature.grade.toFixed() * 100)}}px">&nbsp;</span> -->
-
-				<!-- <p class="percentage" style="float:left ; margin-left:5px; width: 100px; background-color:blue; border-right:{{100-(feature.grade.toPrecision(2) * 100)}}px solid red" >{{feature.grade.toPrecision(2) * 100}}<span>%</span></p> -->
-
 		</div> <!-- end of grade -->
 	</div>
 	<div id="left-lower" class="content-div podium-div">
 		<h4>3 הגדולים ע"פ הקריטריונים</h4>
 		<br>
-		<div>
-			<span style="position: relative; top: -72px; left: -203px;width:100px">number 1</span>
+		<div style="position:absolute; top:85%">
+			<span style="position: relative; top: -72px; left: -203px;width:50px;word-break:break-all;border:1px solid">{{products[0].productName}}</span>
 			<span style="position: relative; top: -51px; left: -380px;width:100px">number 2</span>
-			<span style="position: relative; top: -27px; left: -221px;width:100px">number 3</span>
+			<span style="position: relative; top: -27px; left: -221px;width:100px">{{products[2].productName}}</span>
 			<img src="../img/podium.png">
 		</div>
 		<!-- <table class="poduim">
