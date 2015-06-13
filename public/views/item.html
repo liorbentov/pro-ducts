@@ -2,7 +2,7 @@
 	<div>
 		<h3 class="text-center">{{products[selectedItem].productName}}</h3>
 		<br>
-		<img src="{{products[selectedItem].Img}}" class="text-center">
+		<img ng-src="{{products[selectedItem].Img}}" class="text-center">
 	</div>
 	<div>
 		<span class="pull-right">
@@ -19,9 +19,9 @@
 		<!--<div ng-repeat="feature in products[selectedItem].features">קריטריון: {{feature.featureId}} ציון: {{feature.grade}}</div>-->
 
 
-		<div class="grade col-md-6 col-sm-6" ng-repeat="feature in products[selectedItem].features">
+		<!-- <div class="grade col-md-6 col-sm-6" ng-repeat="feature in products[selectedItem].features">
 
-				<p class="title">{{features[feature.featureId]}}</p>
+				<p class="title" ng-class="{bolder: findValueInArray(feature.featureId, chosenFeatures) != -1}">{{features[feature.featureId]}}</p>
 				<div class="progress">
 					<div class="progress-bar" style="width:{{(feature.grade.toPrecision()*100).toFixed()}}%;"
 						ng-class="{progressRed:(feature.grade.toPrecision()*100).toFixed() <= 60,
@@ -32,14 +32,31 @@
 					</div>
 					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
 				</div>
+		</div> -->
+		<div class="grade col-xs-6 col-md-6" ng-repeat="feature in features">
+			<p class="title" ng-class="{bolder: feature.bolder}">
+				{{feature.name}}
+			</p>
+			<div class="progress">
+				<div class="progress-bar"
+				style="width:{{feature.grade}}%;opacity:{{feature.opacity}}"
+					ng-class="{progressRed:feature.grade <= 60,
+						progressYellow:(feature.grade > 60 &&
+							feature.grade <= 80),
+						progressGreen: feature.grade > 80}">
+				</div>
+				<div class="progressGrade" ng-show="feature">
+					{{feature.caption}}
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="left-lower" class="content-div podium-div">
 		<h4>3 הגדולים ע"פ הקריטריונים</h4>
 		<br>
-			<span class="first-place"><a ng-click="displayProduct(0)" class="clickable">{{products[0].productName}}</a></span>
-			<span class="second-place"><a ng-click="displayProduct(1)" class="clickable">{{products[1].productName}}</a></span>
-			<span class="third-place"><a ng-click="displayProduct(2)" class="clickable">{{products[2].productName}}</a></span>
+			<span class="first-place"><img ng-click="displayProduct(0)" class="clickable podiumImg" ng-src="{{products[0].Img}}"><span>{{products[0].productName}}</span></span>
+			<span class="second-place"><img ng-click="displayProduct(1)" class="clickable podiumImg" ng-src="{{products[1].Img}}"><span>{{products[1].productName}}</span></span>
+			<span class="third-place"><img ng-click="displayProduct(2)" class="clickable podiumImg" ng-src="{{products[2].Img}}"><span>{{products[2].productName}}</span></span>
 			<img src="../img/podium.png">
 	</div>
 </div>
