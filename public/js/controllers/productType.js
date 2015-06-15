@@ -1,5 +1,5 @@
-angular.module('proDucts.controllers').controller('productTypeController', ['$scope', '$location',
-	function($scope, $location) {
+angular.module('proDucts.controllers').controller('productTypeController', ['$scope', '$location', '$http', 
+	function($scope, $location, $http) {
 		$scope.products = [
 			{
 				name : "טלפונים סלולריים",

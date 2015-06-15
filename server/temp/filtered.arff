@@ -1,413 +1,547 @@
-@relation 'Feature1-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-T-I-N1-stemmerweka.core.stemmers.NullStemmer-M2-tokenizerweka.core.tokenizers.NGramTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\" -max 3 -min 1'
+@relation 'Feature23-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-T-I-N1-stemmerweka.core.stemmers.NullStemmer-M2-tokenizerweka.core.tokenizers.NGramTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\" -max 3 -min 1'
 
 @attribute Class {Positive,Negative,Neutral}
-@attribute 12 numeric
-@attribute 13 numeric
-@attribute '13 מגה' numeric
-@attribute '13 מגה פיקסל' numeric
-@attribute 16 numeric
-@attribute '16 מגה' numeric
-@attribute '16 מגה פיקסל' numeric
-@attribute 2 numeric
 @attribute 3 numeric
+@attribute '3 כל' numeric
+@attribute '3 כל מיני' numeric
 @attribute 4 numeric
-@attribute 4k numeric
-@attribute 5 numeric
-@attribute 8 numeric
-@attribute '8 מגה' numeric
-@attribute '8 מגה פיקסל' numeric
-@attribute focus numeric
-@attribute full numeric
-@attribute 'full hd' numeric
-@attribute hd numeric
-@attribute hdr numeric
-@attribute 'hdr בזמן' numeric
-@attribute 'hdr בזמן אמת' numeric
+@attribute '4 ליבות' numeric
+@attribute 4s numeric
+@attribute gps numeric
+@attribute htc numeric
+@attribute ios numeric
 @attribute lg numeric
-@attribute ram numeric
-@attribute s3 numeric
-@attribute 's3 הרגיל' numeric
-@attribute 's3 הרגיל מצלמה' numeric
+@attribute 'lg עשו' numeric
+@attribute s2 numeric
+@attribute sense numeric
 @attribute אבל numeric
-@attribute 'אבל המצלמה' numeric
+@attribute אדירה numeric
 @attribute או numeric
-@attribute אוטומטי numeric
-@attribute אולי numeric
-@attribute אופציה numeric
-@attribute אור numeric
-@attribute אותה numeric
 @attribute אותו numeric
-@attribute 'אותו דבר' numeric
+@attribute 'אותו לעוד' numeric
+@attribute 'אותו לעוד יותר' numeric
+@attribute אותי numeric
 @attribute אז numeric
 @attribute אחד numeric
 @attribute אחר numeric
 @attribute אחרי numeric
-@attribute 'אחרי הצילום' numeric
+@attribute אחרים numeric
 @attribute אחת numeric
+@attribute אי numeric
+@attribute איטי numeric
+@attribute אייפון numeric
 @attribute איכות numeric
-@attribute 'איכות מסך' numeric
 @attribute איכותי numeric
-@attribute איכותית numeric
 @attribute אין numeric
-@attribute 'אין לי' numeric
-@attribute 'אין שום' numeric
+@attribute 'אין אפשרות' numeric
+@attribute אינטואיטיבית numeric
+@attribute אישית numeric
+@attribute איתו numeric
 @attribute אך numeric
+@attribute אלא numeric
 @attribute אם numeric
-@attribute אמנם numeric
-@attribute אמת numeric
+@attribute אנדרואיד numeric
 @attribute אני numeric
+@attribute 'אני הייתי' numeric
+@attribute 'אני לא' numeric
+@attribute 'אני משתמש' numeric
+@attribute אנשים numeric
 @attribute אפל numeric
 @attribute אפליקציות numeric
 @attribute אפשר numeric
+@attribute 'אפשר להשתמש' numeric
 @attribute אפשרויות numeric
-@attribute 'אפשרויות צילום' numeric
+@attribute אפשרות numeric
+@attribute אצבע numeric
 @attribute את numeric
+@attribute 'את הטלפון' numeric
 @attribute 'את המכשיר' numeric
-@attribute 'את הפוקוס' numeric
-@attribute באגים numeric
-@attribute באיכות numeric
-@attribute באינטרנט numeric
+@attribute אתה numeric
+@attribute ב numeric
+@attribute בגב numeric
+@attribute 'בגב המכשיר' numeric
 @attribute בגלל numeric
+@attribute בהודעות numeric
+@attribute בהחלט numeric
 @attribute בו numeric
-@attribute בזמן numeric
-@attribute 'בזמן אמת' numeric
-@attribute בטירוף numeric
-@attribute בטריה numeric
+@attribute 'בו זמנית' numeric
+@attribute בזה numeric
+@attribute בחרתי numeric
+@attribute בטלפון numeric
 @attribute ביד numeric
+@attribute 'ביד אחת' numeric
 @attribute ביותר numeric
-@attribute בין numeric
+@attribute ביחס numeric
+@attribute 'ביחס למכשירים' numeric
+@attribute בכיס numeric
+@attribute בכל numeric
 @attribute בכלל numeric
 @attribute בלי numeric
-@attribute בלילה numeric
-@attribute במהירות numeric
 @attribute במיוחד numeric
 @attribute במכשיר numeric
-@attribute במצלמה numeric
+@attribute בממשק numeric
+@attribute 'בממשק משתמש' numeric
+@attribute 'בממשק משתמש שהופכים' numeric
+@attribute במסך numeric
+@attribute 'במסך נעילה' numeric
+@attribute במשקל numeric
+@attribute בנוסף numeric
+@attribute בעיות numeric
 @attribute בעיקר numeric
-@attribute בעלת numeric
+@attribute בצד numeric
 @attribute בצורה numeric
-@attribute בצילום numeric
 @attribute בקיצור numeric
-@attribute בשוק numeric
+@attribute בקלות numeric
 @attribute ג numeric
 @attribute גבוהה numeric
 @attribute גדול numeric
+@attribute 'גדול מאוד' numeric
+@attribute גירסה numeric
 @attribute גם numeric
-@attribute 'גם המצלמה' numeric
-@attribute 'גם הסטילס' numeric
-@attribute 'גם הסטילס וגם' numeric
-@attribute גרועה numeric
 @attribute דבר numeric
+@attribute דברים numeric
 @attribute די numeric
-@attribute דיי numeric
-@attribute האיכות numeric
+@attribute דק numeric
+@attribute 'דק וקל' numeric
+@attribute ה numeric
+@attribute 'ה lg' numeric
+@attribute האייפון numeric
+@attribute האצבע numeric
+@attribute הבית numeric
+@attribute הגדול numeric
+@attribute הגדרות numeric
+@attribute ההפעלה numeric
 @attribute הוא numeric
-@attribute 'הוא מהיר' numeric
-@attribute 'הוא מהיר המצלמה' numeric
-@attribute הוידאו numeric
+@attribute 'הוא נוח' numeric
+@attribute הודעה numeric
+@attribute הודעות numeric
 @attribute הזה numeric
+@attribute החיישן numeric
 @attribute הטלפון numeric
+@attribute הטעינה numeric
+@attribute 'הטעינה נמצאת' numeric
+@attribute 'הטעינה נמצאת למטה' numeric
 @attribute היא numeric
 @attribute היה numeric
-@attribute היום numeric
+@attribute היו numeric
+@attribute הייתי numeric
+@attribute 'הייתי שמח' numeric
+@attribute 'הייתי שמח אם' numeric
 @attribute הכי numeric
-@attribute 'הכי טובה' numeric
 @attribute הכל numeric
+@attribute הכפתור numeric
+@attribute הם numeric
+@attribute המגע numeric
 @attribute המון numeric
-@attribute 'המון אפשרויות' numeric
-@attribute 'המון אפשרויות צילום' numeric
 @attribute המוצר numeric
 @attribute המחיר numeric
 @attribute המכשיר numeric
-@attribute המכשירים numeric
 @attribute הממשק numeric
+@attribute 'הממשק של' numeric
 @attribute המסך numeric
-@attribute 'המסך מצוין' numeric
-@attribute המפות numeric
-@attribute 'המפות והמצלמה' numeric
+@attribute המעבד numeric
 @attribute המצלמה numeric
-@attribute 'המצלמה לא' numeric
-@attribute 'המצלמה מעולה' numeric
-@attribute 'המצלמה מעולה גם' numeric
-@attribute 'המצלמה שלו' numeric
+@attribute המקורי numeric
+@attribute המקש numeric
+@attribute המתחרים numeric
+@attribute הנעילה numeric
 @attribute הסוללה numeric
-@attribute הסטילס numeric
-@attribute 'הסטילס וגם' numeric
-@attribute 'הסטילס וגם הוידאו' numeric
-@attribute הפוקוס numeric
+@attribute העיצוב numeric
+@attribute הפונקציונליות numeric
+@attribute הפלאפון numeric
 @attribute הפעלה numeric
-@attribute הצילום numeric
-@attribute הקודם numeric
-@attribute הקודמים numeric
+@attribute 'הפעלה לא' numeric
 @attribute הרבה numeric
-@attribute 'הרבה אפשרויות' numeric
-@attribute הרגיל numeric
-@attribute 'הרגיל מצלמה' numeric
-@attribute התלהבתי numeric
-@attribute התמונה numeric
-@attribute התמונות numeric
-@attribute ואיכות numeric
-@attribute ואיכותית numeric
+@attribute 'הרבה יותר' numeric
+@attribute 'הרבה יותר נוח' numeric
+@attribute 'הרבה מאוד' numeric
+@attribute השימוש numeric
+@attribute השמע numeric
+@attribute השתפרה numeric
+@attribute התמיכה numeric
+@attribute התפעול numeric
+@attribute ואבק numeric
+@attribute ואינטואיטיבי numeric
+@attribute ואני numeric
+@attribute ואפילו numeric
 @attribute וגם numeric
-@attribute 'וגם הוידאו' numeric
 @attribute והוא numeric
 @attribute והמצלמה numeric
+@attribute והתפריט numeric
+@attribute ווליום numeric
 @attribute וזה numeric
-@attribute וידאו numeric
-@attribute ויותר numeric
-@attribute וכך numeric
-@attribute 'וכך גם' numeric
+@attribute וחצי numeric
+@attribute וכו numeric
 @attribute ולא numeric
+@attribute 'ולא נוח' numeric
+@attribute ומאוד numeric
 @attribute ומהיר numeric
-@attribute ומצלמה numeric
+@attribute וממש numeric
+@attribute ומעוצב numeric
+@attribute ומערכת numeric
+@attribute 'ומערכת ההפעלה' numeric
 @attribute ונוח numeric
+@attribute 'ונוח לשימוש' numeric
+@attribute 'ונוח לתפעול' numeric
 @attribute ונוחה numeric
-@attribute ועוד numeric
-@attribute 'ועוד הרבה' numeric
-@attribute ועושה numeric
+@attribute ועובד numeric
+@attribute ועם numeric
+@attribute ופשוט numeric
+@attribute וקל numeric
+@attribute 'וקל לשימוש' numeric
+@attribute 'וקל לתפעול' numeric
+@attribute זאת numeric
 @attribute זה numeric
+@attribute 'זה לא' numeric
 @attribute זיכרון numeric
-@attribute 'זיכרון ram' numeric
 @attribute זמן numeric
+@attribute זמנית numeric
+@attribute זריז numeric
+@attribute חבל numeric
 @attribute חד numeric
-@attribute חדות numeric
-@attribute חדים numeric
-@attribute חובב numeric
-@attribute חומרה numeric
-@attribute חזק numeric
-@attribute חזקה numeric
+@attribute חווית numeric
+@attribute 'חווית שימוש' numeric
+@attribute חיווי numeric
+@attribute חיי numeric
+@attribute 'חיי סוללה' numeric
+@attribute חיישן numeric
+@attribute חכם numeric
+@attribute חלונות numeric
 @attribute חלק numeric
-@attribute 'חלק בלי' numeric
+@attribute חלקה numeric
 @attribute חשוב numeric
-@attribute חשוך numeric
-@attribute 'חשוך בלי' numeric
+@attribute טאצ numeric
+@attribute טביעות numeric
+@attribute 'טביעות אצבע' numeric
+@attribute טביעת numeric
+@attribute 'טביעת אצבע' numeric
+@attribute 'טביעת האצבע' numeric
 @attribute טוב numeric
+@attribute 'טוב אבל' numeric
+@attribute 'טוב ונוח' numeric
+@attribute 'טוב ונוח לשימוש' numeric
 @attribute 'טוב מאוד' numeric
-@attribute 'טוב מצלמה' numeric
 @attribute טובה numeric
-@attribute 'טובה מאוד' numeric
-@attribute 'טובה סוללה' numeric
-@attribute 'טובה עם' numeric
-@attribute טובות numeric
 @attribute טובים numeric
 @attribute טלפון numeric
-@attribute 'טלפון טוב' numeric
-@attribute יודע numeric
-@attribute יוצאות numeric
-@attribute יוצאת numeric
+@attribute 'טלפון מצוין' numeric
+@attribute טריקים numeric
+@attribute 'טריקים קטנים' numeric
+@attribute 'טריקים קטנים בממשק' numeric
+@attribute יד numeric
+@attribute ידידותי numeric
+@attribute יהיה numeric
+@attribute יודעים numeric
+@attribute יום numeric
+@attribute יומיומי numeric
+@attribute יומיים numeric
 @attribute יותר numeric
+@attribute 'יותר יעיל' numeric
+@attribute 'יותר מידי' numeric
+@attribute 'יותר נוח' numeric
 @attribute יחסית numeric
+@attribute 'יחסית קל' numeric
+@attribute יעיל numeric
 @attribute יפה numeric
+@attribute 'יפה מאוד' numeric
+@attribute יקר numeric
 @attribute יש numeric
-@attribute 'יש בו' numeric
+@attribute 'יש הרבה' numeric
 @attribute 'יש לו' numeric
-@attribute 'יש לו מצלמה' numeric
-@attribute 'יש רק' numeric
+@attribute 'יש לו ממשק' numeric
+@attribute 'יש לי' numeric
+@attribute 'יש לי אותו' numeric
+@attribute יתאים numeric
 @attribute כ numeric
 @attribute כבר numeric
-@attribute כזה numeric
-@attribute כחודש numeric
+@attribute כדי numeric
 @attribute כי numeric
 @attribute כך numeric
 @attribute כל numeric
-@attribute 'כל כך' numeric
-@attribute 'כל מה' numeric
-@attribute 'כל מה שצריך' numeric
-@attribute כמה numeric
+@attribute 'כל דבר' numeric
+@attribute 'כל מיני' numeric
+@attribute 'כל מיני טריקים' numeric
+@attribute כלכך numeric
 @attribute כמו numeric
-@attribute 'כמו s3' numeric
-@attribute 'כמו s3 הרגיל' numeric
-@attribute כניסה numeric
-@attribute ל numeric
+@attribute כמעט numeric
+@attribute כעבור numeric
+@attribute כפתור numeric
+@attribute 'כפתור הבית' numeric
+@attribute 'כפתור הנעילה' numeric
+@attribute כפתורי numeric
+@attribute כשהטלפון numeric
 @attribute לא numeric
-@attribute 'לא התלהבתי' numeric
-@attribute 'לא כל' numeric
-@attribute 'לא כל כך' numeric
-@attribute 'לא כמו' numeric
-@attribute 'לא כמו s3' numeric
-@attribute לאחיזה numeric
+@attribute 'לא אינטואיטיבית' numeric
+@attribute 'לא מבין' numeric
+@attribute 'לא מסובך' numeric
+@attribute 'לא מעט' numeric
+@attribute 'לא משתמש' numeric
+@attribute 'לא נוח' numeric
+@attribute 'לא נוחה' numeric
+@attribute 'לא ניתן' numeric
 @attribute לאחר numeric
-@attribute 'לאחר שצילמת' numeric
-@attribute לבצע numeric
+@attribute לגבי numeric
+@attribute לד numeric
+@attribute לדוגמא numeric
+@attribute לדעתי numeric
+@attribute להחליף numeric
+@attribute להמשיך numeric
+@attribute להפעיל numeric
+@attribute להפעלה numeric
 @attribute להשתמש numeric
+@attribute 'להשתמש בו' numeric
+@attribute להתאמה numeric
 @attribute לו numeric
-@attribute 'לו מצלמה' numeric
-@attribute לוקח numeric
+@attribute 'לו ממשק' numeric
+@attribute לחלוטין numeric
+@attribute לטעמי numeric
 @attribute לי numeric
-@attribute ליום numeric
-@attribute 'ליום עבודה' numeric
-@attribute לילה numeric
-@attribute למחיר numeric
+@attribute 'לי אותו' numeric
+@attribute 'לי אייפון' numeric
+@attribute ליבות numeric
+@attribute לך numeric
+@attribute לכך numeric
+@attribute לכל numeric
+@attribute 'לכל אחד' numeric
+@attribute לכפתורים numeric
+@attribute ללא numeric
+@attribute למטה numeric
 @attribute למי numeric
-@attribute 'למי שלא' numeric
-@attribute למצלמה numeric
+@attribute 'למי שרוצה' numeric
+@attribute 'למי שרוצה מכשיר' numeric
+@attribute למכשיר numeric
+@attribute למכשירים numeric
 @attribute למרות numeric
-@attribute לעומת numeric
+@attribute למשל numeric
+@attribute למשתמש numeric
+@attribute לסיכום numeric
+@attribute 'לסיכום מכשיר' numeric
+@attribute לעבוד numeric
+@attribute לעוד numeric
+@attribute 'לעוד יותר' numeric
+@attribute 'לעוד יותר יעיל' numeric
+@attribute לעולם numeric
 @attribute לעשות numeric
-@attribute לצלם numeric
-@attribute 'לצלם תמונות' numeric
+@attribute לפני numeric
+@attribute לפעמים numeric
+@attribute לשחק numeric
 @attribute לשימוש numeric
+@attribute 'לשימוש איכות' numeric
+@attribute 'לשימוש ביד' numeric
+@attribute 'לשימוש ביד אחת' numeric
+@attribute 'לשימוש יומיומי' numeric
 @attribute לשנות numeric
+@attribute 'לשנות את' numeric
+@attribute לתפעול numeric
+@attribute לתפעל numeric
+@attribute 'לתפעל אותו' numeric
+@attribute 'לתפעל את' numeric
+@attribute לתקן numeric
 @attribute מאד numeric
-@attribute 'מאד איכותית' numeric
 @attribute מאוד numeric
-@attribute 'מאוד טובה' numeric
-@attribute 'מאוד מסך' numeric
-@attribute מאייפון numeric
-@attribute 'מאייפון 4' numeric
-@attribute מגה numeric
-@attribute 'מגה פיקסל' numeric
-@attribute 'מגה פיקסל מצוינת' numeric
+@attribute 'מאוד איכותי' numeric
+@attribute 'מאוד ולא' numeric
+@attribute 'מאוד ולא נוח' numeric
+@attribute 'מאוד לשימוש' numeric
+@attribute 'מאוד מהיר' numeric
+@attribute 'מאוד נוח' numeric
+@attribute 'מאוד קל' numeric
+@attribute מאחור numeric
+@attribute מאחורה numeric
+@attribute 'מאחורה מאוד' numeric
+@attribute 'מאחורה מאוד נוח' numeric
+@attribute מבחינת numeric
+@attribute מבין numeric
+@attribute מבית numeric
+@attribute מגניב numeric
 @attribute מדהים numeric
+@attribute 'מדהים קל' numeric
 @attribute מדהימה numeric
+@attribute מדי numeric
 @attribute מה numeric
-@attribute 'מה שצריך' numeric
 @attribute מהיר numeric
-@attribute 'מהיר ביותר' numeric
-@attribute 'מהיר המצלמה' numeric
 @attribute 'מהיר ונוח' numeric
 @attribute 'מהיר מאוד' numeric
-@attribute 'מהיר מאוד מסך' numeric
-@attribute מהירה numeric
-@attribute מהעולם numeric
-@attribute 'מהעולם הזה' numeric
 @attribute מהר numeric
-@attribute מומלץ numeric
-@attribute מושלמת numeric
-@attribute מחדש numeric
-@attribute מחזיקה numeric
-@attribute מילים numeric
+@attribute מובנה numeric
+@attribute מול numeric
+@attribute מושלם numeric
+@attribute מידי numeric
+@attribute מידע numeric
+@attribute מיותרות numeric
+@attribute מיני numeric
+@attribute 'מיני טריקים' numeric
+@attribute 'מיני טריקים קטנים' numeric
+@attribute מישהו numeric
 @attribute מכשיר numeric
-@attribute מלא numeric
+@attribute 'מכשיר טוב' numeric
+@attribute 'מכשיר מאוד' numeric
+@attribute 'מכשיר מדהים' numeric
+@attribute 'מכשיר מעולה' numeric
+@attribute 'מכשיר מעולה נוח' numeric
+@attribute 'מכשיר פשוט' numeric
+@attribute ממליץ numeric
 @attribute ממש numeric
+@attribute 'ממש לא' numeric
+@attribute 'ממש לא נוח' numeric
+@attribute 'ממש נוח' numeric
 @attribute ממשק numeric
+@attribute 'ממשק ה' numeric
+@attribute 'ממשק טוב' numeric
+@attribute 'ממשק נוח' numeric
+@attribute מסובך numeric
 @attribute מסך numeric
 @attribute 'מסך איכותי' numeric
-@attribute 'מסך באיכות' numeric
 @attribute 'מסך גדול' numeric
-@attribute 'מסך מעולה' numeric
-@attribute מספיק numeric
+@attribute 'מסך טוב' numeric
+@attribute מספר numeric
+@attribute מע numeric
+@attribute 'מע הפעלה' numeric
 @attribute מעבד numeric
-@attribute 'מעבד חזק' numeric
 @attribute מעולה numeric
-@attribute 'מעולה גם' numeric
-@attribute 'מעולה גם הסטילס' numeric
-@attribute 'מעולה עם' numeric
+@attribute 'מעולה נוח' numeric
 @attribute מעט numeric
 @attribute מערכת numeric
+@attribute 'מערכת ההפעלה' numeric
 @attribute 'מערכת הפעלה' numeric
-@attribute מצב numeric
+@attribute 'מערכת הפעלה לא' numeric
+@attribute מצויין numeric
 @attribute מצויינת numeric
 @attribute מצוין numeric
-@attribute מצוינת numeric
-@attribute מצלם numeric
 @attribute מצלמה numeric
-@attribute 'מצלמה 13' numeric
-@attribute 'מצלמה 13 מגה' numeric
-@attribute 'מצלמה איכותית' numeric
-@attribute 'מצלמה באיכות' numeric
-@attribute 'מצלמה טובה' numeric
-@attribute 'מצלמה טובה סוללה' numeric
-@attribute 'מצלמה טובה עם' numeric
-@attribute 'מצלמה לא' numeric
-@attribute 'מצלמה מאוד' numeric
-@attribute 'מצלמה מאוד טובה' numeric
-@attribute 'מצלמה מדהימה' numeric
-@attribute 'מצלמה מעולה' numeric
 @attribute 'מצלמה מצויינת' numeric
-@attribute 'מצלמה מצוינת' numeric
-@attribute 'מצלמה נהדרת' numeric
-@attribute 'מצלמה סבירה' numeric
-@attribute מצלמת numeric
+@attribute מקלדת numeric
+@attribute מראה numeric
+@attribute מרגיש numeric
 @attribute משהו numeric
 @attribute משתמש numeric
+@attribute 'משתמש שהופכים' numeric
+@attribute 'משתמש שהופכים אותו' numeric
+@attribute נהדר numeric
 @attribute נהדרת numeric
 @attribute נוח numeric
-@attribute 'נוח לאחיזה' numeric
+@attribute 'נוח ומהיר' numeric
+@attribute 'נוח וקל' numeric
+@attribute 'נוח להשתמש' numeric
+@attribute 'נוח לשימוש' numeric
+@attribute 'נוח לתפעול' numeric
 @attribute 'נוח מאוד' numeric
+@attribute 'נוח מאוד לשימוש' numeric
+@attribute 'נוח מהיר' numeric
 @attribute נוחה numeric
+@attribute 'נוחה מאוד' numeric
+@attribute נוחות numeric
+@attribute נוחים numeric
+@attribute נורא numeric
+@attribute נורה numeric
+@attribute נורית numeric
+@attribute 'נורית חיווי' numeric
+@attribute נח numeric
+@attribute 'נח לשימוש' numeric
+@attribute ניתן numeric
+@attribute ניתנים numeric
+@attribute נמצאים numeric
+@attribute 'נמצאים בגב' numeric
+@attribute 'נמצאים בגב המכשיר' numeric
+@attribute נמצאת numeric
+@attribute 'נמצאת למטה' numeric
+@attribute נעילה numeric
+@attribute נענו numeric
 @attribute נראה numeric
-@attribute 'נראה כמו' numeric
+@attribute נתקלתי numeric
 @attribute נתקע numeric
-@attribute סבבה numeric
-@attribute סביר numeric
-@attribute סבירה numeric
 @attribute סוללה numeric
-@attribute 'סוללה חזקה' numeric
-@attribute סוני numeric
-@attribute סוף numeric
-@attribute סמסונג numeric
-@attribute ספורט numeric
-@attribute עבודה numeric
-@attribute עדין numeric
 @attribute עובד numeric
 @attribute 'עובד חלק' numeric
-@attribute 'עובד חלק בלי' numeric
 @attribute עוד numeric
-@attribute 'עוד הרבה' numeric
 @attribute עוצמת numeric
+@attribute עושה numeric
+@attribute 'עושה את' numeric
 @attribute עיצוב numeric
+@attribute 'עיצוב מדהים' numeric
+@attribute על numeric
+@attribute 'על המסך' numeric
 @attribute עם numeric
-@attribute 'עם hdr' numeric
-@attribute 'עם hdr בזמן' numeric
-@attribute 'עם פוקוס' numeric
+@attribute 'עם הטלפון' numeric
+@attribute 'עם זאת' numeric
+@attribute 'עם טביעת' numeric
+@attribute ענק numeric
+@attribute עשו numeric
+@attribute פה numeric
 @attribute פונקציות numeric
-@attribute פוקוס numeric
 @attribute פחות numeric
-@attribute פיקסל numeric
-@attribute 'פיקסל מצוינת' numeric
 @attribute פלאפון numeric
-@attribute 'פלאפון טוב' numeric
-@attribute פנורמה numeric
-@attribute פנס numeric
-@attribute פצצה numeric
+@attribute פעם numeric
 @attribute פשוט numeric
+@attribute פתיחת numeric
 @attribute צבעים numeric
-@attribute צורך numeric
-@attribute צילום numeric
-@attribute צילומי numeric
-@attribute צלם numeric
-@attribute קדמית numeric
-@attribute קיבלתי numeric
-@attribute קידמית numeric
+@attribute צריך numeric
+@attribute קטן numeric
+@attribute קטנים numeric
+@attribute 'קטנים בממשק' numeric
+@attribute 'קטנים בממשק משתמש' numeric
 @attribute קל numeric
+@attribute 'קל במשקל' numeric
+@attribute 'קל לשימוש' numeric
+@attribute 'קל לתפעול' numeric
+@attribute 'קל לתפעל' numeric
+@attribute 'קל מאוד' numeric
+@attribute קלה numeric
+@attribute קליטה numeric
+@attribute קניתי numeric
+@attribute 'קניתי את' numeric
 @attribute קצת numeric
-@attribute 'קצת יותר' numeric
-@attribute רואים numeric
-@attribute רמקול numeric
-@attribute רמקולים numeric
+@attribute קשה numeric
+@attribute 'קשה לתפעל' numeric
+@attribute רגילים numeric
+@attribute רים numeric
 @attribute רק numeric
-@attribute 'רק 8' numeric
-@attribute שאומר numeric
+@attribute שאני numeric
+@attribute שגם numeric
 @attribute שהוא numeric
-@attribute שהיא numeric
-@attribute שהמצלמה numeric
-@attribute 'שהמצלמה היא' numeric
-@attribute 'שהמצלמה לא' numeric
+@attribute שהופכים numeric
+@attribute 'שהופכים אותו' numeric
+@attribute 'שהופכים אותו לעוד' numeric
+@attribute שהיה numeric
+@attribute 'שהיה לי' numeric
+@attribute שהממשק numeric
+@attribute שוב numeric
 @attribute שום numeric
 @attribute שזה numeric
-@attribute שיפור numeric
+@attribute שימוש numeric
+@attribute שימושיות numeric
 @attribute שיש numeric
 @attribute של numeric
+@attribute 'של המכשיר' numeric
 @attribute 'של המצלמה' numeric
-@attribute 'של סוני' numeric
 @attribute שלא numeric
+@attribute 'שלא נענו' numeric
 @attribute שלה numeric
 @attribute שלו numeric
-@attribute שלי numeric
-@attribute שמספיקה numeric
-@attribute שמע numeric
-@attribute שעות numeric
-@attribute שצילמת numeric
-@attribute שצריך numeric
-@attribute שראיתי numeric
-@attribute תאורה numeric
-@attribute תמונה numeric
-@attribute תמונות numeric
-@attribute 'תמונות באיכות' numeric
-@attribute 'תמונות טובות' numeric
+@attribute שליטה numeric
+@attribute שמח numeric
+@attribute 'שמח אם' numeric
+@attribute שמפריע numeric
+@attribute שנה numeric
+@attribute שנוח numeric
+@attribute שסמסונג numeric
+@attribute שרוצה numeric
+@attribute 'שרוצה מכשיר' numeric
+@attribute תדלק numeric
+@attribute תהבהב numeric
+@attribute 'תהבהב נורה' numeric
+@attribute תענוג numeric
+@attribute 'תענוג להשתמש' numeric
+@attribute 'תענוג להשתמש בו' numeric
 @attribute תקיעות numeric
 
 @data
 
-{0 Neutral,105 6.949596,301 1.431538}
+{0 Neutral,14 2.880743,31 3.06188,75 3.416237,122 4.258028,270 1.503459,288 2.880743}
+{0 Neutral,332 3.649378,480 3.139066,483 5.904459}
+{0 Neutral,22 2.545204,45 2.986452,111 1.520656,115 2.728338,135 1.306462,270 0.963344,332 1.845841,480 1.587727,483 2.986452,495 2.403153,498 2.403153,514 1.961905}
+{0 Neutral,165 2.749305,245 1.908603,247 3.059583,270 1.158033,291 2.631343,381 2.358401,382 3.590007,432 3.279729}
+{0 Neutral,117 5.757851,325 3.289077,511 3.750127}
+{0 Neutral,85 4.708429,245 3.415185,265 4.919506}
+{0 Neutral,122 3.136899,270 1.107602,276 2.419016,381 2.255694,382 3.433665,383 3.433665,419 0.810836,488 3.433665}
+{0 Neutral,17 3.234698,350 5.382106,419 1.270947,475 4.121733}

@@ -4,7 +4,7 @@ var Q = require('q');
 var weka = require('../node_modules/node-weka/lib/weka-lib');
 var sentimentsClassifier =
 	new (require('./sentiments-classifier.js').sentimentsClassifier)(
-		"D:\\Weka-3-6\\weka.jar",
+		"c:\\Program Files\\Weka-3-6\\weka.jar",
 		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\training",
 		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\models",
 		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\temp");
@@ -108,7 +108,7 @@ var splitAndFindFeatures = function (fullTextArray) {
 var combineFeaturesAndSentences = function(productId, sentencesArray) {
 	return Q.promise(function(resolve, reject) {
 		var sentencesToClassify = [];
-		console.log(sentencesArray);
+
 		sentencesArray.forEach(function(sentenceEntry){
 			for (feature in sentenceEntry.features) {
 				try {
@@ -122,8 +122,11 @@ var combineFeaturesAndSentences = function(productId, sentencesArray) {
 				}
 			}
 		});
-		console.log(sentencesToClassify	);
+		console.log("before classify");
+		try {
+			console.log(sentencesToClassify);
 		sentimentsClassifier.classifyProduct(productId, sentencesToClassify, function (err, results, stats){
+
 			console.log("hello");
 			if (err) {
 				console.log(err);
@@ -155,7 +158,10 @@ var combineFeaturesAndSentences = function(productId, sentencesArray) {
 				//resolve(sentencesToClassify);
 			}
 		});
-
+	}
+	catch (error) {
+		console.log(error);
+	}
 	});
 };
 
