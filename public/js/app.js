@@ -1,4 +1,4 @@
-var proDucts = angular.module('proDucts', ['proDucts.controllers', 'ngRoute', 'proDucts.directives', 'angular-highlight']);
+var proDucts = angular.module('proDucts', ['proDucts.controllers', 'ngRoute', 'proDucts.directives', 'angular-highlight' ,'angularModalService']);
 
 proDucts.config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -187,7 +187,16 @@ proDucts.factory('productsService', ['$http', '$q', function($http, $q){
 		},
 		getSelectedIndex : function(){
 			return selectedItem;
-		}
+		},
+		getProductId : function(index) {
+			return products[index].productId;
+		},
+		getProductName : function(index) {
+			return products[index].productName;
+		},
+		setSelectedItem : function(selectedIndex) {
+			selectedItem = selectedIndex;
+		}	
 	}
 }]);
 

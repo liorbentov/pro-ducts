@@ -95,8 +95,8 @@ var shtuty = function(array, importantFeatures, res) {
 		var featuresSum = 0;
 		var featuresCount = 0;
 		product.features.forEach(function(feature){
-			featuresSum += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.grade : feature.grade*3);
-			featuresCount += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.count : feature.count*3);
+			featuresSum += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.grade : feature.grade*4);
+			featuresCount += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.count : feature.count*4);
 		});
 
 		var tempFeatures = product.features.map(function(currentValue, index, array){

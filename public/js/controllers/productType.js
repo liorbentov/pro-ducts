@@ -4,7 +4,7 @@ angular.module('proDucts.controllers').controller('productTypeController', ['$sc
 			{
 				name : "טלפונים סלולריים",
 				img : "cellphones.jpg",
-				numberOfProducts : 527,
+				numberOfProducts : 347,
 				isClickable: true
 			},
 			{

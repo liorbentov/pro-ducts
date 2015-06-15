@@ -10,7 +10,7 @@
 		</span>
 		<div class="middle text-center">
 			<h4>מוצר {{selectedItem + 1}} מתוך {{products.length}}</h4>
-			<button ng-click="getComments()">ראה תגובות</button>
+			<button ng-click="show(selectedItem)" class="btn btn-default">ראה תגובות</button>
 		</div>
 		<span class="pull-left">
 			<button class="left-button" ng-click="productLeft()"></button>
@@ -64,27 +64,25 @@
 			<img src="../img/podium.png">
 	</div>
 </div>
-<div ng-controller="ModalDemoCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="comment in comments">
-                    {{comment.sentence}}
-                </li>
-            </ul>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
 
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
-    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-    <button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-</div>
+     <!-- The actual modal template, just a bit o bootstrap -->
+     <script type="text/ng-template" id="modal.html">
+         <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">תגובות עבור {{shtuty}}</h4>
+              </div>
+              <div class="modal-body" style="height: 300px;overflow-y:scroll">
+	              <div ng-repeat="comment in comments">
+	                <p>{{comment.sentence}}</p>
+	              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" ng-click="close('Yes')" class="btn btn-default" data-dismiss="modal">סגור</button>
+              </div>
+            </div>
+          </div>
+        </div>
+     </script>

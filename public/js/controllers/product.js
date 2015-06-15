@@ -1,5 +1,32 @@
-angular.module('proDucts.controllers').controller('productController', ['$scope', '$http', '$location', 'productsService', 'featuresService',
-	function($scope, $http, $location, productsService, featuresService) {
+angular.module('proDucts.controllers').controller('ModalController', ['$scope','$http', 'close', 'productsService', function($scope, $http, close, productsService) {
+  
+ $scope.close = function(result) {
+ 	close(result, 500); // close, but give 500ms for bootstrap to animate
+ };
+
+$scope.getComments = function(productId) {
+
+	var req = {
+		method : 'GET',
+		url : '/sentences/',
+		params: {"productId" : productId}
+	}
+
+	$http(req).
+		success(function(data, status, headers, config){
+			$scope.comments = data;	
+	});
+};
+
+var productId = productsService.getProductId(productsService.getSelectedIndex());
+$scope.shtuty = productsService.getProductName(productsService.getSelectedIndex());
+
+$scope.getComments(productId);
+
+}]);
+
+angular.module('proDucts.controllers').controller('productController', ['$scope', '$http', '$location', 'productsService', 'featuresService', 'ModalService', 
+	function($scope, $http, $location, productsService, featuresService, ModalService) {
 
 	$scope.productsFilter = "";
 	$scope.products = null;
@@ -135,5 +162,19 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   	$scope.getComments = function(){
 		$location.url('/comments');  		
   	}
+
+  	$scope.show = function(index) {
+  		productsService.setSelectedItem(index);
+        ModalService.showModal({
+            templateUrl: 'modal.html',
+            controller: "ModalController"
+        }).then(function(modal) {
+
+            $(modal.element).modal();
+            modal.close.then(function(result) {
+            });
+        });
+    };
+
 
 }]);
