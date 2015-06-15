@@ -556,7 +556,6 @@ var getSentencesByProductId = function(productId) {
 };
 
 var getPicture = function(productName) {
-	console.log(productName);
 	var url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + productName;
 
 	request({
@@ -566,7 +565,6 @@ var getPicture = function(productName) {
 
 	    if (!error && response.statusCode === 200) {
 	    	if (body.responseData){
-		        console.log(body.responseData.results[0]) // Print the json response
 		        return body.responseData.results[0];
 	        }
 	        else {
@@ -574,14 +572,12 @@ var getPicture = function(productName) {
 	        }
 	    }
 	    else {
-	    	console.log(error);
 	    	return null;
 	    }
 	})
 };
 
 var getProductPicture = function(productName, res) {
-	console.log(productName);
 	var url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + productName;
 
 	request({
@@ -595,7 +591,6 @@ var getProductPicture = function(productName, res) {
 	        res.json(body);
 	    }
 	    else {
-	    	console.log(error);
 	    	res.json("{error: error}");
 	    }
 	})

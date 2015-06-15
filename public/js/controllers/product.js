@@ -132,4 +132,8 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   		}
   	}
 
+  	$scope.getComments = function(){
+		$location.url('/comments');  		
+  	}
+
 }]);

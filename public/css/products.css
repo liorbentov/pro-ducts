@@ -525,6 +525,11 @@ textarea.form-control {
   top:0;
 }
 
+.middle {
+  width: 80% !important;
+  margin-left: 10% !important;
+}
+
 .bolder {
   font-weight: bold;
 }
@@ -532,3 +537,4 @@ textarea.form-control {
 .podiumImg {
   width: 100px;
 }
+

@@ -3,7 +3,7 @@ var classifiers = [
 {
     classifier: 'weka.classifiers.meta.Vote',
     classifierParams: ' -S 1 ' +
-        '-B "weka.classifiers.bayes.NaiveBayesMultinomialUpdateable " ' +
+        '-B "weka.classifiers.bayes.NaiveBayesMultinomialUpdateable" ' +
         '-B "weka.classifiers.bayes.ComplementNaiveBayes -S 1.0" ' +
         '-B "weka.classifiers.trees.RandomForest -I 100 -K 0 -S 1" ' +
         '-B "weka.classifiers.trees.FT -I 15 -F 0 -M 15 -W 0.0" ' /*+
@@ -110,7 +110,7 @@ var featureClassifiers =
     "1": {
 	    classifier: 'weka.classifiers.meta.Vote',
 	    classifierParams: ' -S 1 ' +
-		'-B "weka.classifiers.bayes.NaiveBayesMultinomialUpdateable " ' +
+		'-B "weka.classifiers.bayes.NaiveBayesMultinomialUpdateable" ' +
 		'-B "weka.classifiers.bayes.ComplementNaiveBayes -S 1.0" ' +
 		'-B "weka.classifiers.trees.RandomForest -I 100 -K 0 -S 1" ' +
 		'-B "weka.classifiers.trees.FT -I 15 -F 0 -M 15 -W 0.0" ' /*+

@@ -38,6 +38,8 @@ var splitToSentences = function (fullText, response) {
 
 		getClassification(sentences).then(function(toClassify){
 			sentimentsClassifier.classify(toClassify, function(err, results){
+				console.log(err);
+				console.log(results);
 				var toResponse = [];
 				results.forEach(function(entry){
 

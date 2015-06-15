@@ -31,7 +31,7 @@ var sentencesByFeaturesDictionary = function(featureSentenceCouples) {
 };
 
 sentimentsClassifier.prototype.classify = function (featureSentenceCouples, callback) {
-  console.log(featureSentenceCouples);
+    console.log(featureSentenceCouples);
     var sentencesByFeatures = sentencesByFeaturesDictionary(featureSentenceCouples);
     var featureKeys = Object.keys(sentencesByFeatures),
 		numFeatures = featureKeys.length;
@@ -50,17 +50,20 @@ sentimentsClassifier.prototype.classify = function (featureSentenceCouples, call
         var feature = classifiers.featureClassifiers[featureId];
 
         weka.classify2(
-            //this.modelsDirectory + "\\3_classes_feature_" + featureId + ".model",
+            this.modelsDirectory + "\\3_classes_feature_" + featureId + ".model",
 			this.trainDirectory + "\\3_classes_feature_" + featureId + ".arff",
-            sentencesByFeatures.featureClassifiers[featureId],
+            sentencesByFeatures[featureId],
 			{
 			    classifier: feature.classifier,
 			    params: feature.classifierParams,
 			    classIndex: 1,
 			    jarPath: this.wekaJarPath,
-			    workingDirectory: this.tempFilesFolder,
+			    workingDirectory: this.tempFilesFolder,/*
 			    filter: "weka.filters.unsupervised.attribute.StringToWordVector",
-			    filterParams: NGramsTokenizer,
+			    filterParams: NGramsTokenizer*/
+                filter: "weka.filters.unsupervised.attribute.StringToWordVector",
+                filterParams: '-R first-last -W 1000 -prune-rate -1.0 -T -I -N 1 -stemmer weka.core.stemmers.NullStemmer -M 2 ' +
+                    '-tokenizer \"weka.core.tokenizers.NGramTokenizer -delimiters \\" \\\\r\\\\n\\\\t.,;:\\\\\\\'\\\\\\\"()?!\\" -max 3 -min 1'
 			},
 			function (errors, currResults) {
 
@@ -74,7 +77,7 @@ sentimentsClassifier.prototype.classify = function (featureSentenceCouples, call
 			            predicted: currResults[i].predicted,
 			            certainty: currResults[i].certainty,
 			            featureId: featureId,
-			            sentence: sentencesByFeatures.featureClassifiers[featureId][i]
+			            sentence: sentencesByFeatures[featureId][i]
 			        });
 			    }
 

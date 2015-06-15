@@ -34,6 +34,12 @@ app.get('/features', function(req, res){
 	res.json(features.getFeatures());
 });
 
+app.get('/sentences', function(req, res){
+	products.getSentencesByProductId(req.query.productId).then(function(productComments){
+		res.json(productComments);
+	});
+})
+
 app.get('/productSentences', function(req, res) {
 	var sentencesToClassify = [];
 	var sendToClassify3 = [];
@@ -50,23 +56,6 @@ app.get('/productSentences', function(req, res) {
 
 
 });
-
-var doAll = function() {
-	return Q.promise(function(resolve, reject){
-		var sentencesToClassify = [];
-		var sendToClassify3 = [];
-		var counter = 1;
-		products.getSentencesByProductId(req.query.productId).then(function(productComments){
-			sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
-				
-				sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
-
-					resolve(endResults);
-				});
-			});
-		});
-	})
-}
 
 app.get('/aggregate', function(req, res){
 
@@ -106,8 +95,8 @@ var shtuty = function(array, importantFeatures, res) {
 		var featuresSum = 0;
 		var featuresCount = 0;
 		product.features.forEach(function(feature){
-			featuresSum += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.grade : feature.grade*2);
-			featuresCount += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.count : feature.count*2);
+			featuresSum += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.grade : feature.grade*3);
+			featuresCount += (importantFeatures.indexOf(feature.featureId) == -1 ? feature.count : feature.count*3);
 		});
 
 		var tempFeatures = product.features.map(function(currentValue, index, array){

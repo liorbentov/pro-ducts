@@ -22,6 +22,10 @@ proDucts.config(function($routeProvider, $locationProvider) {
 		controller: 'sentenceController',
 		templateUrl: 'views/sentence.html'
 	})
+	.when('/comments', {
+		controller: 'commentsController',
+		templateUrl: 'views/productComments.html'
+	})
 	.otherwise({redirectTo: '/intro'});
 
 	$locationProvider.html5Mode({
