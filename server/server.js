@@ -5,16 +5,10 @@ var features = require('./feature.js');
 var DB = require('./db.js');
 var mongoose = require('mongoose');
 var Q = require('q');
-// var bodyParser = require('body-parser');
 
 var app = express();
 var server = require('http').Server(app);
 
-// app.use(bodyParser.urlencoded({
-// 	extended: true
-// }));
-
-// app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../public"));
 
 app.get('/', function(req, res){
@@ -33,24 +27,11 @@ app.get('/sentences', function(req, res){
 	products.getSentencesByProductId(req.query.productId).then(function(productComments){
 		res.json(productComments);
 	});
-})
-
-app.get('/productSentences', function(req, res) {
-	var sentencesToClassify = [];
-	var sendToClassify3 = [];
-	products.getSentencesByProductId(req.query.productId).then(function(productComments){
-		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
-			
-			sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
-
-				res.json(endResults);
-			});
-		});
-	});
 });
 
 app.get('/aggregate', function(req, res){
 
+	// Arrange important features from request in array
 	var importantFeatures = [];
 
 	if (req.query.important) {
@@ -62,84 +43,8 @@ app.get('/aggregate', function(req, res){
 		}
 	}
 
-	DB.getObject("stat")
-	.aggregate([
-			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade :
-        {$cond: { if: { $ne: [ {$add:["$counters.positives", "$counters.negatives"]}, 0 ] }, then: {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives"]}]}, else: 0 }}                                
-        
-        
-        } }}}
-       ,{$project : {_id:1, features: "$feats"}}
-       ,{$sort : {_id : 1}}
-		])
-	.exec(function(err, results){shtuty(results,
-			importantFeatures.map(function(currentValue, index, array){return currentValue*1}), res)});
-})
-
-var shtuty = function(array, importantFeatures, res) {
-	var results = [];
-	array.forEach(function(product){
-		var featuresSum = 0;
-		var featuresCount = 0;
-		product.features.forEach(function(feature){
-			featuresSum += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.grade : feature.grade*4);
-			featuresCount += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.count : feature.count*4);
-		});
-
-		var tempFeatures = product.features.map(function(currentValue, index, array){
-			return Number.parseInt(currentValue.featureId);
-		})
-		results.push({
-			product : product._id,
-			grade : (featuresSum/featuresCount),
-			features : product.features,
-			tempFeatures : tempFeatures
-		});
-	});
-
-	sortByFeatures(results, importantFeatures)
-		.then(function(tempResults){
-			tempResults.forEach(function(bla){
-				console.log(bla.tempFeatures, bla.grade)
-				}); /*sortByKey(tempResults, "grade").then(
-		function(shtuty){*/
-				res.json(tempResults/*shtuty*/.map(function(currentValue, index, array){
-					var productToReturn = products.getProductNameById(currentValue.product);
-					productToReturn.grade = currentValue.grade;
-					productToReturn.features = currentValue.features;
-					return (productToReturn);
-				}));
-			})/*})*/  ;
-};
-
-var sortByKey = function(array, key) {
-	return Q.promise(function(resolve, reject) {
-	    resolve(array.sort(function(a, b) {
-	        var x = a[key]; var y = b[key];
-	        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-	    })) ;
-	});
-}
-
-var sortByFeatures = function(array, features) {
-	return Q.promise(function(resolve, reject) {
-	    resolve(array.sort(function(a, b) {
-	        var x = countVIPFeatures(a, features); var y = countVIPFeatures(b, features);
-	        var x2 = a["grade"]; var y2 = b["grade"];
-	        return ((x > y) ? -1 : ((x < y) ? 1 : ((x2 > y2) ? -1 : ((x2 < y2) ? 1 : 0))));
-	    })) ;
-	});	
-}
-
-var countVIPFeatures = function(product, features) {
-	var counter = 0;
-	features.forEach(function(feature){
-		if (product.tempFeatures.indexOf(feature) != -1) {
-			counter++;
-		}
-	});
-	return counter;
-}
+	products.getProductsGradesByQuery(importantFeatures, res);
+});
 
 app.get('/products', function(req, res){
 	products.getProducts(res);
@@ -155,3 +60,18 @@ app.get('*', function(req, res){
 
 
 server.listen(4444);
+
+// Necessary only for building the DB
+// app.get('/productSentences', function(req, res) {
+// 	var sentencesToClassify = [];
+// 	var sendToClassify3 = [];
+// 	products.getSentencesByProductId(req.query.productId).then(function(productComments){
+// 		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
+			
+// 			sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
+
+// 				res.json(endResults);
+// 			});
+// 		});
+// 	});
+// });

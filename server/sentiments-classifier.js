@@ -10,9 +10,7 @@ var sentimentsClassifier = function (wekaJarPath, trainDirectory, modelsDirector
 	this.modelsDirectory = modelsDirectory;
 	this.trainDirectory = trainDirectory;
 	this.wekaJarPath = wekaJarPath;
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	this.tempFilesFolder = tempFilesFolder;
-    console.log(this.tempFilesFolder);
 };
 
 var sentencesByFeaturesDictionary = function(featureSentenceCouples) {

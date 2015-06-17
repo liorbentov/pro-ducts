@@ -1,5 +1,6 @@
 var request = require("request");
 var Q = require("q");
+var DB = require('./db.js');
 
 var products = [
 	{productId : 1, productName : '208 Nokia', zapId : 867366}, 
@@ -607,9 +608,132 @@ var getProductNameById = function(productId) {
 	}
 };
 
+var countVIPFeatures = function(product, features) {
+	var counter = 0;
+	features.forEach(function(feature){
+		if (product.tempFeatures.indexOf(feature) != -1) {
+			counter++;
+		}
+	});
+	return counter;
+}
+
+var sortByKey = function(array, key) {
+	return Q.promise(function(resolve, reject) {
+	    resolve(array.sort(function(a, b) {
+	        var x = a[key]; var y = b[key];
+	        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+	    })) ;
+	});
+}
+
+var sortByFeatures = function(array, features) {
+	return Q.promise(function(resolve, reject) {
+	    resolve(array.sort(function(a, b) {
+	        var x = countVIPFeatures(a, features); var y = countVIPFeatures(b, features);
+	        
+	        var x2 = a["grade"]; var y2 = b["grade"];
+	        return ((x > y) ? -1 : ((x < y) ? 1 : ((x2 > y2) ? -1 : ((x2 < y2) ? 1 : 0))));
+	        
+	    })) ;
+	});	
+}
+
+var getProductsGradesByQuery = function(importantFeatures, response) {
+	DB.getObject("stat")
+		.aggregate([{
+			$group: {
+				_id : "$productId", 
+				feats : {
+					$push : {
+						count : {
+							$literal : 1
+						}, 
+						featureId : "$featureId", 
+						grade :{
+							$cond: { 
+				        		if : { 
+				        			$ne : [{
+				        				$add : [
+				        					"$counters.positives", 
+				        					"$counters.negatives"]
+				        				}, 0 ] 
+				        		}, 
+				    			then: {
+				    				$divide : [
+				    					"$counters.positives", {
+				    						$add:[
+				    							"$counters.positives", 
+				    							"$counters.negatives"
+				    							]
+				    						}]
+				    			}, 
+				        		else: 0 
+				        	}
+				        }                                
+        			} 
+        		}
+        	}
+        },
+        {
+        	$project : {
+        		_id:1, 
+        		features: "$feats"
+        	}
+        },
+        {
+        	$sort : {
+        		_id : 1
+        	}
+        }]).exec(function(err, results){
+        	calcProductGrade(results, importantFeatures.map(function(currentValue, index, array){
+        		return currentValue*1
+        	}), response)
+        });
+};
+
+
+var calcProductGrade = function(array, importantFeatures, res) {
+	console.log(importantFeatures);
+	var results = [];
+	array.forEach(function(product){
+		var featuresSum = 0;
+		var featuresCount = 0;
+		product.features.forEach(function(feature){
+			featuresSum += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.grade : feature.grade*4);
+			featuresCount += (importantFeatures.indexOf(feature.featureId*1) == -1 ? feature.count : feature.count*4);
+		});
+
+		var tempFeatures = product.features.map(function(currentValue, index, array){
+			return Number.parseInt(currentValue.featureId);
+		})
+		
+		results.push({
+			product : product._id,
+			grade : (featuresSum/featuresCount),
+			features : product.features,
+			tempFeatures : tempFeatures
+		});
+	});
+
+	sortByFeatures(results, importantFeatures)
+		.then(function(tempResults){
+				res.json(tempResults.map(function(currentValue, index, array){
+					var productToReturn = getProductNameById(currentValue.product);
+					productToReturn.grade = currentValue.grade;
+					productToReturn.features = currentValue.features;
+					return (productToReturn);
+				}));
+		})
+		.catch(function(thisError){
+			res.json({error : thisError});
+		});
+};
+
 module.exports = {
 	getProducts : getProducts,
 	getSentencesByProductId : getSentencesByProductId,
 	getProductPicture : getProductPicture,
-	getProductNameById : getProductNameById
+	getProductNameById : getProductNameById,
+	getProductsGradesByQuery : getProductsGradesByQuery
 };

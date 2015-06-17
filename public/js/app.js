@@ -22,6 +22,9 @@ proDucts.config(function($routeProvider, $locationProvider) {
 		controller: 'sentenceController',
 		templateUrl: 'views/sentence.html'
 	})
+	.when('/grades', {
+		templateUrl: 'views/productsGrades.html'
+	})
 	.otherwise({redirectTo: '/intro'});
 
 	$locationProvider.html5Mode({
