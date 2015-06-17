@@ -27,14 +27,6 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 	    	if (!$scope.chosenFeatures) {
 	    		$scope.chosenFeatures = [];
 	    	}
-	    	// else {
-	    	// 	$scope.chosenFeatures.forEach(function(entry){
-	    	// 		var index = findValueInArray(entry, $scope.unChosenFeatures)
-	    	// 		if (index > -1) {
-	    	// 			$scope.unChosenFeatures.splice(index, 1);
-	    	// 		}
-	    	// 	});
-	    	// }
 	    }
 	}, function(error) {
 		console.log(error);
@@ -114,15 +106,6 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
     		checkedFeatures = [];
     		featuresService.saveChosenFeatures($scope.chosenFeatures);
     	}
-
-    	// if ($scope.outSelected){
-	    // 	$scope.chosenFeatures.push($scope.unChosenFeatures[index]);
-	    // 	$scope.unChosenFeatures.splice(index,1);
-	    // 	$scope.outSelected = null;
-	    // 	$scope.inSelected = null;
-
-	    // 	featuresService.saveChosenFeatures($scope.chosenFeatures);
-    	// }
     }
 
     $scope.unChoose = function(index){

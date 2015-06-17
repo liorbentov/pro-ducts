@@ -3,23 +3,18 @@ var products = require('./products.js');
 var sentences = require('./sentence.js');
 var features = require('./feature.js');
 var DB = require('./db.js');
-var app = express();
-
 var mongoose = require('mongoose');
-
 var Q = require('q');
+// var bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser');
-
+var app = express();
 var server = require('http').Server(app);
 
-var API_PATH = '/api/';
+// app.use(bodyParser.urlencoded({
+// 	extended: true
+// }));
 
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../public"));
 
 app.get('/', function(req, res){
@@ -43,7 +38,6 @@ app.get('/sentences', function(req, res){
 app.get('/productSentences', function(req, res) {
 	var sentencesToClassify = [];
 	var sendToClassify3 = [];
-	var counter = 1;
 	products.getSentencesByProductId(req.query.productId).then(function(productComments){
 		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
 			
@@ -53,8 +47,6 @@ app.get('/productSentences', function(req, res) {
 			});
 		});
 	});
-
-
 });
 
 app.get('/aggregate', function(req, res){
@@ -70,12 +62,7 @@ app.get('/aggregate', function(req, res){
 		}
 	}
 
-	DB.getObject("stat")/*.aggregate([
-			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade :
-        {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives"]}]}} }}}
-       ,{$project : {_id:1, features: "$feats"}}
-       ,{$sort : {_id : 1}}
-		])*/
+	DB.getObject("stat")
 	.aggregate([
 			{$group:{_id: "$productId", feats:{$push : { count: {$literal : 1}, featureId : "$featureId", grade :
         {$cond: { if: { $ne: [ {$add:["$counters.positives", "$counters.negatives"]}, 0 ] }, then: {$divide : ["$counters.positives",{$add:["$counters.positives", "$counters.negatives"]}]}, else: 0 }}                                
@@ -102,13 +89,6 @@ var shtuty = function(array, importantFeatures, res) {
 		var tempFeatures = product.features.map(function(currentValue, index, array){
 			return Number.parseInt(currentValue.featureId);
 		})
-
-		// importantFeatures.forEach(function(vipFeature){
-		// 	if (tempFeatures.indexOf(vipFeature) == -1) {
-		// 		featuresSum -= 0.1;
-		// 	}
-		// })
-
 		results.push({
 			product : product._id,
 			grade : (featuresSum/featuresCount),

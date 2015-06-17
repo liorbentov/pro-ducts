@@ -12,17 +12,19 @@
 	<link rel="stylesheet" type="text/css" href="css/lib/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/products.css">	
 	<link href='http://fonts.googleapis.com/css?family=Syncopate:400,700|Roboto' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 	<div id="wrapper">
-		<section id="header">
+		<header>
 			<!-- logo -->
 			<a href="intro">Pro-ducts</a>
-		</section>
+			<a href="sentence" class="pull-left" style="font-size: 0.7em">איך זה עובד</a>
+		</header>
 		
 		<section ng-view id="content">
 		</section>
-		<section id="footer" class="bs-footer">
+		<footer class="bs-footer">
 			© כל הזכויות שמורות לצוות Pro-ducts
 			<ul class="bs-footer-links">
                     <li>Currently v1.0.7</li>
@@ -35,24 +37,24 @@
                     <li>·</li>
                     <li><a href="https://github.com/liorbentov/pro-ducts/releases">Releases</a></li>
                 </ul>
-		</section>
+		</footer>
 	</div>
 
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
+	<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/lib/angular-highlight.js"></script>
+	<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/services/productService.js"></script>
+	<script type="text/javascript" src="js/services/featureService.js"></script>
+	<script type="text/javascript" src="js/controllers/productType.js"></script>
+	<script type="text/javascript" src="js/controllers/product.js"></script>
+	<script type="text/javascript" src="js/controllers/sentence.js"></script>
+	<script type="text/javascript" src="js/controllers/feature.js"></script>
+	<script type="text/javascript" src="js/directives/directives.js"></script>
 
-<!--<script type="text/javascript" src="js/lib/angular.min.js"></script>-->
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.js"></script>
-<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
-<script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/lib/angular-highlight.js"></script>
-<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/controllers/productType.js"></script>
-<script type="text/javascript" src="js/controllers/product.js"></script>
-<script type="text/javascript" src="js/controllers/sentence.js"></script>
-<script type="text/javascript" src="js/controllers/comment.js"></script>
-<script type="text/javascript" src="js/controllers/feature.js"></script>
-<script type="text/javascript" src="js/directives/directives.js"></script>
 </body>
 </html>

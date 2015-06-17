@@ -20,23 +20,6 @@
 <div id="left">
 	<div class="content-div">
 		<h4>ציון ע"פ הקריטריונים: {{products[selectedItem].grade.toPrecision(2) * 100}}</h4>
-		<!--<div ng-repeat="feature in products[selectedItem].features">קריטריון: {{feature.featureId}} ציון: {{feature.grade}}</div>-->
-
-
-		<!-- <div class="grade col-md-6 col-sm-6" ng-repeat="feature in products[selectedItem].features">
-
-				<p class="title" ng-class="{bolder: findValueInArray(feature.featureId, chosenFeatures) != -1}">{{features[feature.featureId]}}</p>
-				<div class="progress">
-					<div class="progress-bar" style="width:{{(feature.grade.toPrecision()*100).toFixed()}}%;"
-						ng-class="{progressRed:(feature.grade.toPrecision()*100).toFixed() <= 60,
-							progressYellow:((feature.grade.toPrecision()*100).toFixed() > 60 &&
-								(feature.grade.toPrecision()*100).toFixed() <= 80),
-							progressGreen: (feature.grade.toPrecision()*100).toFixed() > 80}">
-
-					</div>
-					<div class="progressGrade">{{(feature.grade.toPrecision()*100).toFixed()}}</div>
-				</div>
-		</div> -->
 		<div class="grade col-xs-6 col-md-6" ng-repeat="feature in features">
 			<p class="title" ng-class="{bolder: feature.bolder}">
 				{{feature.name}}
@@ -65,24 +48,24 @@
 	</div>
 </div>
 
-     <!-- The actual modal template, just a bit o bootstrap -->
-     <script type="text/ng-template" id="modal.html">
-         <div class="modal fade">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">תגובות עבור {{shtuty}}</h4>
+ <!-- The actual modal template, just a bit o bootstrap -->
+ <script type="text/ng-template" id="modal.html">
+     <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">תגובות עבור {{shtuty}}</h4>
+          </div>
+          <div class="modal-body" style="height: 300px;overflow-y:scroll">
+              <div ng-repeat="comment in comments">
+                <p>{{comment.sentence}}</p>
               </div>
-              <div class="modal-body" style="height: 300px;overflow-y:scroll">
-	              <div ng-repeat="comment in comments">
-	                <p>{{comment.sentence}}</p>
-	              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" ng-click="close('Yes')" class="btn btn-default" data-dismiss="modal">סגור</button>
-              </div>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" ng-click="close('Yes')" class="btn btn-default" data-dismiss="modal">סגור</button>
           </div>
         </div>
-     </script>
+      </div>
+    </div>
+ </script>

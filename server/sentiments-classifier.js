@@ -10,7 +10,9 @@ var sentimentsClassifier = function (wekaJarPath, trainDirectory, modelsDirector
 	this.modelsDirectory = modelsDirectory;
 	this.trainDirectory = trainDirectory;
 	this.wekaJarPath = wekaJarPath;
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	this.tempFilesFolder = tempFilesFolder;
+    console.log(this.tempFilesFolder);
 };
 
 var sentencesByFeaturesDictionary = function(featureSentenceCouples) {
@@ -50,7 +52,6 @@ sentimentsClassifier.prototype.classify = function (featureSentenceCouples, call
         var feature = classifiers.featureClassifiers[featureId];
 
         weka.classify2(
-            this.modelsDirectory + "\\3_classes_feature_" + featureId + ".model",
 			this.trainDirectory + "\\3_classes_feature_" + featureId + ".arff",
             sentencesByFeatures[featureId],
 			{
@@ -82,7 +83,7 @@ sentimentsClassifier.prototype.classify = function (featureSentenceCouples, call
 			    }
 
 			    console.log("Finished " + currResults.length + " sentences for feature #" + featureId);
-			    handleFeature.call(this, currFeature + 1);
+			    handleFeature.call(that, currFeature + 1);
 			});
     }
 

@@ -21,7 +21,7 @@ h3, h4{
 	min-height:100%;
 	position:relative;
 }
-#header {
+header {
 	padding:10px;
 	background:#607D8B;
 	box-shadow: 1px 1px 10px rgba(0,0,0,0.6);
@@ -30,12 +30,12 @@ h3, h4{
 	font-size: 1.3em;
 }
 
-#header a {
+header a {
 	color: #FFFFFF;
 	text-decoration: none;
 }
 
-#header a:hover {
+header a:hover {
 	color: #DDDDDD;
 	text-decoration: none;
 }
@@ -44,7 +44,8 @@ h3, h4{
 	padding:10px;
 	/*padding-bottom:80px;   /* Height of the footer element */*/
 }
-#footer {
+
+footer {
 	width:100%;
 	position:absolute;
 	bottom:0;
