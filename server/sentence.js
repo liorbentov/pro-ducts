@@ -4,10 +4,15 @@ var Q = require('q');
 var weka = require('../node_modules/node-weka/lib/weka-lib');
 var sentimentsClassifier =
 	new (require('./sentiments-classifier.js').sentimentsClassifier)(
-		"c:\\Program Files\\Weka-3-6\\weka.jar",
-		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\training",
-		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\models",
-		"C:\\Users\\Lior\\My Dev\\Pro-Ducts\\server\\temp");
+		".\\lib\\weka.jar",
+		".\\training",
+		".\\models",
+		".\\temp");
+	/*
+		"D:\\Weka-3-6\\weka.jar",
+		"D:\\Development\\pro-ducts\\server\\training",
+		"D:\\Development\\pro-ducts\\server\\models",
+		"D:\\Development\\pro-ducts\\server\\temp"); */
 
 var splitToSentences = function (fullText, response) {
 	var sentences = [];
