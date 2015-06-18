@@ -33,4 +33,19 @@ proDucts.config(function($routeProvider, $locationProvider) {
 	});
 });
 
+proDucts.factory('generalService', function(){
+
+	var searchMode = "features";
+
+	return {
+		getSearchMode : function(){
+			return searchMode;
+		},
+		setSearchMode : function(mode) {
+			searchMode = mode;
+		}
+	};
+
+});
+
 angular.module('proDucts.controllers', []);

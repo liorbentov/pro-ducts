@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-sm-6 col-md-6 col-md-push-4">
+	<div class="col-sm-6 col-md-6 col-md-push-4" ng-show="searchMode=='features'">
 		<h4>בחר מתוך רשימת הקריטריונים את אלו שיותר חשובים לך</h4>
 		<div class="row">
 			<div ng-repeat="feature in unChosenFeatures track by feature.key" ng-animate="'feature'" class="ondisplay col-sm-6 col-md-6 pull-right">
@@ -16,5 +16,27 @@
 		<br>
 		<button class="btn btn-primary" ng-click="getProducts()">בדוק אילו מוצרים מתאימים</button>
 		<button class="btn btn-default" ng-click="resetFeatures()">אפס בחירה</button>
+	</div>
+
+	<div class="col-sm-8 col-md-8 col-md-push-2" ng-show="searchMode=='filter'">
+		<h4>חפש מוצר</h4>	
+		<form class="form-inline">
+			<div class="form-group">
+				<select ng-model="featureFilter" class="form-control">
+					<option ng-repeat="feature in unChosenFeatures track by feature.key" value="{{feature.key}}">{{feature.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="number" placeholder="מעל ציון" ng-model="gradeFilter" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="text" placeholder="שם שמכיל..." ng-model="nameFilter" class="form-control">
+			</div>
+			<button ng-click="filterProducts()" class="btn btn-default">שלח</button>
+		</form>
+		<br/>
+		<div >
+			<p ng-repeat="product in filteredProducts">{{product.productName}}</p>
+		</div>
 	</div>
 </div>

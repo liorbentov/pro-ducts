@@ -53,7 +53,6 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 
 			$http(req).
 				success(function(data, status, headers, config){
-					console.log(data);
 					products = data;
 					selectedItem = 0;
 					callback(data);

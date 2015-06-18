@@ -1,5 +1,5 @@
-angular.module('proDucts.controllers').controller('productTypeController', ['$scope', '$location', '$http', 
-	function($scope, $location, $http) {
+angular.module('proDucts.controllers').controller('productTypeController', ['$scope', '$location', '$http', 'generalService',
+	function($scope, $location, $http, generalService) {
 		$scope.products = [
 			{
 				name : "טלפונים סלולריים",
@@ -43,11 +43,12 @@ angular.module('proDucts.controllers').controller('productTypeController', ['$sc
 		$scope.typeChosen = null;
 
 		// Doesnt change
-		$scope.chooseProductType = function(name) {
+		$scope.chooseProductType = function(productsType) {
 			//console.log(event);
-			if (name == 'טלפונים סלולריים') {
-				$scope.chooseByCriteria();
-			}
+			productsType.typeChosen = true;			
+			// if (name == 'טלפונים סלולריים') {
+			// 	$scope.chooseByCriteria();
+			// }
 		};
 
 		$scope.chooseByModule = function() {
@@ -55,7 +56,12 @@ angular.module('proDucts.controllers').controller('productTypeController', ['$sc
 		};
 
 		$scope.chooseByCriteria = function() {
+			generalService.setSearchMode("features");
 			$location.url('/criteria');
 		};
 	
+		$scope.filterProducts = function() {
+			generalService.setSearchMode("filter");
+			$location.url('/criteria');
+		};
 }]);

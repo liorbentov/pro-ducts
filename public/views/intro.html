@@ -8,12 +8,14 @@
 <div class="row" style="width:66%;margin-right:22%">
 	<div class="col-xs-4" ng-repeat="ptype in products">
 		<!-- <button type="button" id="{{ptype.Name}}" ng-click="chooseProductType($event)" class="btn btn-default btn-lg btn-block" ng-class="{'btn-primary':typeChosen=='{{ptype.Name}}'}">{{ptype.HebName}}</button> -->
-		<div style="width:230px; height:240px" ng-click="chooseProductType(ptype.name)">
+		<div style="width:230px; height:240px" ng-click="chooseProductType(ptype)">
 			<img src="../img/{{ptype.img}}" style="width:100%" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
 			<div class="product-title" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
 				<div>{{ptype.name}}</div>
 				<div>{{ptype.numberOfProducts}}</div>
 			</div>
+			<div class="chooseByGrade" ng-show="ptype.typeChosen" ng-click="filterProducts()">חיפוש ע"פ שם וציון</div>
+			<div class="chooseByFeatures" ng-show="ptype.typeChosen" ng-click="chooseByCriteria()">חיפוש ע"פ קריטריונים</div>
 		</div>
 	</div>
 </div>

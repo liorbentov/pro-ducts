@@ -1,7 +1,8 @@
-angular.module('proDucts.controllers').controller('featureController', ['$scope', '$timeout', '$location','productsService', 'featuresService',
-	function($scope, $timeout, $location, productsService, featuresService) {
+angular.module('proDucts.controllers').controller('featureController', ['$scope', '$timeout', '$http', '$location', 'generalService', 'productsService', 'featuresService',
+	function($scope, $timeout, $http, $location, generalService, productsService, featuresService) {
 
 	// For criteria.html
+	$scope.searchMode = generalService.getSearchMode();
     $scope.unChosenFeatures;
     $scope.chosenFeatures;
 
@@ -116,6 +117,16 @@ angular.module('proDucts.controllers').controller('featureController', ['$scope'
 	    	$scope.outSelected = null;
 
 	    	featuresService.saveChosenFeatures($scope.chosenFeatures);
+    	}
+    }
+
+    $scope.filteredProducts;
+
+    $scope.filterProducts = function(){
+    	if (($scope.featureFilter) && ($scope.gradeFilter) && ($scope.nameFilter)) {
+	    	$http.get("/filterProducts?featureId="+$scope.featureFilter+"&grade="+$scope.gradeFilter+"&name="+$scope.nameFilter+"").then(function(results){
+	    		$scope.filteredProducts = results.data;
+	    	});
     	}
     }
 }]);

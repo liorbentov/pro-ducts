@@ -43,7 +43,37 @@ app.get('/aggregate', function(req, res){
 		}
 	}
 
-	products.getProductsGradesByQuery(importantFeatures, res);
+	products.calcGradesByImportantFeatures(importantFeatures, res);
+});
+
+app.get('/filterProducts', function(req, res){
+
+	products.getProductsGradesWithFilters(req.query.featureId, (req.query.grade/100), function(err, results){
+		var filteredByGrades = results.map(function(product){
+			return (product._id * 1);
+		});
+		var filteredByProductName = [];
+		products.filterProductsByName(req.query.name).then(function(results){
+
+			results.forEach(function(entry){
+				if (filteredByGrades.indexOf(entry.productId) != -1) {
+					filteredByProductName.push(entry);
+				}
+			});
+
+			// filteredByProductName = results.map(function(product){
+			// 	return {
+			// 		productId : product.productId,
+			// 		productName : productName
+			// 	};
+			// });
+
+			res.json(filteredByProductName);
+
+		}).catch(function(){
+			res.json({error:"error"});
+		});		
+	});
 });
 
 app.get('/products', function(req, res){

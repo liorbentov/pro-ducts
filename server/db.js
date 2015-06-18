@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Q = require('q');
 
 // Load the dictionary
 // mongoimport -d mydb -c things --type csv --file locations.csv --headerline
@@ -30,6 +31,15 @@ var stat = new Schema({
 
 var myStat = mongoose.model('Stat', stat);
 
+var product = new Schema({
+	productId : Number
+  , productName : String
+  , zapId : Number
+},
+{collection: 'products'});
+
+var myProduct = mongoose.model('Product', product);
+
 
 var getObject = function(objectName) {
 	switch (objectName) {
@@ -39,9 +49,16 @@ var getObject = function(objectName) {
 		case ("stat") : {
 			return myStat;
 		}
+		case ("product") : {
+			return myProduct;
+		}
 	}
 }
 
 module.exports = {
 	getObject : getObject
 }
+
+// exports.getObject = getObject;
+// exports.product = myProduct;
+// exports.product.find = Q.nfbind(myProduct.find.bind(myProduct));
