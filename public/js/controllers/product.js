@@ -25,17 +25,23 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 
 	productsService.getProducts(function(results){$scope.products = results});
 
-	productsService.setProductImage(0, function(results){
-		$scope.products = results;
-	});
+	// productsService.setProductImage(0, function(results){
+	// 	$scope.products[0].Img = results;
+	// });
+	
+	$scope.products[selectedItem].Img = productsService.setProductImage(selectedItem);
 
-	productsService.setProductImage(1, function(results){
-		$scope.products = results;
-	});
+	$scope.products[0].Img = productsService.setProductImage(0);
+	$scope.products[1].Img = productsService.setProductImage(1);
+	$scope.products[2].Img = productsService.setProductImage(2);
 
-	productsService.setProductImage(2, function(results){
-		$scope.products = results;
-	});
+	// productsService.setProductImage(1, function(results){
+	// 	$scope.products[1].Img = results;
+	// });
+
+	// productsService.setProductImage(2, function(results){
+	// 	$scope.products[2].Img = results;
+	// });
 
 	$scope.findFeatureInArray = function(feature, array) {
 		if (feature && array) {
@@ -108,7 +114,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 
   	$scope.chooseProduct = function (productIndex) {
 		  productsService.setProductImage(productIndex, function(results){
-			$scope.products = results;
+			$scope.products[productIndex].Img = results;
 			$location.url('/item');
 		});
   	};
@@ -123,9 +129,12 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   		if (selectedItem > 0) {
 
   			if (!$scope.products[($scope.selectedItem - 1)].Img) {
-  				productsService.setProductImage(($scope.selectedItem - 1), function(results){
-  					$scope.products = results;
-  				});
+
+  				$scope.products[$scope.selectedItem - 1].Img = productsService.setProductImage($scope.selectedItem - 1);
+  				// productsService.setProductImage(($scope.selectedItem - 1), function(results){
+  				// 	console.log(results);
+  				// 	$scope.products[$scope.selectedItem - 1].Img = results;
+  				// });
   			};
 
   			selectedItem--;
@@ -138,9 +147,13 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   		if (selectedItem < $scope.products.length - 1) {
 
   			if (!$scope.products[($scope.selectedItem + 1)].Img) {
-  				productsService.setProductImage(($scope.selectedItem + 1), function(results){
-  					$scope.products = results;
-  				});
+
+  				$scope.products[$scope.selectedItem + 1].Img = productsService.setProductImage($scope.selectedItem + 1);
+  				// productsService.setProductImage(($scope.selectedItem + 1), function(results){
+
+  				// 	console.log(results);
+  				// 	$scope.products[$scope.selectedItem + 1].Img = results;
+  				// });
   			};
 
   			selectedItem++;

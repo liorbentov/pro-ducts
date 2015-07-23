@@ -48,6 +48,22 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 				function(){console.log("error");});	
 	}
 
+	var setProductImage = function(productIndex) {
+		var req = {
+			method : 'GET',
+			url : '/picture/',
+			params : {
+				"productName" : products[productIndex].productName
+			}
+		}
+
+		$http(req).
+			success(function(data, status, headers, config){
+				products[productIndex].Img = data.responseData.results[0].url;
+				return data.responseData.results[0].url;
+			});
+	};
+
 	return {
 		getProductComments : getProductComments,
 		getProducts : function(callback) {
@@ -83,26 +99,10 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 					else {
 						selectedItem = 0;	
 					}
-					callback(data);
-				});
-		},
-		setProductImage : function(productIndex, callback) {
-
-			var req = {
-				method : 'GET',
-				url : '/picture/',
-				params : {
-					"productName" : products[productIndex].productName
-				}
-			}
-
-			$http(req).
-				success(function(data, status, headers, config){
-					products[productIndex].Img = data.responseData.results[0].url;
-					//setSelectedItem(productIndex);
 					callback(products);
 				});
 		},
+		setProductImage : setProductImage,
 		getSelectedIndex : function(){
 			return selectedItem;
 		},

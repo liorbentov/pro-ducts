@@ -213,6 +213,14 @@ footer {
   width: 100%;
 }
 
+.podium-div > span img {
+  opacity: 0.5;
+  transition: opacity 0.4s linear;
+}
+
+.podium-div > span:hover img {
+  opacity: 1;
+}
 .podium-div img {
   position: absolute;
   left: 5%;

@@ -54,6 +54,7 @@ angular.module('proDucts.controllers').controller('featureController',
     // For the second view of criteria.html
     $scope.filteredProducts;
 
+    // Filter the list of products by feature's grade and by product name
     $scope.filterProducts = function(){
     	if (($scope.featureFilter) && ($scope.gradeFilter) && ($scope.nameFilter)) {
 	    	$http.get("/filterProducts?featureId="+$scope.featureFilter+"&grade="+$scope.gradeFilter+"&name="+$scope.nameFilter+"").then(function(results){
@@ -62,6 +63,9 @@ angular.module('proDucts.controllers').controller('featureController',
     	}
     }
 
+    // This function is calles when we have a specific product name and we want to see it's grades
+    // In order to do so, we need to set the products array in the productService so we can find the product's grades and 
+    // it's rank
 	$scope.getSpecificProduct = function(productId) {
 		productsService.getProductsAfterCalc(
 			$scope.unChosenFeatures.map(function(currentValue, index, array){return currentValue.key}),
