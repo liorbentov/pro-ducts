@@ -14,8 +14,6 @@ var productId = productsService.getProductId(productsService.getSelectedIndex())
 
 $scope.shtuty = productsService.getProductName(productsService.getSelectedIndex());
 
-// $scope.getComments(productId);
-
 }]);
 
 angular.module('proDucts.controllers').controller('productController', ['$scope', '$http', '$location', 'productsService', 'featuresService', 'ModalService', 

@@ -8,19 +8,21 @@ body {
 	margin:0;
 	padding:0;
 	height:100%;
-	/*overflow-y: hidden;*/
 	overflow-x: hidden;
 	font-family: "Roboto", "Tahoma";
 }
+
 h3, h4{
 	color: #02188B;
 	font-family: "Alef";
 	font-weight: bold;
 }
+
 #wrapper {
 	min-height:100%;
 	position:relative;
 }
+
 header {
 	padding:10px;
 	background:#607D8B;
@@ -30,7 +32,7 @@ header {
 	font-size: 1.3em;
 }
 
-header a {
+header a, header a:active, header a:focus {
 	color: #FFFFFF;
 	text-decoration: none;
 }
@@ -42,7 +44,7 @@ header a:hover {
 
 #content {
 	padding:10px;
-	/*padding-bottom:80px;   /* Height of the footer element */*/
+	/*padding-bottom:80px;   /* Height of the footer element */
 }
 
 footer {
@@ -143,16 +145,64 @@ footer {
     border-color: transparent transparent transparent rgba(64, 64, 65, 0.56);
 }
 
+/* Item */
+#right, #left {
+  width: 50%;
+  position:absolute;
+  min-height:85%;
+}
+
+#right {
+  left:50%;
+}
+
+#right div:nth-child(1) {
+  margin:2%;
+  padding-bottom:130px;
+}
+
+#right img {
+  height:350px;
+  width:70%;
+  margin-right:13%;
+}
+
+#right div:nth-child(2) {
+  position:absolute;
+  bottom:2%;
+  left:0;
+  width:96%;
+  margin-left:2%;
+}
+
+#left {
+  left: 0;
+}
+
+#left div:first {
+  width: 100%;
+  position:absolute;
+  top:0;
+}
+
+.middle {
+  width: 80% !important;
+  margin-left: 10% !important;
+}
+
+.bolder {
+  font-weight: bold;
+}
+
+.podiumImg {
+  width: 100px;
+}
+
 .first-place-bottom {
 	height: 100px;
 }
 
 .podium-div {
-	/*position: fixed;
-	bottom: 10%;
-	left: -50%;
-	width: 100%;
-	padding: 2%;*/
   position: absolute;
   bottom: 20%;
   right: 0;
@@ -160,16 +210,10 @@ footer {
 }
 
 .podium-div img {
-  /*position: relative;
-  left: -10%;
-  top: 20%;*/
   position: absolute;
   left: 5%;
 }
 
-.podium-top {
-
-}
 .podium-bottom{
 	background-color:blue;
 	width:40px;
@@ -186,9 +230,12 @@ footer {
 	padding: 2%;
 }
 
+/* Sentence */
+
 span.angular-highlight{
 	background-color: rgba(255, 255, 0, 0.5);;
 }
+
 span.angular-highlight-positive{
 	background-color: rgba(76, 254, 76, 0.5);
 }
@@ -486,58 +533,6 @@ textarea.form-control {
   background-color: rgba(100,100,100,0.7);
 }
 
-/* item.html */
-#right, #left {
-  width: 50%;
-  position:absolute;
-  min-height:85%;
-}
-
-#right {
-  left:50%;
-}
-
-#right div:nth-child(1) {
-  margin:2%;
-  padding-bottom:130px;
-}
-
-#right img {
-  height:350px;
-  width:70%;
-  margin-right:13%;
-}
-
-#right div:nth-child(2) {
-  position:absolute;
-  bottom:2%;
-  left:0;
-  width:96%;
-  margin-left:2%;
-}
-
-#left {
-  left: 0;
-}
-
-#left div:first {
-  width: 100%;
-  position:absolute;
-  top:0;
-}
-
-.middle {
-  width: 80% !important;
-  margin-left: 10% !important;
-}
-
-.bolder {
-  font-weight: bold;
-}
-
-.podiumImg {
-  width: 100px;
-}
 
 .chooseByGrade, .chooseByFeatures {
   position: absolute;
@@ -556,4 +551,109 @@ textarea.form-control {
 
 .chooseByFeatures {
   top: 30%;
+}
+
+.filteredProducts{
+  height: 450px;
+  overflow-y: auto;
+}
+
+.filteredProduct {
+  clear: both;
+  float: right;
+  line-height: 2em;
+}
+
+.logo {
+  margin-left: 10px;
+}
+
+header .link {
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
+.modal-header .close {
+  margin-top: 0 !important;
+  margin-left: 10px;
+}
+
+/* Admin */
+
+.admin-table th , .admin-table td{
+    text-align: center;
+}
+
+/*   About   */
+
+.about {
+  width: 100%;
+}
+
+.about header {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.about aside {
+  margin-right: 15px;
+  text-shadow: 3px 5px 3px blue; 
+  width: 0; 
+  float:right; 
+  word-wrap:break-word;
+  font-size: 1.4em;
+}
+
+.about section {
+  width: 90%; 
+  direction: ltr; 
+  float:left; 
+  vertical-align:top; 
+  -webkit-column-count:3; 
+  -moz-column-count:3; 
+  column-count:3; 
+  font-family:Alef;
+}
+
+.about canvas {
+  background-color: transparent;
+  border: 1px solid black; 
+  border-radius: 10%;
+}
+
+.about canvas:hover {
+  background-color: #CCC;
+  -webkit-transition: all linear 0.5s;
+}
+
+/* Intro */
+.product-type-area {
+  width:66%;
+  margin-right:22%;
+}
+
+.product-type-area>div{
+  width:270px; 
+  height:260px;
+}
+
+.product-type-area img {
+  width: 100%;
+}
+
+/* Graphs */
+.barRed {
+  fill : red;
+}
+
+.barYellow {
+  fill : yellow;
+}
+
+.barGreen {
+  fill : green;
+}
+
+.tick text {
+  font-size : 0.6em;
 }

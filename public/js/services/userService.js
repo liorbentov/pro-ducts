@@ -1,12 +1,17 @@
 (function () {
     'use strict';
  
+
     angular
         .module('proDucts')
         .factory('UserService', UserService);
  
     UserService.$inject = ['$http'];
     function UserService($http) {
+
+		var currAction;
+		var connectedUsers = 0;
+
         var service = {};
  
         service.GetAll = GetAll;
@@ -18,11 +23,13 @@
 		service.getCurrAction = getCurrAction;
 		service.isCurrentUserAdmin = isCurrentUserAdmin;
 		service.setAdmin = setAdmin;
+		service.Login = Login;
+		service.Logout = Logout;
+		service.getConnectedUsersCount = getConnectedUsersCount;
  
         return service;
-
-		var currAction;
  
+
 		function setCurrAction(action){
 			this.currAction = action;
 		}
@@ -64,6 +71,23 @@
             return $http.delete('/users/' + username).then(handleSuccess, handleError('Error deleting user'));
         }
  
+		function getConnectedUsersCount() {
+			return this.connectedUsers;
+		}
+
+		function Login() {
+
+			this.connectedUsers = this.connectedUsers || 0;
+			this.connectedUsers++;
+			
+			console.log(this.connectedUsers);
+		}
+
+		function Logout() {
+			this.connectedUsers--;
+			console.log(this.connectedUsers);
+		}
+
         // private functions
  
         function handleSuccess(data) {

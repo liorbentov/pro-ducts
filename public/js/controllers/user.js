@@ -13,6 +13,16 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		});
 	})();
 
+	var user;
+	$scope.connectedUsers;
+	$scope.$watch(function(){return user;}, function(newValue, oldValue){
+		if (newValue !== oldValue) {
+			console.log("new", newValue);
+			console.log("old", oldValue);
+			$scope.connectedUsers = newValue;
+		}
+	})
+
 	$scope.register = function(){
 		console.log(this);
 		UserService.Register($scope.newUser).then(function(answer){
@@ -44,7 +54,38 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		return UserService.isCurrentUserAdmin();
 	}
 
+	$scope.successfulLogin = function() {
+		$scope.userLoggedIn = true;
+
+		// Send a message to the server that the user logged in
+		var socket = io();
+
+		socket.on('server-user-login', function(msg){
+			console.log(msg);
+			UserService.Login();
+		});
+
+		socket.on('server-user-logout', function(msg){
+			console.log(msg);
+			UserService.Logout();
+		});
+
+		// Set message
+		var userMessage = document.getElementById("user-message");
+		$(userMessage)
+			.text('ההתחברות בוצעה הבהצלחה!')
+			.removeClass("hidden")
+			.removeClass("alert-warning")
+			.addClass("alert-info")
+
+		setTimeout(function(){
+			var userModal = document.getElementById("user-modal");
+			$(userModal).modal('toggle');
+		}, 1500);
+	}
+
 	$scope.login = function(user) {
+		debugger;
 		// Check if the user is already logged in
 		if (!$scope.isLoggedIn()) {
 			if (!user) {
@@ -53,6 +94,7 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 				UserService.GetByUsername($scope.newUser.username).then(function(result){
 					if (result.success) {
 						localStorage.loggedIn = JSON.stringify(result.success);
+						$scope.successfulLogin();
 					}
 					if (result.error) {
 						console.log("error");
@@ -61,29 +103,8 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 
 			} else {
 				localStorage.loggedIn = JSON.stringify(user);
+				$scope.successfulLogin();
 			}
-			
-			$scope.userLoggedIn = true;
-
-			// Send a message to the server that the user logged in
-			var socket = io();
-
-			socket.on('server-message', function(msg){
-				console.log(msg);
-			});
-
-			// Set message
-			var userMessage = document.getElementById("user-message");
-			$(userMessage)
-				.text('ההתחברות בוצעה הבהצלחה!')
-				.removeClass("hidden")
-				.removeClass("alert-warning")
-				.addClass("alert-info")
-
-			setTimeout(function(){
-				var userModal = document.getElementById("user-modal");
-				$(userModal).modal('toggle');
-			}, 1500);
 		}
 	};
 

@@ -155,8 +155,12 @@ app.get('*', function(req, res){
 });
 
 io.on('connection', function(socket){
-	io.emit("server-message", "a user just connected");
+	io.emit("server-user-login", "a user just connected");
   	console.log('a user connected');
+	socket.on('disconnected', function(){
+		io.emit("server-user-logout", "a user just disconnected");
+	  	console.log('a user disconnected');
+	});
 });
 
 server.listen(4444);
