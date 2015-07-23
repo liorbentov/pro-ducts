@@ -17,6 +17,7 @@ angular.module('proDucts.controllers').controller('featureController',
 		return -1;
 	}
 
+	// Load the chosen features from the repository
 	featuresService.getFeaturesAsArray().then(function(results) {
 		$scope.unChosenFeatures = results;
     	$scope.chosenFeatures = featuresService.getChosenFeatures();
@@ -32,11 +33,14 @@ angular.module('proDucts.controllers').controller('featureController',
 		featuresService.saveChosenFeatures($scope.chosenFeatures);
 	}
 
+	// Checks/unchecks a feature 
 	$scope.checkFeature = function(feature){
 		var index = $scope.findFeatureInChosenFeatures(feature);
+		// The feature is already chosen
 		if (index > -1) {
 			$scope.chosenFeatures.splice(index, 1);
 		}
+		// The feature is not chosen yet
 		else {
 			$scope.chosenFeatures.push(feature);
 		}
@@ -44,16 +48,20 @@ angular.module('proDucts.controllers').controller('featureController',
 		featuresService.saveChosenFeatures($scope.chosenFeatures);
 	}
 
+	// Get all products with grades calculated by the chosen features
 	$scope.getProducts = function() {
 		productsService.getProductsAfterCalc(
 			$scope.chosenFeatures.map(function(currentValue, index, array){return currentValue.key}), 
-			function(results){$timeout(function(){$location.url("/item");}) }
+			function(results){
+				// Move to the first item page
+				$timeout(function(){$location.url("/item");}) 
+			}
 		);
 	}
 
     // For the second view of criteria.html
     $scope.filteredProducts;
-
+    // Get all products matching to the filters
     $scope.filterProducts = function(){
     	if (($scope.featureFilter) && ($scope.gradeFilter) && ($scope.nameFilter)) {
 	    	$http.get("/filterProducts?featureId="+$scope.featureFilter+"&grade="+$scope.gradeFilter+"&name="+$scope.nameFilter+"").then(function(results){
@@ -62,10 +70,13 @@ angular.module('proDucts.controllers').controller('featureController',
     	}
     }
 
+	// Go to the page of a specific product (with no chosen features)
 	$scope.getSpecificProduct = function(productId) {
 		productsService.getProductsAfterCalc(
 			$scope.unChosenFeatures.map(function(currentValue, index, array){return currentValue.key}),
-			function(results){$timeout(function(){$location.url("/item");}) },
+			function(results){
+				// Go to the item's page
+				$timeout(function(){$location.url("/item");}) },
 			productId
 		);	
 	}

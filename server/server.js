@@ -15,8 +15,10 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+// Set public folder for files to be directely downloaded
 app.use(express.static(__dirname + "/../public"));
 
+/* Set custom routes */
 app.get('/', function(req, res){
 	res.redirect('index.html');
 });

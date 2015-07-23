@@ -3,6 +3,7 @@ angular.module('proDucts').factory('featuresService', ['$http',  '$q', function(
 	var chosenFeatures;
 	var features;
 
+	// Gets a promise of all features
 	var getFeatures = function() {
 			return $q(function(resolve, reject) {
 				if (features) {
