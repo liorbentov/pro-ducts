@@ -11,6 +11,7 @@
 		<div class="middle text-center">
 			<h4>מוצר {{selectedItem + 1}} מתוך {{products.length}}</h4>
 			<button ng-click="show(selectedItem)" class="btn btn-default">ראה תגובות</button>
+			<button ng-click="showGradesGraph(products[selectedItem].productId)" class="btn btn-default">ראה גרף</button>
 		</div>
 		<span class="pull-left">
 			<button class="left-button" ng-click="productLeft()"></button>

@@ -63,6 +63,17 @@ app.get('/features', function(req, res){
 	res.json(features.getFeatures());
 });
 
+app.get('/features/status', function(req, res){
+	features.getFeaturesStatus()
+		.then(function(data){
+			res.json(data);
+		})
+		.catch(function(error){
+			res.json(error);
+		})
+});
+
+
 // Get the sentences (comments) for the product
 app.get('/products/:productId/sentences', function(req, res){
 	products.getSentencesByProductId(req.params.productId)
@@ -122,7 +133,7 @@ app.get('/products', function(req, res){
 
 app.get('/products/:productId/grades', function(req, res){
 	products.getProductGrades(req.params.productId, function(error, data){
-		
+		console.log(data[0]);		
 		var grades = data[0].feats.map(function(currentValue, index, array){
 			return {
 				feature : features.getFeatures()[currentValue.featureId],

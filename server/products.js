@@ -249,7 +249,42 @@ var getProductsGradesWithFilters = function(featureFilter, gradeFilter, callback
         }]).exec(callback);
 };
 
+var saveSearchFeatures = function(importantFeatures) {
+
+	console.log(importantFeatures);
+	importantFeatures.forEach(function(featureId) {
+
+		DB.getObject("search").find({"categoryId":featureId}, function(err,docs){
+			var instance;
+			if (err || docs.length == 0) {
+				
+				// Create new instance
+				instance = new DB.getObject("search")();
+				instance.categoryId = featureId;
+				instance.count = 1;
+			}
+			else {
+				instance = docs[0];
+				instance.count++;
+			}
+
+			instance.save(function(err){
+				if (!err) {
+					console.log("Update success!");
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+	})
+}
+
 var calcGradesByImportantFeatures = function(importantFeatures, response) {
+	// Save the search features
+	saveSearchFeatures(importantFeatures);
+
+	// Calc the grades
 	getProductsGrades(function(err, results){
         	calcProductGrade(results, importantFeatures.map(function(currentValue, index, array){
         		return currentValue*1

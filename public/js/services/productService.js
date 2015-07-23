@@ -43,20 +43,9 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 	}
 
 	var getProductComments = function(productId, callback) {
-		// var req = {
-		// 	method : 'GET',
-		// 	url : '/sentences/',
-		// 	params: {"productId" : productId}
-		// }
-
-		// $http(req).
-		// 	success(function(data, status, headers, config){
-		// 		$scope.comments = data;	
-		// });
-
-		console.log('/products/' + productId + '/sentences');
 		$http.get('/products/' + productId + '/sentences')
-		.then(function(data){console.log(data); callback(data.data);}, function(){console.log("error");});	
+			.then(function(data){console.log(data); callback(data.data);}, 
+				function(){console.log("error");});	
 	}
 
 	return {
@@ -110,7 +99,7 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 			$http(req).
 				success(function(data, status, headers, config){
 					products[productIndex].Img = data.responseData.results[0].url;
-					setSelectedItem(productIndex);
+					//setSelectedItem(productIndex);
 					callback(products);
 				});
 		},

@@ -42,6 +42,10 @@ header a:hover {
 	text-decoration: none;
 }
 
+nav {
+  display: inline-block;
+}
+
 #content {
 	padding:10px;
 	/*padding-bottom:80px;   /* Height of the footer element */
@@ -571,6 +575,7 @@ textarea.form-control {
 header .link {
   font-size: 0.7em;
   font-weight: normal;
+  margin-left: 10px;
 }
 
 .modal-header .close {
@@ -643,17 +648,23 @@ header .link {
 
 /* Graphs */
 .barRed {
-  fill : red;
+  fill : #f63a0f;
 }
 
 .barYellow {
-  fill : yellow;
+  fill : #f2b01e;
 }
 
 .barGreen {
-  fill : green;
+  fill : #86e01e;
 }
 
 .tick text {
   font-size : 0.6em;
 }
+
+ .connectedUsers {
+  position: absolute;
+  top: 0;
+  right: 0;
+ }

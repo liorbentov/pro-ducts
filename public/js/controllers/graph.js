@@ -1,4 +1,6 @@
-angular.module('proDucts').controller('graphController', ['$scope', '$http', function($scope, $http){
+angular.module('proDucts').controller('graphController', ['$scope', '$http', 'productsService',  function($scope, $http, productsService){
+
+(function(){console.log(productsService.getSelectedIndex())})();
 
 var margin = {top: 20, right: 5, bottom: 30, left: 40},
     width = 1370 - margin.left - margin.right,
@@ -29,7 +31,9 @@ var svg = d3.select("#content").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json('/products/1/grades/',function(error, json) {
+
+
+d3.json('/products/'+productsService.getProductId(productsService.getSelectedIndex())+'/grades/',function(error, json) {
 	var data = json;
   	x.domain(data.map(function(d) { return d.feature; }));
   	y.domain([0, 100]);
@@ -40,11 +44,6 @@ d3.json('/products/1/grades/',function(error, json) {
       .call(xAxis);
 
   svg.append("g")
-    //   .attr("class", "y axis")
-    //   .call(yAxis)
-    // .append("text")
-    //   .attr("transform", "rotate(-90), translate(-30, -30)")
-
       .attr("y", 6)
       .attr("dy", "0.71em")
       .style("text-anchor", "top")
