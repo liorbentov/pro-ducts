@@ -24,10 +24,6 @@ var register = function(user) {
 	});
 };
 
-var login = function(user) {
-
-};
-
 var updateAdmin = function(username) {
 	console.log(username);
 	getByUsername(username).then(function(userFromDB){

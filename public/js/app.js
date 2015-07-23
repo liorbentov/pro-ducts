@@ -20,7 +20,7 @@ proDucts.config(function($routeProvider, $locationProvider) {
 	})
 	.when('/grades', {
 		controller: 'graphController',
-		templateUrl: 'views/productsGrades.html'
+		templateUrl: 'views/productGraph.html'
 	})
 	.when('/users', {
 		controller: 'usersController',
@@ -32,6 +32,10 @@ proDucts.config(function($routeProvider, $locationProvider) {
 	})
 	.when('/about', {
 		templateUrl: 'views/about.html'
+	})
+	.when('/pie', {
+		controller: 'pieController',
+		templateUrl: 'views/pie.html'
 	})
 	.otherwise({redirectTo: '/intro'});
 

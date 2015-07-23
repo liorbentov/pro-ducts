@@ -4,7 +4,6 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	$scope.formAction = "";
 
 	$scope.doFormAction = function(action) {
-		//$scope[$scope.getCurrAction()]();
 		console.log(action);
 		$scope[action]();
 	};
@@ -15,13 +14,6 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		});
 	})();
 
-	// $scope.$watch(function(){return UserService.getConnectedUsersCount();}, function(newValue, oldValue){
-	// 	if (newValue !== oldValue) {
-	// 		$scope.connectedUsers = newValue;
-	// 		$scope.apply();
-	// 	}
-	// });
-
 	$scope.$watch(function(){return $scope.panelShow}, function(newValue, oldValue){
 		if (newValue !== oldValue) {
 			var userMessage = document.getElementById("user-message");
@@ -31,22 +23,13 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	});
 
 	$scope.register = function(){
-		console.log(this);
 		UserService.Register($scope.newUser).then(function(answer){
 			if (answer.success) {
 				$scope.login(answer.success);
 				$scope.newUser = {};
 			}
 			if (answer.error) {
-				console.log(answer.error);
-
-				// Set message
-				var userMessage = document.getElementById("user-message");
-				$(userMessage)
-					.text('קיים משתמש עם שם זה')
-					.removeClass("hidden")
-					.removeClass("alert-info")
-					.addClass("alert-warning")
+				setUserFormMessage('קיים משתמש עם שם זה', false);
 			}
 		});
 	}
@@ -81,14 +64,7 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		UserService.socket.emit('login', null);
 
 		// Set message
-		var userMessage = document.getElementById("user-message");
-		$(userMessage)
-			.text('ההתחברות בוצעה בהצלחה!')
-			.removeClass("hidden")
-			.removeClass("alert-warning")
-			.addClass("alert-info");
-
-		console.log($scope.panelShow);
+		setUserFormMessage('ההתחברות בוצעה בהצלחה!', true);
 
 		setTimeout(function(){
 			$scope.panelShow = null;
@@ -102,7 +78,7 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		// Check if the user is already logged in
 		if (!$scope.isLoggedIn()) {
 			if (!user) {
-				
+
 				// Check if the user is registered
 				UserService.GetByUsername($scope.newUser.username).then(function(result){
 					if (result.success) {
@@ -110,7 +86,9 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 						$scope.successfulLogin();
 					}
 					if (result.error) {
-						console.log("error");
+						
+						// Set message
+						setUserFormMessage('לא קיים משתמש עם שם זה', false);
 					}
 				})
 
@@ -145,20 +123,22 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		return UserService.getCurrAction();
 	}
 
-  	$scope.show = function(action) {
-  		debugger;
-  		UserService.setCurrAction(action);
-        ModalService.showModal({
-            templateUrl: 'userModal.html',
-            controller: "usersController"
-        }).then(function(modal) {
-        	$scope.modal = modal;
-            $(modal.element).modal();
-            modal.close.then(function(result) {
-            	$scope.formAction = "";
-            });
-        }).catch(function(err){
-        	console.log(err);
-        });
+    var setUserFormMessage = function(message, isGood){
+    	var userMessage = document.getElementById("user-message");
+		$(userMessage)
+			.text(message)
+			.removeClass("hidden");
+
+
+		if (isGood) {
+			$(userMessage)
+				.addClass("alert-info")
+				.removeClass("alert-warning");
+		} else {
+			$(userMessage)
+				.removeClass("alert-info")
+				.addClass("alert-warning");
+		}
     };
+  
 }]);

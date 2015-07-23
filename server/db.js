@@ -49,6 +49,14 @@ var user = new Schema({
 
 var myUser = mongoose.model('User', user);
 
+var search = new Schema({
+	categoryId : String,
+	count : Number
+},
+{collection : 'searchStat'});
+
+var mySearch = mongoose.model('search', search);
+
 var getObject = function(objectName) {
 	switch (objectName) {
 		case ("keyword") : {
@@ -62,6 +70,9 @@ var getObject = function(objectName) {
 		}
 		case ("user") : {
 			return myUser;
+		}
+		case ("search") : {
+			return mySearch;
 		}
 	}
 }

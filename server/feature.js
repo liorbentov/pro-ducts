@@ -1,3 +1,6 @@
+var DB = require('./db.js')
+var Q = require('q');
+
 var featuresNames = {
     "1" : "מצלמה",
     "2" : "בטריה",
@@ -15,10 +18,24 @@ var featuresNames = {
     "23" : "ממשק ונוחות"
 };
 
+var getFeaturesStatus = function() {
+    return new Q.promise(function(resolve, reject){
+        DB.getObject("search").find({}, function(err,docs) {
+            if (err || docs.length == 0) {
+                reject("no features");
+            }
+            else {
+                resolve(docs);
+            }
+        });  
+    });
+}
+
 var getFeatures = function() {
     return featuresNames;
 }
 
 module.exports = {
-    getFeatures : getFeatures
+    getFeatures : getFeatures,
+    getFeaturesStatus : getFeaturesStatus
 }

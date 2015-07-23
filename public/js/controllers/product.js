@@ -60,7 +60,9 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 	}
 
 	$scope.selectedItemChanged = function() {
-		console.log("hello");
+		// Set the selectedItem in the service
+		productsService.setSelectedItem(selectedItem);
+
 		// We need to set the list of the features so that we can see all the chosen features
 		// and those that have grades
 		var promise = featuresService.getFeaturesAsArray();
@@ -93,8 +95,6 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 				}
 			});
 		});
-
-
 	}
 
 	$scope.selectedItemChanged();
@@ -130,7 +130,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 
   			selectedItem--;
   			$scope.selectedItem--;
-				$scope.selectedItemChanged();
+			$scope.selectedItemChanged();
   		}
   	}
 
@@ -145,7 +145,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 
   			selectedItem++;
   			$scope.selectedItem++;
-				$scope.selectedItemChanged();
+			$scope.selectedItemChanged();
   		}
   	}
 
@@ -166,5 +166,8 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
         });
     };
 
+    $scope.showGradesGraph = function(productId) {
+		$location.url('/grades');    	
+    };
 
 }]);
