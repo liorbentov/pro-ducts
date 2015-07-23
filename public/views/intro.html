@@ -5,18 +5,15 @@
 		<h3>מה ברצונך לרכוש?</h3>
 	</div>
 </div>
-<div class="row" style="width:66%;margin-right:22%">
-	<div class="col-xs-4" ng-repeat="ptype in products">
-		<!-- <button type="button" id="{{ptype.Name}}" ng-click="chooseProductType($event)" class="btn btn-default btn-lg btn-block" ng-class="{'btn-primary':typeChosen=='{{ptype.Name}}'}">{{ptype.HebName}}</button> -->
-		<div style="width:230px; height:240px" ng-click="chooseProductType(ptype)">
-			<img src="../img/{{ptype.img}}" style="width:100%" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
-			<div class="product-title" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
-				<div>{{ptype.name}}</div>
-				<div>{{ptype.numberOfProducts}}</div>
-			</div>
-			<div class="chooseByGrade" ng-show="ptype.typeChosen" ng-click="filterProducts()">חיפוש ע"פ שם וציון</div>
-			<div class="chooseByFeatures" ng-show="ptype.typeChosen" ng-click="chooseByCriteria()">חיפוש ע"פ קריטריונים</div>
+<div class="row product-type-area">
+	<div class="col-xs-4" ng-repeat="ptype in products" ng-click="ptype.isClickable && chooseProductType(ptype)">
+		<img ng-src="../img/{{ptype.img}}" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
+		<div class="product-title" ng-class="{clickable:ptype.isClickable, notClickable:!ptype.isClickable}">
+			<div>{{ptype.name}}</div>
+			<div>{{ptype.numberOfProducts}}</div>
 		</div>
+		<div class="chooseByGrade" ng-show="ptype.typeChosen" ng-click="filterProducts()">חיפוש ע"פ שם וציון</div>
+		<div class="chooseByFeatures" ng-show="ptype.typeChosen" ng-click="chooseByCriteria()">חיפוש ע"פ קריטריונים</div>
 	</div>
 </div>
 <br/>

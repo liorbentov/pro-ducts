@@ -40,6 +40,14 @@ var product = new Schema({
 
 var myProduct = mongoose.model('Product', product);
 
+var user = new Schema({
+	username : String,
+	email : String,
+	isAdmin : Boolean
+},
+{collection: 'users'});
+
+var myUser = mongoose.model('User', user);
 
 var getObject = function(objectName) {
 	switch (objectName) {
@@ -52,13 +60,12 @@ var getObject = function(objectName) {
 		case ("product") : {
 			return myProduct;
 		}
+		case ("user") : {
+			return myUser;
+		}
 	}
 }
 
 module.exports = {
 	getObject : getObject
 }
-
-// exports.getObject = getObject;
-// exports.product = myProduct;
-// exports.product.find = Q.nfbind(myProduct.find.bind(myProduct));

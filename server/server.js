@@ -2,12 +2,18 @@ var express = require('express');
 var products = require('./products.js');
 var sentences = require('./sentence.js');
 var features = require('./feature.js');
+var users = require('./user.js');
 var DB = require('./db.js');
-var mongoose = require('mongoose');
 var Q = require('q');
 
 var app = express();
 var server = require('http').Server(app);
+
+var io = require('socket.io')(server);
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(express.static(__dirname + "/../public"));
 
@@ -15,18 +21,54 @@ app.get('/', function(req, res){
 	res.redirect('index.html');
 });
 
-app.get('/disassemble', function(req, res){
-	sentences.splitToSentences(req.query.fullText, res);
+app.get('/users', function(req, res){
+	users.getUsers().then(function(users){
+		res.json(users);
+	}).catch(function(err){
+		res.json(err);
+	})
+});
+
+app.get('/users/:username', function(req, res){
+	users.getByUsername(req.params.username).then(function(user){
+		res.json({"success":user});
+	}).catch(function(err){
+		res.json({"error":err});
+	})
+});
+
+app.post('/users/register', function(req, res){
+	users.register(req.body).then(function(answer){
+		res.json({"success":answer});
+	})
+	.catch(function(error){
+		res.json({"error":error});	
+	});
+});
+
+app.put('/users/admin/:username', function(req, res){
+	res.json(users.updateAdmin(req.params.username));
+});
+
+app.delete('/users/:username', function(req, res){
+	users.deleteUser(req.params.username).then(function(result){
+		res.json(result);
+	}).
+	catch(function(error){
+		res.json(error);	
+	})
 });
 
 app.get('/features', function(req, res){
 	res.json(features.getFeatures());
 });
 
-app.get('/sentences', function(req, res){
-	products.getSentencesByProductId(req.query.productId).then(function(productComments){
-		res.json(productComments);
-	});
+// Get the sentences (comments) for the product
+app.get('/products/:productId/sentences', function(req, res){
+	products.getSentencesByProductId(req.params.productId)
+		.then(function(productComments){
+			res.json(productComments);
+		});
 });
 
 app.get('/aggregate', function(req, res){
@@ -61,13 +103,6 @@ app.get('/filterProducts', function(req, res){
 				}
 			});
 
-			// filteredByProductName = results.map(function(product){
-			// 	return {
-			// 		productId : product.productId,
-			// 		productName : productName
-			// 	};
-			// });
-
 			res.json(filteredByProductName);
 
 		}).catch(function(){
@@ -77,31 +112,51 @@ app.get('/filterProducts', function(req, res){
 });
 
 app.get('/products', function(req, res){
-	products.getProducts(res);
+	// products.getProducts(res);
+	product.getProducts()
+		.then(function(data){res.json(data)})
+		.catch(function(error){
+			res.json({"error" : "Error in products.js - getProducts" + (error ? error : "")});
+		})
 })
+
+app.get('/products/:productId/grades', function(req, res){
+	products.getProductGrades(req.params.productId, function(error, data){
+		
+		var grades = data[0].feats.map(function(currentValue, index, array){
+			return {
+				feature : features.getFeatures()[currentValue.featureId],
+				grade: (currentValue.grade * 100).toFixed(2)
+			};
+		});
+
+		res.json(grades);
+	})
+});
 
 app.get('/picture', function(req, res){
 	products.getProductPicture(req.query.productName, res);
 })
 
+app.get('/disassemble', function(req, res){
+	sentences.splitToSentences(req.query.fullText, res);
+});
+
+app.get('/graph1', function(req, res){
+	console.log("hello");
+	res.json([{
+	  letter : "A", 
+	  frequency : 0.08167
+	}]);
+});
+
 app.get('*', function(req, res){
 	res.redirect('/#' + req.originalUrl);
 });
 
+io.on('connection', function(socket){
+	io.emit("server-message", "a user just connected");
+  	console.log('a user connected');
+});
 
 server.listen(4444);
-
-// Necessary only for building the DB
-// app.get('/productSentences', function(req, res) {
-// 	var sentencesToClassify = [];
-// 	var sendToClassify3 = [];
-// 	products.getSentencesByProductId(req.query.productId).then(function(productComments){
-// 		sentences.splitAndFindFeatures(productComments).then(function(sentencesWithFeatures){
-			
-// 			sentences.combineFeaturesAndSentences(req.query.productId, sentencesWithFeatures).then(function(endResults){
-
-// 				res.json(endResults);
-// 			});
-// 		});
-// 	});
-// });

@@ -2,15 +2,6 @@ var proDucts = angular.module('proDucts.directives', []);
 
 var directives = {};
 
-directives.product = function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'views/product.html',
-        replace: true,
-        require: 'ngModel'
-    };
-};
-
 directives.chosenFeature = function() {
     return {
         restrict: 'EA',
@@ -20,15 +11,14 @@ directives.chosenFeature = function() {
     }
 }
 
-directives.productType = function() {
-
+directives.userForm =  function(){
     return {
         restrict: 'E',
-        templateUrl: 'views/productType.html',
-        replace: true,
-        require: 'ngModel'
-    };
+        templateUrl : 'views/userForm.html',
+        controller : 'usersController'
+    }
 };
+
 
 directives.sentence = function(productsService) {
 

@@ -2,17 +2,7 @@ var request = require("request");
 var Q = require("q");
 var DB = require('./db.js');
 
-var getProducts = function(res) {
-	getProductsFromDB()
-		.then(function(products){
-			res.json(products);
-		})
-		.catch(function(){
-			res.json({error: "error"});
-		});
-};
-
-var getProductsFromDB = function() {
+var getProducts = function() {
 	return Q.promise(function(resolve, reject) {
 		DB.getObject("product").find({}, function (err, docs) {
 			if (err || docs.length == 0) {
@@ -43,28 +33,6 @@ var getSentencesByProductId = function(productId) {
 		    }
 		})
 	});
-};
-
-var getPicture = function(productName) {
-	var url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + productName;
-
-	request({
-	    url: url,
-	    json: true
-	}, function (error, response, body) {
-
-	    if (!error && response.statusCode === 200) {
-	    	if (body.responseData){
-		        return body.responseData.results[0];
-	        }
-	        else {
-	        	return null;
-	        }
-	    }
-	    else {
-	    	return null;
-	    }
-	})
 };
 
 var getProductPicture = function(productName, res) {
@@ -99,7 +67,6 @@ var getProductById = function(productId) {
 
 var filterProductsByName = function(nameFilter) {
 	return Q.promise(function(resolve, reject){
-		// var filterToQuery = nameFilter || "..";
 		DB.getObject("product").find({productName:{ $regex : new RegExp(nameFilter, "i") } }, function (err, docs) {
 			if (err || docs.length == 0) {
 				reject(err);
@@ -140,6 +107,40 @@ var sortByFeatures = function(array, features) {
 	        
 	    })) ;
 	});	
+}
+
+var getProductGrades = function(productId, callback){
+	DB.getObject("stat").aggregate([{
+        $match: {"productId":productId }
+    },{
+        $group: {				_id : "$productId", 
+				feats : {
+					$push : {
+						featureId : "$featureId", 
+						grade :{
+							$cond: { 
+				        		if : { 
+				        			$ne : [{
+				        				$add : [
+				        					"$counters.positives", 
+				        					"$counters.negatives"]
+				        				}, 0 ] 
+				        		}, 
+				    			then: {
+				    				$divide : [
+				    					"$counters.positives", {
+				    						$add:[
+				    							"$counters.positives", 
+				    							"$counters.negatives"
+				    							]
+				    						}]
+				    			}, 
+				        		else: 0 
+				        	}
+				        }                                
+        			} 
+        		}}
+    }]).exec(callback);
 }
 
 var getProductsGrades = function(callback) {
@@ -303,6 +304,7 @@ module.exports = {
 	getProducts : getProducts,
 	getSentencesByProductId : getSentencesByProductId,
 	getProductPicture : getProductPicture,
+	getProductGrades : getProductGrades,
 	getProductsGrades : getProductsGrades,
 	calcGradesByImportantFeatures : calcGradesByImportantFeatures,
 	getProductsGradesWithFilters : getProductsGradesWithFilters,

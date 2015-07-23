@@ -10,10 +10,6 @@ proDucts.config(function($routeProvider, $locationProvider) {
 		controller: 'featureController',
 		templateUrl: 'views/criteria.html'
 	})
-	.when('/model', {
-		controller: 'productController',
-		templateUrl: 'views/model.html'
-	})
 	.when('/item', {
 		controller: 'productController',
 		templateUrl: 'views/item.html'
@@ -23,7 +19,19 @@ proDucts.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/sentence.html'
 	})
 	.when('/grades', {
+		controller: 'graphController',
 		templateUrl: 'views/productsGrades.html'
+	})
+	.when('/users', {
+		controller: 'usersController',
+		templateUrl: 'views/users.html'
+	})
+	.when('/admin', {
+		controller: 'usersController',
+		templateUrl: 'views/admin.html'
+	})
+	.when('/about', {
+		templateUrl: 'views/about.html'
 	})
 	.otherwise({redirectTo: '/intro'});
 
@@ -33,19 +41,11 @@ proDucts.config(function($routeProvider, $locationProvider) {
 	});
 });
 
-proDucts.factory('generalService', function(){
-
-	var searchMode = "features";
-
-	return {
-		getSearchMode : function(){
-			return searchMode;
-		},
-		setSearchMode : function(mode) {
-			searchMode = mode;
-		}
-	};
-
-});
-
 angular.module('proDucts.controllers', []);
+
+proDucts.controller('AboutController', function(){
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+	context.font = "30px Arial";
+	context.strokeText("proDucts",160,40);
+});

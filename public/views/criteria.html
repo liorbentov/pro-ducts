@@ -2,12 +2,10 @@
 	<div class="col-sm-6 col-md-6 col-md-push-4" ng-show="searchMode=='features'">
 		<h4>בחר מתוך רשימת הקריטריונים את אלו שיותר חשובים לך</h4>
 		<div class="row">
-			<div ng-repeat="feature in unChosenFeatures track by feature.key" ng-animate="'feature'" class="ondisplay col-sm-6 col-md-6 pull-right">
-				
+			<div ng-repeat="feature in unChosenFeatures track by feature.key" ng-animate="'feature'" class="ondisplay col-sm-6 col-md-6 pull-right">				
 					<div class="slideTwo">
-						<input type="checkbox" id="{{feature.key}}" value="feature.name" name="selectedFeatures[]" ng-click="checkFeature(feature)" ng-checked="findValueInArray(feature, chosenFeatures) > -1">
+						<input type="checkbox" id="{{feature.key}}" value="feature.name" name="selectedFeatures[]" ng-click="checkFeature(feature)" ng-checked="findFeatureInChosenFeatures(feature) > -1">
 						<label for="{{feature.key}}"></label>
-
 	    			</div>
 	    			<span style="float: right;margin-top: 10px;margin-right: 5px;">{{feature.name}}</span>
 			</div>
@@ -35,8 +33,8 @@
 			<button ng-click="filterProducts()" class="btn btn-default">שלח</button>
 		</form>
 		<br/>
-		<div >
-			<p ng-repeat="product in filteredProducts">{{product.productName}}</p>
+		<div class="filteredProducts">
+			<a href class="filteredProduct" ng-repeat="product in filteredProducts" ng-click="getSpecificProduct(product.productId)">{{product.productName}}</a>
 		</div>
 	</div>
 </div>

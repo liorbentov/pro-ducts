@@ -1,0 +1,23 @@
+<table class="table table-hover admin-table">
+	<thead>
+		<tr>
+			<th>משתמש</th>
+			<th>מייל</th>
+			<th>האם מנהל</th>
+			<th>מחק משתמש</th>
+		</tr>
+		<tr>
+			<th><input type="text" class="form-control" placeholder="הכנס ערך לסינון" ng-model="myFilter.username" /></th>
+			<th><input type="text" class="form-control" placeholder="הכנס ערך לסינון" ng-model="myFilter.email" /></th>
+			<th><input type="text" class="form-control" placeholder="הכנס ערך לסינון" ng-model="myFilter.isAdmin" /></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users | filter: myFilter">
+			<td>{{user.username}}</td>
+			<td>{{user.email}}</td>
+			<td><a href ng-click="changeAdminState(user)" >{{(user.isAdmin ? "True" : "False")}}</a></td>
+			<td><button class="btn btn-default" ng-click="deleteUser(user)">מחק</button></td>
+		</tr>
+	</tbody>
+</table>

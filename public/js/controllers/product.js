@@ -1,27 +1,20 @@
 angular.module('proDucts.controllers').controller('ModalController', ['$scope','$http', 'close', 'productsService', function($scope, $http, close, productsService) {
   
  $scope.close = function(result) {
- 	close(result, 500); // close, but give 500ms for bootstrap to animate
+ 	close(result, 500); 
  };
 
-$scope.getComments = function(productId) {
-
-	var req = {
-		method : 'GET',
-		url : '/sentences/',
-		params: {"productId" : productId}
-	}
-
-	$http(req).
-		success(function(data, status, headers, config){
-			$scope.comments = data;	
-	});
-};
-
 var productId = productsService.getProductId(productsService.getSelectedIndex());
+
+($scope.getComments = function(productId) {
+	productsService.getProductComments(productId, function(data){
+		$scope.comments = data;
+	})
+})(productId);
+
 $scope.shtuty = productsService.getProductName(productsService.getSelectedIndex());
 
-$scope.getComments(productId);
+// $scope.getComments(productId);
 
 }]);
 
@@ -31,7 +24,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 	$scope.productsFilter = "";
 	$scope.products = null;
 	var selectedItem = $scope.selectedItem = productsService.getSelectedIndex();
-  //var selectedItem = 0;
+
 	productsService.getProducts(function(results){$scope.products = results});
 
 	productsService.setProductImage(0, function(results){
@@ -47,7 +40,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 	});
 
 	$scope.findFeatureInArray = function(feature, array) {
-		if (feature) {
+		if (feature && array) {
 			for (var i = 0; i < array.length; i++) {
 				if (array[i].featureId == feature) {
 					return i;
@@ -58,7 +51,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 	};
 
 	$scope.findValueInArray = function(value, array) {
-		if (value) {
+		if (value && array) {
 			for (var i = 0; i < array.length; i++) {
 				if (array[i].key == value) {
 					return i;
@@ -69,6 +62,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 	}
 
 	$scope.selectedItemChanged = function() {
+		console.log("hello");
 		// We need to set the list of the features so that we can see all the chosen features
 		// and those that have grades
 		var promise = featuresService.getFeaturesAsArray();
@@ -105,7 +99,7 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
 
 	}
 
-		$scope.selectedItemChanged();
+	$scope.selectedItemChanged();
 
 	$scope.filterProduct = function (item){
 	    if (item.Name.toUpperCase().indexOf($scope.productsFilter.toUpperCase())!=-1 /*|| item.Grade.toString().indexOf($scope.productsFilter)!=-1*/) {
@@ -115,18 +109,16 @@ angular.module('proDucts.controllers').controller('productController', ['$scope'
   	};
 
   	$scope.chooseProduct = function (productIndex) {
-
 		  productsService.setProductImage(productIndex, function(results){
 			$scope.products = results;
 			$location.url('/item');
 		});
   	};
 
-
     $scope.displayProduct = function(productIndex) {
           $scope.selectedItem = productIndex;
           selectedItem = productIndex;
-					$scope.selectedItemChanged();
+		  $scope.selectedItemChanged();
     };
 
   	$scope.productRight = function () {

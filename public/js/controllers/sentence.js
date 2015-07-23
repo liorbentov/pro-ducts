@@ -1,12 +1,12 @@
-angular.module('proDucts.controllers').controller('sentenceController', ['$scope', '$location', '$http', 'productsService','featuresService',
+angular.module('proDucts.controllers').controller('sentenceController', 
+	['$scope', '$location', '$http', 'productsService','featuresService',
 	function($scope, $location, $http, productsService, featuresService) {
 		$scope.sentence;
 		$scope.resultSentences;
 		$scope.featuresNames;
 		$scope.wait = false;
 
-		var promise = featuresService.getFeatures();
-		promise.then(function(results) {
+		featuresService.getFeatures().then(function(results) {
 			if (!$scope.featuresNames) {
 				$scope.featuresNames = results;
 			}
@@ -23,7 +23,8 @@ angular.module('proDucts.controllers').controller('sentenceController', ['$scope
 						if (tempFeature == null){
 							$scope.features.push({
 								featureId : feature,
-								grade : (sentence.features[feature].certainty * ((sentence.features[feature].predicted == "Negative") ? -1 : 1))
+								grade : (sentence.features[feature].certainty * 
+									((sentence.features[feature].predicted == "Negative") ? -1 : 1))
 							});
 						}
 						else {
