@@ -10,7 +10,7 @@
     function UserService($http) {
 
 		var currAction;
-		var connectedUsers = 0;
+		var currSocket;
 
         var service = {};
  
@@ -23,9 +23,7 @@
 		service.getCurrAction = getCurrAction;
 		service.isCurrentUserAdmin = isCurrentUserAdmin;
 		service.setAdmin = setAdmin;
-		service.Login = Login;
-		service.Logout = Logout;
-		service.getConnectedUsersCount = getConnectedUsersCount;
+		service.socket = currSocket;
  
         return service;
  
@@ -70,23 +68,6 @@
         function Delete(username) {
             return $http.delete('/users/' + username).then(handleSuccess, handleError('Error deleting user'));
         }
- 
-		function getConnectedUsersCount() {
-			return this.connectedUsers;
-		}
-
-		function Login() {
-
-			this.connectedUsers = this.connectedUsers || 0;
-			this.connectedUsers++;
-			
-			console.log(this.connectedUsers);
-		}
-
-		function Logout() {
-			this.connectedUsers--;
-			console.log(this.connectedUsers);
-		}
 
         // private functions
  

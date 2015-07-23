@@ -154,13 +154,22 @@ app.get('*', function(req, res){
 	res.redirect('/#' + req.originalUrl);
 });
 
+var conncetedUsers = 0;
+
 io.on('connection', function(socket){
-	io.emit("server-user-login", "a user just connected");
-  	console.log('a user connected');
-	socket.on('disconnected', function(){
-		io.emit("server-user-logout", "a user just disconnected");
+
+	socket.on('login', function(){
+		conncetedUsers++;
+		io.emit("server-user-login", conncetedUsers);
+	  	console.log('a user connected');
+	});
+
+	socket.on('logout', function(){
+  		conncetedUsers--;
+		io.emit("server-user-logout", conncetedUsers);
 	  	console.log('a user disconnected');
 	});
+
 });
 
 server.listen(4444);
