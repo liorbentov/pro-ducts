@@ -3,8 +3,10 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	$scope.newUser = {};
 	$scope.formAction = "";
 
-	$scope.doFormAction = function() {
-		$scope[$scope.getCurrAction()]();
+	$scope.doFormAction = function(action) {
+		//$scope[$scope.getCurrAction()]();
+		console.log(action);
+		$scope[action]();
 	};
 
 	($scope.getAllUsers = function() {
@@ -13,15 +15,20 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		});
 	})();
 
-	var user;
-	$scope.connectedUsers;
-	$scope.$watch(function(){return user;}, function(newValue, oldValue){
+	// $scope.$watch(function(){return UserService.getConnectedUsersCount();}, function(newValue, oldValue){
+	// 	if (newValue !== oldValue) {
+	// 		$scope.connectedUsers = newValue;
+	// 		$scope.apply();
+	// 	}
+	// });
+
+	$scope.$watch(function(){return $scope.panelShow}, function(newValue, oldValue){
 		if (newValue !== oldValue) {
-			console.log("new", newValue);
-			console.log("old", oldValue);
-			$scope.connectedUsers = newValue;
+			var userMessage = document.getElementById("user-message");
+			$(userMessage)
+				.addClass("hidden");
 		}
-	})
+	});
 
 	$scope.register = function(){
 		console.log(this);
@@ -58,34 +65,40 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 		$scope.userLoggedIn = true;
 
 		// Send a message to the server that the user logged in
-		var socket = io();
-
-		socket.on('server-user-login', function(msg){
+		UserService.socket = io();
+		UserService.socket.on('server-user-login', function(msg){
 			console.log(msg);
-			UserService.Login();
+			$scope.connectedUsers = msg;
+			$scope.$apply();
 		});
 
-		socket.on('server-user-logout', function(msg){
+		UserService.socket.on('server-user-logout', function(msg){
 			console.log(msg);
-			UserService.Logout();
+			$scope.connectedUsers = msg;
+			$scope.$apply();
 		});
+
+		UserService.socket.emit('login', null);
 
 		// Set message
 		var userMessage = document.getElementById("user-message");
 		$(userMessage)
-			.text('ההתחברות בוצעה הבהצלחה!')
+			.text('ההתחברות בוצעה בהצלחה!')
 			.removeClass("hidden")
 			.removeClass("alert-warning")
-			.addClass("alert-info")
+			.addClass("alert-info");
+
+		console.log($scope.panelShow);
 
 		setTimeout(function(){
-			var userModal = document.getElementById("user-modal");
-			$(userModal).modal('toggle');
-		}, 1500);
+			$scope.panelShow = null;
+			$scope.newUser = {};
+			$scope.$apply();
+
+		}, 1000);
 	}
 
 	$scope.login = function(user) {
-		debugger;
 		// Check if the user is already logged in
 		if (!$scope.isLoggedIn()) {
 			if (!user) {
@@ -111,6 +124,11 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	$scope.logout = function(user) {
 		if ($scope.isLoggedIn()) {
 			localStorage.removeItem("loggedIn");
+			$scope.userLoggedIn = false;
+			if (UserService.socket) {
+				UserService.socket.emit("logout", null);
+				$scope.$apply();
+			}
 		}
 	};
 
@@ -132,6 +150,7 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	}
 
   	$scope.show = function(action) {
+  		debugger;
   		UserService.setCurrAction(action);
         ModalService.showModal({
             templateUrl: 'userModal.html',
