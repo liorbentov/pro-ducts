@@ -109,16 +109,17 @@ var sortByFeatures = function(array, features) {
 	});	
 }
 
+// Groups products according to feature "grades"
 var getProductGrades = function(productId, callback){
 	DB.getObject("stat").aggregate([{
         $match: {"productId":productId }
     },{
-        $group: {				_id : "$productId", 
-				feats : {
+        $group: {				_id : "$productId", // Group by product id
+				feats : {							
 					$push : {
 						featureId : "$featureId", 
 						grade :{
-							$cond: { 
+							$cond: { 				// Checks if the sum of pos and neg <> 0
 				        		if : { 
 				        			$ne : [{
 				        				$add : [
@@ -126,7 +127,7 @@ var getProductGrades = function(productId, callback){
 				        					"$counters.negatives"]
 				        				}, 0 ] 
 				        		}, 
-				    			then: {
+				    			then: {				
 				    				$divide : [
 				    					"$counters.positives", {
 				    						$add:[

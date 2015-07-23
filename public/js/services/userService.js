@@ -25,8 +25,6 @@
 		service.setAdmin = setAdmin;
 		service.socket = currSocket;
  
-        return service;
- 
 
 		function setCurrAction(action){
 			this.currAction = action;
@@ -81,6 +79,8 @@
                 return { success: false, message: error };
             };
         }
+
+		return service;
     }
  
 })();
