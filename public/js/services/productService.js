@@ -3,6 +3,7 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 	var products = [];
 	var selectedItem = 0;
 
+	// Get all product models
 	var getProductsFromServer = function(callback) {
 		var that = this;
 		var req = {
@@ -28,9 +29,10 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 
 	};
 
+	// Set the current viewed model index
 	var setSelectedItem = function(selectedIndex) {
 		selectedItem = selectedIndex;
-	}
+	};
 
 	var getProductIndexById = function(productId) {
 		for (var i = 0; i < products.length; i++) {
@@ -66,6 +68,7 @@ angular.module('proDucts').factory('productsService', ['$http', '$q', function($
 
 	return {
 		getProductComments : getProductComments,
+		// Get all the products from the local repository or server
 		getProducts : function(callback) {
 			if (!products.length){
 				getProductsFromServer(callback);

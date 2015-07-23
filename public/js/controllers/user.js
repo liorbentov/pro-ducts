@@ -115,8 +115,12 @@ angular.module('proDucts.controllers').controller('usersController', ['$scope', 
 	};
 
 	$scope.deleteUser = function(user) {
-		UserService.Delete(user.username);
-		$scope.getAllUsers();
+		var deleteUserConfirm = confirm("Are you sure you want to delete user - " + user.username + "?");
+
+		if (deleteUserConfirm) {
+			UserService.Delete(user.username);
+			$scope.getAllUsers();
+		}
 	};
 
 	$scope.getCurrAction = function() {
